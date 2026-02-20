@@ -1,0 +1,60 @@
+﻿<Project>
+  <PropertyGroup>
+    <SatoriDownloadDate>$([System.DateTime]::UtcNow.ToString('yyyyMMdd'))</SatoriDownloadDate>
+    <SatoriArchiveName>windows_$(Platform).zip</SatoriArchiveName>
+    <SatoriArchivePath>$(IntermediateOutputPath)SatoriPackage\$(SatoriDownloadDate)\$(SatoriArchiveName)</SatoriArchivePath>
+    <SatoriDownloadedThisRun>false</SatoriDownloadedThisRun>
+  </PropertyGroup>
+  <Target Name="FetchSatori" AfterTargets="ResolveRuntimePackAssets">
+    <!-- Skip download if the archive already exists -->
+    <ItemGroup Condition="Exists('$(SatoriArchivePath)')">
+      <SatoriArchive Include="$(SatoriArchivePath)" />
+    </ItemGroup>
+
+    <!-- Download if the archive does not exist -->
+    <PropertyGroup Condition="!Exists('$(SatoriArchivePath)')">
+      <SatoriDownloadedThisRun>true</SatoriDownloadedThisRun>
+    </PropertyGroup>
+    <DownloadFile
+        SourceUrl="https://github.com/files-community/Satori/releases/latest/download/$(SatoriArchiveName)"
+        DestinationFolder="$(IntermediateOutputPath)SatoriPackage\$(SatoriDownloadDate)"
+        Retries="3"
+        Condition="!Exists('$(SatoriArchivePath)')">
+      <Output TaskParameter="DownloadedFile" ItemName="SatoriArchive" />
+    </DownloadFile>
+  </Target>
+
+  <Target Name="ExtractSatori" AfterTargets="FetchSatori" DependsOnTargets="FetchSatori">
+    <Unzip
+        SourceFiles="@(SatoriArchive)"
+        DestinationFolder="$(IntermediateOutputPath)Satori"
+        OverwriteReadOnlyFiles="true"
+    />
+    <Delete Files="@(SatoriArchive)" Condition="'$(SatoriDownloadedThisRun)' == 'true'" />
+  </Target>
+
+  <Target Name="IncludeSatoriInRuntimePackAssets" AfterTargets="ExtractSatori" DependsOnTargets="ExtractSatori">
+    <ItemGroup>
+      <RuntimePackAsset Remove="@(RuntimePackAsset)"
+                        Condition=" '%(RuntimePackAsset.Filename)' == 'coreclr'
+                                 Or '%(RuntimePackAsset.Filename)' == 'clrjit'
+                                 Or '%(RuntimePackAsset.Filename)' == 'System.Private.CoreLib' " />
+
+      <SatoriRuntimePackAsset Include="$(IntermediateOutputPath)Satori\System.Private.CoreLib.dll">
+        <AssetType>runtime</AssetType>
+      </SatoriRuntimePackAsset>
+      <SatoriRuntimePackAsset Include="$(IntermediateOutputPath)Satori\clrjit.dll;$(IntermediateOutputPath)Satori\coreclr.dll">
+        <AssetType>native</AssetType>
+        <DropFromSingleFile>true</DropFromSingleFile>
+      </SatoriRuntimePackAsset>
+      <RuntimePackAsset Include="@(SatoriRuntimePackAsset)">
+        <DestinationSubPath>%(Filename)%(Extension)</DestinationSubPath>
+        <RuntimeIdentifier>$(RuntimeIdentifier)</RuntimeIdentifier>
+        <CopyLocal>true</CopyLocal>
+        <NuGetPackageId>Microsoft.NETCore.App.Runtime.win-x64</NuGetPackageId>
+        <FileVersion>42.42.42.42424</FileVersion>
+        <NuGetPackageVersion>42.42.42.42424</NuGetPackageVersion>
+      </RuntimePackAsset>
+    </ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,173 @@
+﻿<!--  Copyright (c) Files Community. Licensed under the MIT License.  -->
+<Page
+	x:Class="Files.App.Views.Settings.AdvancedPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converters="using:CommunityToolkit.WinUI.Converters"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:helpers="using:Files.App.Helpers"
+	xmlns:i="using:Microsoft.Xaml.Interactivity"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="using:Files.App.ViewModels.Settings"
+	xmlns:wctcontrols="using:CommunityToolkit.WinUI.Controls"
+	mc:Ignorable="d">
+
+	<Page.Resources>
+		<ResourceDictionary>
+			<converters:BoolNegationConverter x:Key="BoolNegationConverter" />
+		</ResourceDictionary>
+	</Page.Resources>
+
+	<Page.DataContext>
+		<vm:AdvancedViewModel x:Name="ViewModel" />
+	</Page.DataContext>
+
+	<Grid>
+		<StackPanel
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+			Spacing="4">
+
+			<!--  Title  -->
+			<TextBlock
+				Padding="0,0,0,12"
+				FontSize="24"
+				FontWeight="Medium"
+				Text="{helpers:ResourceString Name=Advanced}" />
+
+			<!--  Export  -->
+			<wctcontrols:SettingsCard
+				Command="{x:Bind ViewModel.ExportSettingsCommand}"
+				Header="{helpers:ResourceString Name=ExportSettings}"
+				IsClickEnabled="True">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xEDE1;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<wctcontrols:SettingsCard.ActionIcon>
+					<FontIcon Glyph="&#xE8A7;" />
+				</wctcontrols:SettingsCard.ActionIcon>
+			</wctcontrols:SettingsCard>
+
+			<!--  Import  -->
+			<wctcontrols:SettingsCard
+				Command="{x:Bind ViewModel.ImportSettingsCommand}"
+				Header="{helpers:ResourceString Name=ImportSettings}"
+				IsClickEnabled="True">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xEDE2;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<wctcontrols:SettingsCard.ActionIcon>
+					<FontIcon Glyph="&#xE8A7;" />
+				</wctcontrols:SettingsCard.ActionIcon>
+			</wctcontrols:SettingsCard>
+
+			<!--  Edit Settings File  -->
+			<wctcontrols:SettingsCard
+				Command="{x:Bind ViewModel.Commands.OpenSettingsFile, Mode=OneWay}"
+				Header="{helpers:ResourceString Name=EditSettingsFile}"
+				IsClickEnabled="True">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xE8DA;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<wctcontrols:SettingsCard.ActionIcon>
+					<FontIcon Glyph="&#xE8A7;" />
+				</wctcontrols:SettingsCard.ActionIcon>
+			</wctcontrols:SettingsCard>
+
+			<!--  Open on Windows startup  -->
+			<StackPanel>
+				<!--  Startup disabled InfoBar  -->
+				<InfoBar
+					x:Name="OpenOnStartupInfoBar"
+					x:Load="{x:Bind ViewModel.CanOpenOnWindowsStartup, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"
+					IsClosable="False"
+					IsIconVisible="True"
+					IsOpen="True"
+					Message="{helpers:ResourceString Name=OpenOnStartupDisabled}"
+					Severity="Warning" />
+
+				<!--  Setting block  -->
+				<wctcontrols:SettingsCard Header="{helpers:ResourceString Name=SettingsOpenInLogin}">
+					<wctcontrols:SettingsCard.HeaderIcon>
+						<FontIcon Glyph="&#xE7E8;" />
+					</wctcontrols:SettingsCard.HeaderIcon>
+					<ToggleSwitch
+						AutomationProperties.Name="{helpers:ResourceString Name=SettingsOpenInLogin}"
+						IsEnabled="{x:Bind ViewModel.CanOpenOnWindowsStartup, Mode=OneWay}"
+						IsOn="{x:Bind ViewModel.OpenOnWindowsStartup, Mode=TwoWay}">
+						<i:Interaction.Behaviors>
+							<i:EventTriggerBehavior EventName="Toggled">
+								<i:InvokeCommandAction Command="{x:Bind ViewModel.OpenFilesOnWindowsStartupCommand, Mode=OneWay}" />
+							</i:EventTriggerBehavior>
+						</i:Interaction.Behaviors>
+					</ToggleSwitch>
+				</wctcontrols:SettingsCard>
+			</StackPanel>
+
+			<!--  Leave App Running  -->
+			<wctcontrols:SettingsCard Header="{helpers:ResourceString Name=SettingsLeaveAppRunning}">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xE8E6;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<ToggleSwitch AutomationProperties.Name="{helpers:ResourceString Name=SettingsLeaveAppRunning}" IsOn="{x:Bind ViewModel.LeaveAppRunning, Mode=TwoWay}" />
+			</wctcontrols:SettingsCard>
+
+			<!--  System Tray Icon  -->
+			<wctcontrols:SettingsCard Header="{helpers:ResourceString Name=ShowSystemTrayIcon}">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xE75B;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<ToggleSwitch AutomationProperties.Name="{helpers:ResourceString Name=ShowSystemTrayIcon}" IsOn="{x:Bind ViewModel.ShowSystemTrayIcon, Mode=TwoWay}" />
+			</wctcontrols:SettingsCard>
+
+			<!--  Experimental Settings  -->
+			<TextBlock
+				Padding="0,16,0,4"
+				FontSize="16"
+				FontWeight="Medium"
+				Text="{helpers:ResourceString Name=ExperimentalFeatureFlags}" />
+
+			<!--  Replace File Explorer  -->
+			<wctcontrols:SettingsCard
+				x:Name="SetAsDefaultSettingsBlockControl"
+				Description="{helpers:ResourceString Name=SettingsSetAsDefaultFileManagerDescription}"
+				Header="{helpers:ResourceString Name=SettingsSetAsDefaultFileManager}">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xEC50;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<ToggleSwitch AutomationProperties.Name="{helpers:ResourceString Name=SettingsSetAsDefaultFileManager}" IsOn="{x:Bind ViewModel.IsSetAsDefaultFileManager, Mode=TwoWay}">
+					<i:Interaction.Behaviors>
+						<i:EventTriggerBehavior EventName="Toggled">
+							<i:InvokeCommandAction Command="{x:Bind ViewModel.SetAsDefaultExplorerCommand, Mode=OneWay}" />
+						</i:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</ToggleSwitch>
+			</wctcontrols:SettingsCard>
+
+			<!--  Replace Open File Dialog  -->
+			<wctcontrols:SettingsCard
+				x:Name="ReplaceOpenFileDialogSetting"
+				x:Load="{x:Bind ViewModel.IsAppEnvironmentDev}"
+				Header="{helpers:ResourceString Name=SettingsSetAsOpenDialog}">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xE8E5;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<ToggleSwitch IsEnabled="{x:Bind ViewModel.IsSetAsDefaultFileManager, Mode=OneWay}" IsOn="{x:Bind ViewModel.IsSetAsOpenFileDialog, Mode=TwoWay}">
+					<i:Interaction.Behaviors>
+						<i:EventTriggerBehavior EventName="Toggled">
+							<i:InvokeCommandAction Command="{x:Bind ViewModel.SetAsOpenFileDialogCommand, Mode=OneWay}" />
+						</i:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</ToggleSwitch>
+			</wctcontrols:SettingsCard>
+
+			<!--  Flatten options  -->
+			<wctcontrols:SettingsCard Description="{helpers:ResourceString Name=ShowFlattenOptionsDescription}" Header="{helpers:ResourceString Name=ShowFlattenOptions}">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xE8B7;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<ToggleSwitch AutomationProperties.Name="{helpers:ResourceString Name=ShowFlattenOptions}" IsOn="{x:Bind ViewModel.ShowFlattenOptions, Mode=TwoWay}" />
+			</wctcontrols:SettingsCard>
+		</StackPanel>
+	</Grid>
+</Page>

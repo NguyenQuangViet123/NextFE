@@ -1,0 +1,30 @@
+﻿// Copyright (c) Files Community
+// Licensed under the MIT License.
+
+namespace Files.App.Actions
+{
+	[GeneratedRichCommand]
+	internal sealed class NewWindowAction : IAction
+	{
+		public string Label
+			=> Strings.NewWindow.GetLocalizedResource();
+
+		public string Description
+			=> Strings.NewWindowDescription.GetLocalizedResource();
+
+		public HotKey HotKey
+			=> new(Keys.N, KeyModifiers.Ctrl);
+
+		public RichGlyph Glyph
+			=> new(themedIconStyle: "App.ThemedIcons.New.Window");
+
+		public NewWindowAction()
+		{
+		}
+
+		public Task ExecuteAsync(object? parameter = null)
+		{
+			return NavigationHelpers.LaunchNewWindowAsync();
+		}
+	}
+}

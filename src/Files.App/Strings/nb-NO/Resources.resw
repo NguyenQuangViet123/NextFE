@@ -1,0 +1,4365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NewWindow" xml:space="preserve">
+    <value>Nytt vindu</value>
+  </data>
+  <data name="CopyPath" xml:space="preserve">
+    <value>Kopier filbanen</value>
+  </data>
+  <data name="CopyItemPath" xml:space="preserve">
+    <value>Copy item path</value>
+  </data>
+  <data name="CopyPathWithQuotes" xml:space="preserve">
+    <value>Kopier sti med tilbud</value>
+  </data>
+  <data name="CopyItemPathWithQuotes" xml:space="preserve">
+    <value>Copy selected item path with quotes</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Bla gjennom</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Størrelse</value>
+  </data>
+  <data name="PropertiesCreated.Text" xml:space="preserve">
+    <value>Opprettet:</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Sti</value>
+  </data>
+  <data name="SizeLabel" xml:space="preserve">
+    <value>Størrelse:</value>
+  </data>
+  <data name="SizeOnDiskLabel" xml:space="preserve">
+    <value>Størrelse på disk:</value>
+  </data>
+  <data name="UncompressedSize" xml:space="preserve">
+    <value>Ukomprimert størrelse:</value>
+  </data>
+  <data name="ErrorDialogThisActionCannotBeDone" xml:space="preserve">
+    <value>Denne handlingen kan ikke utføres</value>
+  </data>
+  <data name="ErrorDialogTheDestinationFolder" xml:space="preserve">
+    <value>Destinasjonsmappen</value>
+  </data>
+  <data name="ErrorDialogIsASubfolder" xml:space="preserve">
+    <value>er en undermappe til kildemappen</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Hopp over</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="InvertSelection" xml:space="preserve">
+    <value>Inverter utvalg</value>
+  </data>
+  <data name="ClearSelection" xml:space="preserve">
+    <value>Fjern Utvalg</value>
+  </data>
+  <data name="PropertiesModified.Text" xml:space="preserve">
+    <value>Endret:</value>
+  </data>
+  <data name="Accessed" xml:space="preserve">
+    <value>Åpnet:</value>
+  </data>
+  <data name="RecentItemClearAll.Text" xml:space="preserve">
+    <value>Fjern alle elementer</value>
+  </data>
+  <data name="NavigationToolbarVisiblePath.PlaceholderText" xml:space="preserve">
+    <value>Angi en bane å navigere til eller skriv "&gt;" for å åpne kommandopaletten</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Søk</value>
+  </data>
+  <data name="RecentItemDescription.Text" xml:space="preserve">
+    <value>Filer du tidligere har åpnet vil vises her</value>
+  </data>
+  <data name="RecentItemRemove.Text" xml:space="preserve">
+    <value>Fjern dette elementet</value>
+  </data>
+  <data name="OpenGitHubRepo" xml:space="preserve">
+    <value>GitHub repository</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="OpenSource" xml:space="preserve">
+    <value>Åpen kildekode</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>Datoformat</value>
+  </data>
+  <data name="SettingsAppearanceTheme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="SettingsFilesAndFoldersShowFileExtensions" xml:space="preserve">
+    <value>Vis filendelser for kjente filtyper</value>
+  </data>
+  <data name="SettingsFilesAndFoldersShowHiddenItems" xml:space="preserve">
+    <value>Vis skjulte filer og mapper</value>
+  </data>
+  <data name="ShowDotFiles" xml:space="preserve">
+    <value>Show dot files</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Utseende</value>
+  </data>
+  <data name="BackgroundColor" xml:space="preserve">
+    <value>Bakgrunnsfarge</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Avansert</value>
+  </data>
+  <data name="SettingsOnStartupContinueWhereYouLeftOff.Content" xml:space="preserve">
+    <value>Fortsett der du slapp</value>
+  </data>
+  <data name="SettingsOnStartupOpenANewTab.Content" xml:space="preserve">
+    <value>Åpne en ny fane</value>
+  </data>
+  <data name="SettingsOnStartupOpenASpecificPage.Content" xml:space="preserve">
+    <value>Åpne en eller flere bestemte sider</value>
+  </data>
+  <data name="Desktop" xml:space="preserve">
+    <value>Skrivebord</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Dokumenter</value>
+  </data>
+  <data name="Downloads" xml:space="preserve">
+    <value>Nedlastinger</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Navn</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Stigende</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Lim inn</value>
+  </data>
+  <data name="PasteShortcut" xml:space="preserve">
+    <value>Lim inn snarvei</value>
+  </data>
+  <data name="BaseLayoutContextFlyoutNew.Label" xml:space="preserve">
+    <value>Ny</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Egenskaper</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Åpne</value>
+  </data>
+  <data name="OpenInNewTab" xml:space="preserve">
+    <value>Åpne i ny fane</value>
+  </data>
+  <data name="OpenInNewWindow" xml:space="preserve">
+    <value>Åpne i nytt vindu</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Del</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Klipp ut</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Slett</value>
+  </data>
+  <data name="PinFolderToSidebar" xml:space="preserve">
+    <value>Fest til sidepanelet</value>
+  </data>
+  <data name="WelcomeDialog.Title" xml:space="preserve">
+    <value>Velkommen til Files!</value>
+  </data>
+  <data name="WelcomeDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Gi tilgang</value>
+  </data>
+  <data name="WelcomeDialogTextBlock.Text" xml:space="preserve">
+    <value>For å komme i gang, trenger vi din tillatelse til å vise filene dine. Dette vil åpne en side med innstillinger der du kan gi oss denne tillatelsen. Etter du har fullført dette steget, må du starte appen på nytt.</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Vis</value>
+  </data>
+  <data name="EnterAnItemName" xml:space="preserve">
+    <value>Angi et navn</value>
+  </data>
+  <data name="CreateNewItemTitle" xml:space="preserve">
+    <value>Opprett ny {0}</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Lyst</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Mørkt</value>
+  </data>
+  <data name="UseSystemSetting" xml:space="preserve">
+    <value>Use system setting</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Applikasjon</value>
+  </data>
+  <data name="SystemTimeStyle" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>Ny mappe</value>
+  </data>
+  <data name="NewFile" xml:space="preserve">
+    <value>Ny fil</value>
+  </data>
+  <data name="EmptyFolder.Text" xml:space="preserve">
+    <value>Denne mappen er tom.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tilbake (Alt+Pil Venstre)</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Frem (Alt+Pil Høyre)</value>
+  </data>
+  <data name="Up" xml:space="preserve">
+    <value>Opp (Alt+Pil Opp)</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Oppdater</value>
+  </data>
+  <data name="ItemAlreadyExistsDialogContent" xml:space="preserve">
+    <value>Et element med dette navnet finnes allerede i denne mappen.</value>
+  </data>
+  <data name="ItemAlreadyExistsDialogSecondaryButtonText" xml:space="preserve">
+    <value>Erstatt eksisterende element</value>
+  </data>
+  <data name="ItemAlreadyExistsDialogTitle" xml:space="preserve">
+    <value>Elementet finnes allerede</value>
+  </data>
+  <data name="SetAsLockscreen" xml:space="preserve">
+    <value>Sett som bakgrunn for låseskjerm</value>
+  </data>
+  <data name="SetAsAppBackground" xml:space="preserve">
+    <value>Bruk som app bakgrunn</value>
+  </data>
+  <data name="AccessDeniedDeleteDialog.Text" xml:space="preserve">
+    <value>Vi kunne ikke slette dette elementet</value>
+  </data>
+  <data name="DriveUnpluggedDialog.Text" xml:space="preserve">
+    <value>Koble til nødvendig enhet for å få tilgang til dette elementet.</value>
+  </data>
+  <data name="DriveUnpluggedDialog.Title" xml:space="preserve">
+    <value>Disk frakoblet</value>
+  </data>
+  <data name="FileNotFoundDialog.Text" xml:space="preserve">
+    <value>Filen du forsøker å få tilgang til kan ha blitt flyttet eller slettet.</value>
+  </data>
+  <data name="CannotAccessPropertiesTitle" xml:space="preserve">
+    <value>Kan ikke åpne egenskaper for denne filen</value>
+  </data>
+  <data name="CannotAccessPropertiesContent" xml:space="preserve">
+    <value>Filen du forsøker å få tilgang til kan ha blitt flyttet eller slettet.</value>
+  </data>
+  <data name="FileNotFoundDialog.Title" xml:space="preserve">
+    <value>Fil ikke funnet</value>
+  </data>
+  <data name="FolderNotFoundDialog.Text" xml:space="preserve">
+    <value>Mappen du forsøker å få tilgang til kan ha blitt flyttet eller slettet.</value>
+  </data>
+  <data name="FolderNotFoundDialog.Title" xml:space="preserve">
+    <value>Har du slettet denne mappen?</value>
+  </data>
+  <data name="FileInUseByDialog.Text" xml:space="preserve">
+    <value>Filen du forsøker å få åpne er for øyeblikket i bruk av {0}</value>
+  </data>
+  <data name="FileInUseDialog.Text" xml:space="preserve">
+    <value>Filen du prøver å få tilgang til, er i bruk av et annet program</value>
+  </data>
+  <data name="FileInUseDialog.Title" xml:space="preserve">
+    <value>Filen er i bruk</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Oppsett</value>
+  </data>
+  <data name="PropertiesDialogReadOnly.Text" xml:space="preserve">
+    <value>Skrivebeskyttet</value>
+  </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>{0, plural, one {# dag siden} other {# dager siden}}</value>
+  </data>
+  <data name="DaysAgo_Singular" xml:space="preserve">
+    <value>1 dag siden</value>
+  </data>
+  <data name="DaysAgo_Plural" xml:space="preserve">
+    <value>{0} dager siden</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>{0, plural, one {# time siden} other {# timer siden}}</value>
+  </data>
+  <data name="HoursAgo_Singular" xml:space="preserve">
+    <value>1 time siden</value>
+  </data>
+  <data name="HoursAgo_Plural" xml:space="preserve">
+    <value>{0} timer siden</value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>{0, plural, one{# minutt siden} other {# minutter siden}}</value>
+  </data>
+  <data name="MinutesAgo_Singular" xml:space="preserve">
+    <value>1 minutt siden</value>
+  </data>
+  <data name="MinutesAgo_Plural" xml:space="preserve">
+    <value>{0} minutter siden</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>{0, plural, one {# sekund siden} other {# sekunder siden}}</value>
+  </data>
+  <data name="SecondsAgo_Singular" xml:space="preserve">
+    <value>1 sekund siden</value>
+  </data>
+  <data name="SecondsAgo_Plural" xml:space="preserve">
+    <value>{0} sekunder siden</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>Nå</value>
+  </data>
+  <data name="ErrorDialogUnsupportedOperation" xml:space="preserve">
+    <value>Den ønskede handlingen er ikke støttet</value>
+  </data>
+  <data name="DriveFreeSpaceAndCapacity" xml:space="preserve">
+    <value>{0} ledig av {1}</value>
+  </data>
+  <data name="SendTo" xml:space="preserve">
+    <value>Send til</value>
+  </data>
+  <data name="FileNameTeachingTip.Subtitle" xml:space="preserve">
+    <value>Elementets navn kan ikke inneholde følgende tegn: \ / : * ? " &lt; &gt; |</value>
+  </data>
+  <data name="InvalidFilename.Text" xml:space="preserve">
+    <value>Elementnavnet som er angitt er ugyldig</value>
+  </data>
+  <data name="SelectedItems" xml:space="preserve">
+    <value>{0, plural, one {# item selected} other {# items selected}}</value>
+    <comment>ICU format for plurals, more information here: https://support.crowdin.com/icu-message-syntax/#plural</comment>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>{0, plural, one {item} other {items}}</value>
+    <comment>ICU format for plurals, more information here: https://support.crowdin.com/icu-message-syntax/#plural</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="ConfirmEmptyBinDialogContent" xml:space="preserve">
+    <value>Er du sikker på at du vil slette alle disse elementene permanent?</value>
+  </data>
+  <data name="ConfirmEmptyBinDialogTitle" xml:space="preserve">
+    <value>Tøm papirkurven</value>
+  </data>
+  <data name="ItemSizeBytes" xml:space="preserve">
+    <value>bytes</value>
+  </data>
+  <data name="KiloByteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="MegaByteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="GigaByteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="TeraByteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="PetaByteSymbol" xml:space="preserve">
+    <value>PB</value>
+  </data>
+  <data name="ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="PropertiesFilesAndFoldersCountString" xml:space="preserve">
+    <value>{0, number} {0, plural, one {fil} other {filer}}, {1, number} {1, plural, one {mappe} other {mapper}}</value>
+  </data>
+  <data name="PropertiesFilesAndFoldersAndLocationsCount" xml:space="preserve">
+    <value>{0, number} {0, plural, one {fil} other {filer}}, {1, number} {1, plural, one {mappe} other {mapper}} fra {2, number} {2, plural, one {lokasjon} other {lokasjoner}}</value>
+  </data>
+  <data name="BaseLayoutContextFlyoutRunAsAnotherUser.Text" xml:space="preserve">
+    <value>Kjør som en annen bruker</value>
+  </data>
+  <data name="PropertiesDriveItemTypesEquals" xml:space="preserve">
+    <value>Alle av typen {0}</value>
+  </data>
+  <data name="PropertiesDriveItemTypeDifferent" xml:space="preserve">
+    <value>Forskjellige typer</value>
+  </data>
+  <data name="PropertiesCombinedItemLocation" xml:space="preserve">
+    <value>Alle i {0}</value>
+  </data>
+  <data name="PropertiesDriveUsedSpace.Text" xml:space="preserve">
+    <value>Brukt plass:</value>
+  </data>
+  <data name="PropertiesDriveFreeSpace.Text" xml:space="preserve">
+    <value>Ledig plass:</value>
+  </data>
+  <data name="PropertiesDriveCapacity.Text" xml:space="preserve">
+    <value>Kapasitet:</value>
+  </data>
+  <data name="PropertiesDriveFileSystem.Text" xml:space="preserve">
+    <value>Filsystem:</value>
+  </data>
+  <data name="JumpListRecentGroupHeader" xml:space="preserve">
+    <value>Nylige</value>
+  </data>
+  <data name="TabStripDragAndDropUIOverrideCaption" xml:space="preserve">
+    <value>Flytt fane hit</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="NavigationToolbarVisiblePathNoResults" xml:space="preserve">
+    <value>Ingen resultater</value>
+  </data>
+  <data name="SubDirectoryAccessDenied" xml:space="preserve">
+    <value>Ingen adgang til å vise noen elementer</value>
+  </data>
+  <data name="MoveToFolderCaptionText" xml:space="preserve">
+    <value>Flytt til {0}</value>
+  </data>
+  <data name="CopyToFolderCaptionText" xml:space="preserve">
+    <value>Kopier til {0}</value>
+  </data>
+  <data name="CloneToFolderCaptionText" xml:space="preserve">
+    <value>Clone to {0}</value>
+  </data>
+  <data name="CreateShortcut" xml:space="preserve">
+    <value>Opprett snarvei</value>
+  </data>
+  <data name="OpenFileLocation" xml:space="preserve">
+    <value>Åpne filplassering</value>
+  </data>
+  <data name="PropertiesShortcutItemArgs.Text" xml:space="preserve">
+    <value>Argumenter:</value>
+  </data>
+  <data name="PropertiesShortcutItemPath.Text" xml:space="preserve">
+    <value>Destinasjon:</value>
+  </data>
+  <data name="PropertiesShortcutItemType.Text" xml:space="preserve">
+    <value>Snarveistype:</value>
+  </data>
+  <data name="PropertiesShortcutTypeLink" xml:space="preserve">
+    <value>Web-link</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Generelt</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Snarvei</value>
+  </data>
+  <data name="ShortcutWebLinkFileType" xml:space="preserve">
+    <value>Internett-snarvei</value>
+  </data>
+  <data name="ShortcutCreateNewSuffix" xml:space="preserve">
+    <value>{0} - snarvei</value>
+  </data>
+  <data name="ExceptionNotificationBody" xml:space="preserve">
+    <value>Det oppstod et uventet problem i Files som utviklerne ikke var forberedt på.</value>
+  </data>
+  <data name="ExceptionNotificationHeader" xml:space="preserve">
+    <value>Noe gikk galt!</value>
+  </data>
+  <data name="ExceptionNotificationReportButton" xml:space="preserve">
+    <value>Rapporter dette problemet</value>
+  </data>
+  <data name="InvalidItemDialogContent" xml:space="preserve">
+    <value>Det refererte elementet er enten ugyldig eller utilgjengelig.{0}Feilmelding:{0}{1}</value>
+  </data>
+  <data name="InvalidItemDialogTitle" xml:space="preserve">
+    <value>Ugyldig element</value>
+  </data>
+  <data name="SettingsAboutVersionTitle" xml:space="preserve">
+    <value>Versjon:</value>
+  </data>
+  <data name="ShareDialogFailMessage" xml:space="preserve">
+    <value>Det er ingenting å dele for øyeblikket...</value>
+  </data>
+  <data name="ShareDialogMultipleItemsDescription" xml:space="preserve">
+    <value>Elementene du har valgt vil bli delt</value>
+  </data>
+  <data name="ShareDialogSingleItemDescription" xml:space="preserve">
+    <value>Elementet du har valgt vil bli delt</value>
+  </data>
+  <data name="ShareDialogTitle" xml:space="preserve">
+    <value>Deler {0}</value>
+  </data>
+  <data name="ShareDialogTitleMultipleItems" xml:space="preserve">
+    <value>Deler {0} {1}</value>
+  </data>
+  <data name="RenameError.ItemDeleted.Text" xml:space="preserve">
+    <value>Elementet du forsøker å gi nytt navn eksisterer ikke lenger. Kontroller den korrekte plasseringen av elementet du vil gi nytt navn.</value>
+  </data>
+  <data name="RenameError.ItemDeleted.Title" xml:space="preserve">
+    <value>Elementet eksisterer ikke lenger</value>
+  </data>
+  <data name="RenameError.NameInvalid.Text" xml:space="preserve">
+    <value>Angitt navn er ugyldig. Kontroller ønsket navn og prøv igjen.</value>
+  </data>
+  <data name="RenameError.NameInvalid.Title" xml:space="preserve">
+    <value>Ugyldig navn</value>
+  </data>
+  <data name="RenameError.TooLong.Text" xml:space="preserve">
+    <value>Lengden på navnet overstiger maksimumslengden. Kontrollert ønsket navn og prøv igjen.</value>
+  </data>
+  <data name="RenameError.TooLong.Title" xml:space="preserve">
+    <value>Navnet på elementet var for langt</value>
+  </data>
+  <data name="ShowMoreOptions" xml:space="preserve">
+    <value>Vis flere valg</value>
+  </data>
+  <data name="RestartNotificationText.Text" xml:space="preserve">
+    <value>Applikasjonen må startes på nytt for at disse innstillingene skal aktiveres. Ønsker du å starte på nytt?</value>
+  </data>
+  <data name="SponsorUsOnGitHub" xml:space="preserve">
+    <value>Støtt oss på GitHub</value>
+  </data>
+  <data name="AccessDeniedCreateDialog.Text" xml:space="preserve">
+    <value>Vi kunne ikke opprette dette elementet</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Ingen tilgang</value>
+  </data>
+  <data name="BaseLayoutItemContextFlyoutSetAs.Text" xml:space="preserve">
+    <value>Angi som</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="AddDialog.Title" xml:space="preserve">
+    <value>Opprett nytt element</value>
+  </data>
+  <data name="AddDialogDescription.Text" xml:space="preserve">
+    <value>Velg en type for det nye elementet nedenfor</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Fil</value>
+  </data>
+  <data name="AddDialogListFileSubHeader" xml:space="preserve">
+    <value>Oppretter en tom fil</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Mappe</value>
+  </data>
+  <data name="AddDialogListFolderSubHeader" xml:space="preserve">
+    <value>Oppretter en tom mappe</value>
+  </data>
+  <data name="NavResfreshButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Oppfrisk mappen</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="SettingsContextMenuOverflow" xml:space="preserve">
+    <value>Flytt skallutvidelser til en undermeny</value>
+  </data>
+  <data name="ShowConfirmationWhenDeletingItems" xml:space="preserve">
+    <value>Vis bekreftelsesdialog når du sletter elementer</value>
+  </data>
+  <data name="PropertySaveErrorMessage.Text" xml:space="preserve">
+    <value>Noen egenskaper kunne ikke lagres.</value>
+  </data>
+  <data name="PropertySaveErrorDialog.Title" xml:space="preserve">
+    <value>Feil</value>
+  </data>
+  <data name="PropertySaveErrorDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Lukk likevel</value>
+  </data>
+  <data name="PropertyRatingText" xml:space="preserve">
+    <value>Bedømmelse</value>
+  </data>
+  <data name="PropertyParsingPath" xml:space="preserve">
+    <value>Elementsti</value>
+  </data>
+  <data name="PropertyItemTypeText" xml:space="preserve">
+    <value>Elementtype</value>
+  </data>
+  <data name="PropertyTitle" xml:space="preserve">
+    <value>Tittel</value>
+  </data>
+  <data name="PropertySubject" xml:space="preserve">
+    <value>Emne</value>
+  </data>
+  <data name="PropertyComment" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="PropertyCopyright" xml:space="preserve">
+    <value>Opphavsrett</value>
+  </data>
+  <data name="PropertyDateModified" xml:space="preserve">
+    <value>Dato endret</value>
+  </data>
+  <data name="PropertyBitDepth" xml:space="preserve">
+    <value>Bit-dybde</value>
+  </data>
+  <data name="PropertyDimensions" xml:space="preserve">
+    <value>Dimensjoner</value>
+  </data>
+  <data name="PropertyHorizontalSize" xml:space="preserve">
+    <value>Horisontal størrelse</value>
+  </data>
+  <data name="PropertyVerticalSize" xml:space="preserve">
+    <value>Vertikal størrelse</value>
+  </data>
+  <data name="PropertyHorizontalResolution" xml:space="preserve">
+    <value>Horisontal oppløsning</value>
+  </data>
+  <data name="PropertyVerticalResolution" xml:space="preserve">
+    <value>Vertikal oppløsning</value>
+  </data>
+  <data name="PropertyColorSpace" xml:space="preserve">
+    <value>Fargerom</value>
+  </data>
+  <data name="PropertyColorSpace_Value0" xml:space="preserve">
+    <value>sRGB</value>
+  </data>
+  <data name="PropertyColorSpace_Value65535" xml:space="preserve">
+    <value>Uspesifisert</value>
+  </data>
+  <data name="PropertyLongitudeDecimal" xml:space="preserve">
+    <value>Lengdegrad desimal</value>
+  </data>
+  <data name="PropertyLatitudeDecimal" xml:space="preserve">
+    <value>Breddegrad desimal</value>
+  </data>
+  <data name="PropertyAltitude" xml:space="preserve">
+    <value>Høyde</value>
+  </data>
+  <data name="PropertyDateTaken" xml:space="preserve">
+    <value>Dato tatt</value>
+  </data>
+  <data name="PropertyCameraManufacturer" xml:space="preserve">
+    <value>Kameraprodusent</value>
+  </data>
+  <data name="PropertyCameraModel" xml:space="preserve">
+    <value>Kameramodell</value>
+  </data>
+  <data name="PropertyExposureTime" xml:space="preserve">
+    <value>Eksponeringstid</value>
+  </data>
+  <data name="PropertyFocalLength" xml:space="preserve">
+    <value>Brennvidde</value>
+  </data>
+  <data name="PropertyAperture" xml:space="preserve">
+    <value>Blender</value>
+  </data>
+  <data name="PropertyPeopleNames" xml:space="preserve">
+    <value>Navn på personer</value>
+  </data>
+  <data name="PropertyChannelCount" xml:space="preserve">
+    <value>Antall kanaler</value>
+  </data>
+  <data name="PropertyFormat" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="PropertySampleRate" xml:space="preserve">
+    <value>Prøvefrekvens</value>
+  </data>
+  <data name="PropertyAlbumArtist" xml:space="preserve">
+    <value>Albumartist</value>
+  </data>
+  <data name="PropertyAlbumTitle" xml:space="preserve">
+    <value>Albumtittel</value>
+  </data>
+  <data name="Artist" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="PropertyBeatsPerMinute" xml:space="preserve">
+    <value>Slag per minutt</value>
+  </data>
+  <data name="PropertyComposer" xml:space="preserve">
+    <value>Komponist</value>
+  </data>
+  <data name="Conductor" xml:space="preserve">
+    <value>Dirigent</value>
+  </data>
+  <data name="PropertyDiscNumber" xml:space="preserve">
+    <value>Platenummer</value>
+  </data>
+  <data name="PropertyGenre" xml:space="preserve">
+    <value>Sjanger</value>
+  </data>
+  <data name="PropertyTrackNumber" xml:space="preserve">
+    <value>Spornummer</value>
+  </data>
+  <data name="PropertyDuration" xml:space="preserve">
+    <value>Varighet</value>
+  </data>
+  <data name="PropertyFrameCount" xml:space="preserve">
+    <value>Antall bilder</value>
+  </data>
+  <data name="PropertyProtectionType" xml:space="preserve">
+    <value>Beskyttelsestype</value>
+  </data>
+  <data name="PropertyAuthorUrl" xml:space="preserve">
+    <value>Nettadresse til forfatter</value>
+  </data>
+  <data name="PropertyContentDistributor" xml:space="preserve">
+    <value>Innholdsdistributør</value>
+  </data>
+  <data name="PropertyDateReleased" xml:space="preserve">
+    <value>Utgivelsesdato</value>
+  </data>
+  <data name="PropertySeriesName" xml:space="preserve">
+    <value>Serienavn</value>
+  </data>
+  <data name="PropertySeasonNumber" xml:space="preserve">
+    <value>Sesongnummer</value>
+  </data>
+  <data name="PropertyEpisodeNumber" xml:space="preserve">
+    <value>Episodenummer</value>
+  </data>
+  <data name="PropertyProducer" xml:space="preserve">
+    <value>Produsent</value>
+  </data>
+  <data name="PropertyPromotionUrl" xml:space="preserve">
+    <value>Nettadresse til kampanje</value>
+  </data>
+  <data name="PropertyProviderStyle" xml:space="preserve">
+    <value>Tilbyderstil</value>
+  </data>
+  <data name="PropertyPublisher" xml:space="preserve">
+    <value>Utgiver</value>
+  </data>
+  <data name="PropertyThumbnailLargePath" xml:space="preserve">
+    <value>Sti til stort miniatyrbilde</value>
+  </data>
+  <data name="PropertyThumbnailLargeUri" xml:space="preserve">
+    <value>Nettadresse til stort miniatyrbilde </value>
+  </data>
+  <data name="PropertyThumbnailSmallPath" xml:space="preserve">
+    <value>Sti til litet miniatyrbilde </value>
+  </data>
+  <data name="PropertyThumbnailSmallUri" xml:space="preserve">
+    <value>Nettadresse til litet miniatyrbilde </value>
+  </data>
+  <data name="PropertyUserWebUrl" xml:space="preserve">
+    <value>Nettadresse til bruker</value>
+  </data>
+  <data name="PropertyWriter" xml:space="preserve">
+    <value>Skribent</value>
+  </data>
+  <data name="PropertyYear" xml:space="preserve">
+    <value>År</value>
+  </data>
+  <data name="PropertyContributor" xml:space="preserve">
+    <value>Bidragsyter</value>
+  </data>
+  <data name="PropertyLastAuthor" xml:space="preserve">
+    <value>Siste forfatter</value>
+  </data>
+  <data name="PropertyRevisionNumber" xml:space="preserve">
+    <value>Revisjonsnummer</value>
+  </data>
+  <data name="PropertyVersion" xml:space="preserve">
+    <value>Versjon</value>
+  </data>
+  <data name="PropertyDateCreated" xml:space="preserve">
+    <value>Dato opprettet</value>
+  </data>
+  <data name="PropertyTotalEditingTime" xml:space="preserve">
+    <value>Samlet redigeringstid</value>
+  </data>
+  <data name="PropertyTemplate" xml:space="preserve">
+    <value>Mal</value>
+  </data>
+  <data name="PropertyWordCount" xml:space="preserve">
+    <value>Antall ord</value>
+  </data>
+  <data name="PropertyCharacterCount" xml:space="preserve">
+    <value>Antall tegn</value>
+  </data>
+  <data name="PropertyLineCount" xml:space="preserve">
+    <value>Antall linjer</value>
+  </data>
+  <data name="PropertyParagraphCount" xml:space="preserve">
+    <value>Antall avsnitt</value>
+  </data>
+  <data name="PropertyPageCount" xml:space="preserve">
+    <value>Antall sider</value>
+  </data>
+  <data name="PropertySlideCount" xml:space="preserve">
+    <value>Antall lysbilder</value>
+  </data>
+  <data name="PropertyFrameRate" xml:space="preserve">
+    <value>Bildefrekvens</value>
+  </data>
+  <data name="PropertyEncodingBitrate" xml:space="preserve">
+    <value>Bithastighet for koding</value>
+  </data>
+  <data name="PropertyPreviewAudioEncodingBitrate" xml:space="preserve">
+    <value>Lyd koding Bitrate</value>
+  </data>
+  <data name="PropertyPreviewVideoEncodingBitrate" xml:space="preserve">
+    <value>Videokoding Bitrate</value>
+  </data>
+  <data name="Compression" xml:space="preserve">
+    <value>Kompresjon</value>
+  </data>
+  <data name="PropertyFrameWidth" xml:space="preserve">
+    <value>Bildebredde</value>
+  </data>
+  <data name="PropertyFrameHeight" xml:space="preserve">
+    <value>Bildehøyde</value>
+  </data>
+  <data name="PropertyOrientation" xml:space="preserve">
+    <value>Orientering</value>
+  </data>
+  <data name="PropertySectionCore" xml:space="preserve">
+    <value>Kjerne</value>
+  </data>
+  <data name="PropertySectionImage" xml:space="preserve">
+    <value>Bilde</value>
+  </data>
+  <data name="PropertySectionPhoto" xml:space="preserve">
+    <value>Fotografi</value>
+  </data>
+  <data name="PropertySectionGPS" xml:space="preserve">
+    <value>GPS</value>
+  </data>
+  <data name="PropertySectionMedia" xml:space="preserve">
+    <value>Medier</value>
+  </data>
+  <data name="PropertySectionAudio" xml:space="preserve">
+    <value>Lyd</value>
+  </data>
+  <data name="PropertySectionMusic" xml:space="preserve">
+    <value>Musikk</value>
+  </data>
+  <data name="PropertySectionVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="SelectionOptions" xml:space="preserve">
+    <value>Valgmuligheter</value>
+  </data>
+  <data name="NavToolbarSelectionOptions.Label" xml:space="preserve">
+    <value>Velg</value>
+  </data>
+  <data name="RecycleBinItemAutomation" xml:space="preserve">
+    <value>Papirkurv-element</value>
+  </data>
+  <data name="ShortcutItemAutomation" xml:space="preserve">
+    <value>Snarvei-element</value>
+  </data>
+  <data name="Drives" xml:space="preserve">
+    <value>Enheter</value>
+  </data>
+  <data name="PinToSidebarByDraggingCaptionText" xml:space="preserve">
+    <value>Flytt hit</value>
+  </data>
+  <data name="EjectNotificationHeader" xml:space="preserve">
+    <value>Trygt å fjerne maskinvare</value>
+  </data>
+  <data name="EjectNotificationBody" xml:space="preserve">
+    <value>Enheten kan nå trygt fjernes fra datamaskinen.</value>
+  </data>
+  <data name="EjectNotificationErrorDialogHeader" xml:space="preserve">
+    <value>Problem med å koble fra enhet</value>
+  </data>
+  <data name="EjectNotificationErrorDialogBody" xml:space="preserve">
+    <value>Denne enheten er i bruk. Lukk all programmer, vinduer eller faner som kan bruke enheten, og prøv igjen.</value>
+  </data>
+  <data name="Eject" xml:space="preserve">
+    <value>Koble fra</value>
+  </data>
+  <data name="DuplicateTab" xml:space="preserve">
+    <value>Dupliser fane</value>
+  </data>
+  <data name="HorizontalMultitaskingControlMoveTabToNewWindow.Text" xml:space="preserve">
+    <value>Flytt fane til nytt vindu</value>
+  </data>
+  <data name="NewTab" xml:space="preserve">
+    <value>Ny fane</value>
+  </data>
+  <data name="ClearPropertiesFlyoutText.Text" xml:space="preserve">
+    <value>Noen egenskaper kan inneholde personlig informasjon.</value>
+  </data>
+  <data name="ClearPropertiesButton.Content" xml:space="preserve">
+    <value>Fjern alle egenskaper</value>
+  </data>
+  <data name="OngoingTasksTeachingTip.Subtitle" xml:space="preserve">
+    <value>Sjekk status for filoperasjoner her</value>
+  </data>
+  <data name="OngoingTasksTeachingTip.Title" xml:space="preserve">
+    <value>Statussenter</value>
+  </data>
+  <data name="SearchPagePathBoxOverrideText" xml:space="preserve">
+    <value>Søkeresultater i {1} for {0}</value>
+  </data>
+  <data name="SearchResultsFor" xml:space="preserve">
+    <value>Search results for `{0}`</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaljer</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nei</value>
+  </data>
+  <data name="ShowProtectedSystemFiles" xml:space="preserve">
+    <value>Vis beskyttede systemfiler</value>
+  </data>
+  <data name="SyncFolderPreferencesAcrossDirectories" xml:space="preserve">
+    <value>Synkroniser oppsett og sortering preferanser på tvers av kataloger</value>
+  </data>
+  <data name="SettingsContextMenu.Text" xml:space="preserve">
+    <value>Tilpass høyreklikk-kontekstmenyen</value>
+  </data>
+  <data name="OriginalPath" xml:space="preserve">
+    <value>Opprinnelig sti</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Legg til</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Rediger</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Fjern</value>
+  </data>
+  <data name="SettingsMultitaskingAlwaysOpenDualPane" xml:space="preserve">
+    <value>Åpne faner i topanel-modus</value>
+  </data>
+  <data name="ShowOpenInNewPane" xml:space="preserve">
+    <value>Vis alternativ for å åpne mapper i et nytt panel</value>
+  </data>
+  <data name="ShowCopyPath" xml:space="preserve">
+    <value>Vis alternativet for å kopiere sti</value>
+  </data>
+  <data name="ShowCreateFolderWithSelection" xml:space="preserve">
+    <value>Vis alternativet for å opprette mappe med utvalg</value>
+  </data>
+  <data name="ShowCreateShortcut" xml:space="preserve">
+    <value>Vis alternativet for å opprette snarvei</value>
+  </data>
+  <data name="NavigationToolbarNewPane.Label" xml:space="preserve">
+    <value>Nytt panel</value>
+  </data>
+  <data name="OpenInNewPane" xml:space="preserve">
+    <value>Åpne i nytt panel</value>
+  </data>
+  <data name="FilesAndFolders" xml:space="preserve">
+    <value>Filer &amp; mapper</value>
+  </data>
+  <data name="NavToolbarDetails.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Detaljer (Ctrl+Skift+1)</value>
+  </data>
+  <data name="DateDeleted" xml:space="preserve">
+    <value>Dato slettet</value>
+  </data>
+  <data name="SidebarCloudDrives" xml:space="preserve">
+    <value>Skylagring</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Bekreft</value>
+  </data>
+  <data name="DesiredName" xml:space="preserve">
+    <value>Ønsket navn</value>
+  </data>
+  <data name="TogglePreviewPane" xml:space="preserve">
+    <value>Vis/skjul forhåndsvisningspanel</value>
+  </data>
+  <data name="ToggleDetailsPane" xml:space="preserve">
+    <value>Skru av/på detaljruten</value>
+  </data>
+  <data name="ToggleDetailsPaneDescription" xml:space="preserve">
+    <value>Velg detaljruten for å vise grunnleggende filegenskaper</value>
+  </data>
+  <data name="ToggleInfoPane" xml:space="preserve">
+    <value>Vis/Skjul info-ruten</value>
+  </data>
+  <data name="ToggleInfoPaneDescription" xml:space="preserve">
+    <value>Toggle visibility of the detail/preview panes</value>
+  </data>
+  <data name="ToggleToolbar" xml:space="preserve">
+    <value>Toggle toolbar</value>
+  </data>
+  <data name="ToggleToolbarDescription" xml:space="preserve">
+    <value>Toggle visibility of the toolbar</value>
+  </data>
+  <data name="ToggleFilterHeader" xml:space="preserve">
+    <value>Toggle filter header</value>
+  </data>
+  <data name="ToggleFilterHeaderDescription" xml:space="preserve">
+    <value>Toggle visibility of the filter header</value>
+  </data>
+  <data name="ToggleDualPane" xml:space="preserve">
+    <value>Toggle dual pane</value>
+  </data>
+  <data name="ToggleDualPaneDescription" xml:space="preserve">
+    <value>Toggle dual pane mode</value>
+  </data>
+  <data name="DetailsPanePreviewNotAvaliableText" xml:space="preserve">
+    <value>Forhåndsvisning ikke tilgjengelig</value>
+  </data>
+  <data name="PropertyItemName" xml:space="preserve">
+    <value>Elementnavn</value>
+  </data>
+  <data name="UnpinFolderFromSidebar" xml:space="preserve">
+    <value>Løsne fra sidepanelet</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Nettverk</value>
+  </data>
+  <data name="PreviewPaneFileDetails.AutomationProperties.Name" xml:space="preserve">
+    <value>Fildetaljer</value>
+  </data>
+  <data name="PreviewPaneFilePreview.AutomationProperties.Name" xml:space="preserve">
+    <value>Forhåndsvisning av fil</value>
+  </data>
+  <data name="SelectedFilePreviewPane.AutomationProperties.Name" xml:space="preserve">
+    <value>Panel for forhåndsvisning av merket fil</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Tilbakemeldinger</value>
+  </data>
+  <data name="CloudDriveSyncStatus_Online" xml:space="preserve">
+    <value>Tilgjengelig på nett</value>
+  </data>
+  <data name="Documentation" xml:space="preserve">
+    <value>Dokumentasjon</value>
+  </data>
+  <data name="CloudDriveSyncStatus_Offline" xml:space="preserve">
+    <value>Tilgjengelig frakoblet</value>
+  </data>
+  <data name="CloudDriveSyncStatus_PartialOffline" xml:space="preserve">
+    <value>Delvis tilgjengelig frakoblet</value>
+  </data>
+  <data name="CloudDriveSyncStatus_Sync" xml:space="preserve">
+    <value>Synkroniserer</value>
+  </data>
+  <data name="CloudDriveSyncStatus_Excluded" xml:space="preserve">
+    <value>Utelatt fra synkronisering</value>
+  </data>
+  <data name="ItemSizeNotCalculated" xml:space="preserve">
+    <value>Ikke kalkulert</value>
+  </data>
+  <data name="CloudDriveSyncStatus_Unknown" xml:space="preserve">
+    <value>Ukjent</value>
+  </data>
+  <data name="RenameFileDialog.Text" xml:space="preserve">
+    <value>Hvis du endrer filendelsen, kan filen bli ubrukelig. Er du sikker på at du vil endre den?</value>
+  </data>
+  <data name="DriveTypeCDRom" xml:space="preserve">
+    <value>CD ROM-stasjon</value>
+  </data>
+  <data name="DriveTypeCloudDrive" xml:space="preserve">
+    <value>Skylagring</value>
+  </data>
+  <data name="DriveTypeFixed" xml:space="preserve">
+    <value>Fastmontert disk</value>
+  </data>
+  <data name="DriveTypeFloppyDisk" xml:space="preserve">
+    <value>Diskettstasjon</value>
+  </data>
+  <data name="DriveTypeNetwork" xml:space="preserve">
+    <value>Nettverksdisk</value>
+  </data>
+  <data name="DriveTypeNoRootDirectory" xml:space="preserve">
+    <value>Umontert disk</value>
+  </data>
+  <data name="DriveTypeRam" xml:space="preserve">
+    <value>RAM-disk</value>
+  </data>
+  <data name="DriveTypeRemovable" xml:space="preserve">
+    <value>Flyttbar lagringsenhet</value>
+  </data>
+  <data name="DriveTypeUnknown" xml:space="preserve">
+    <value>Ukjent</value>
+  </data>
+  <data name="DriveTypeVirtualDrive" xml:space="preserve">
+    <value>Virtuell stasjon</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Dato opprettet</value>
+  </data>
+  <data name="MoreOptions" xml:space="preserve">
+    <value>Flere alternativer...</value>
+  </data>
+  <data name="DrivesWidgetOptionsFlyoutMapNetDriveMenuItem.Text" xml:space="preserve">
+    <value>Koble til nettverksdisk</value>
+  </data>
+  <data name="Pinned" xml:space="preserve">
+    <value>Festet</value>
+  </data>
+  <data name="SidebarLibraries" xml:space="preserve">
+    <value>Biblioteker</value>
+  </data>
+  <data name="NoItemSelected" xml:space="preserve">
+    <value>Ingen elementer valgt</value>
+  </data>
+  <data name="PropertyItemTarget" xml:space="preserve">
+    <value>Mål</value>
+  </data>
+  <data name="Arguments" xml:space="preserve">
+    <value>Argumenter</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="PropertyItemCount" xml:space="preserve">
+    <value>Antall elementer</value>
+  </data>
+  <data name="ElevateConfirmDialog.Title" xml:space="preserve">
+    <value>Denne handlingen krever administrator-rettigheter</value>
+  </data>
+  <data name="ElevateConfirmDialog.Content" xml:space="preserve">
+    <value>Vil du fortsette som administrator?</value>
+  </data>
+  <data name="ColumnsShortcutTooltip" xml:space="preserve">
+    <value>Kolonner (Ctrl+Skift+6)</value>
+  </data>
+  <data name="PinItemToStart.Text" xml:space="preserve">
+    <value>Fest til Start-menyen</value>
+  </data>
+  <data name="UnpinItemFromStart.Text" xml:space="preserve">
+    <value>Løsne fra Start-menyen</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Bibliotek</value>
+  </data>
+  <data name="LibraryLocations.Text" xml:space="preserve">
+    <value>Plasseringer:</value>
+  </data>
+  <data name="SetAsDefaultSavePath" xml:space="preserve">
+    <value>Angi som standard-sti for lagring</value>
+  </data>
+  <data name="LibraryNoLocations.Text" xml:space="preserve">
+    <value>Ingen plasseringer</value>
+  </data>
+  <data name="ErrorInputEmpty" xml:space="preserve">
+    <value>Input-feltet kan ikke være tomt!</value>
+  </data>
+  <data name="ErrorNameInputRestrictedCharacters" xml:space="preserve">
+    <value>Navnet kan ikke inneholder følgende tegn: \ / : * ? " &lt; &gt; |</value>
+  </data>
+  <data name="ErrorNameInputRestricted" xml:space="preserve">
+    <value>Dette navnet er ikke tillatt!</value>
+  </data>
+  <data name="CreateLibraryErrorAlreadyExists" xml:space="preserve">
+    <value>Et bibliotek med samme navn eksisterer fra før!</value>
+  </data>
+  <data name="OpenStorageSense" xml:space="preserve">
+    <value>Åpne Storage Sense</value>
+  </data>
+  <data name="OpenStorageSenseDescription" xml:space="preserve">
+    <value>Åpne lagringssensor-siden i Windows Innstillinger</value>
+  </data>
+  <data name="Cleanup" xml:space="preserve">
+    <value>Cleanup</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopier</value>
+  </data>
+  <data name="CopyItemsDialogTitle" xml:space="preserve">
+    <value>Kopier {0, plural, one {element} other {elementer}}</value>
+  </data>
+  <data name="DeleteItemsDialogTitle" xml:space="preserve">
+    <value>Slett {0, plural, one {element} other {elementer}}</value>
+  </data>
+  <data name="MoveItemsDialogPrimaryButtonText" xml:space="preserve">
+    <value>Flytt</value>
+  </data>
+  <data name="MoveItemsDialogSubtitle" xml:space="preserve">
+    <value>{0, plural, one {Ett element vil bli flyttet} other {# elementer vil bli flyttet}}</value>
+  </data>
+  <data name="MoveItemsDialogTitle" xml:space="preserve">
+    <value>Flytt {0, plural, one {element} other {elementer}}</value>
+  </data>
+  <data name="DeleteItemsDialogSubtitle" xml:space="preserve">
+    <value>{0, plural, one {Ett element vil bli slettet} other {# elementer vil bli slettet}}</value>
+  </data>
+  <data name="ConflictingItemsDialogPrimaryButtonText" xml:space="preserve">
+    <value>Fortsett</value>
+  </data>
+  <data name="ConflictingItemsDialogSubtitleConflicts" xml:space="preserve">
+    <value>{0, plural, one {There is one conflicting file name} other {There are # conflicting file names}}</value>
+  </data>
+  <data name="ConflictingItemsDialogSubtitleConflictsNonConflicts" xml:space="preserve">
+    <value>{0, plural, one {There is one conflicting file name} other {There are # conflicting file names}}, and {1, plural, one {one outgoing item} other {# outgoing items}}</value>
+  </data>
+  <data name="ConflictingItemsDialogTitle" xml:space="preserve">
+    <value>Conflicting {0, plural, one {file name} other {file names}}</value>
+  </data>
+  <data name="CopyItemsDialogSubtitle" xml:space="preserve">
+    <value>{0, plural, one {One item will be copied} other {# items will be copied}}</value>
+  </data>
+  <data name="DeleteItemsDialogPermanentlyDeleteCheckBox.Content" xml:space="preserve">
+    <value>Slett permanent</value>
+  </data>
+  <data name="PropertyISO" xml:space="preserve">
+    <value>ISO-hastighet</value>
+  </data>
+  <data name="ReplaceExisting" xml:space="preserve">
+    <value>Erstatt eksisterende</value>
+  </data>
+  <data name="GenerateNewName" xml:space="preserve">
+    <value>Generer nytt navn</value>
+  </data>
+  <data name="CreateFolderWithSelection" xml:space="preserve">
+    <value>Opprett mappe med merkede elementer</value>
+  </data>
+  <data name="ItemType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="ToolTipDescriptionDate" xml:space="preserve">
+    <value>Dato endret:</value>
+  </data>
+  <data name="OpenWith" xml:space="preserve">
+    <value>Åpne med</value>
+  </data>
+  <data name="FileBrowserThumbnailIconColumnGrid.AutomationProperties.Name" xml:space="preserve">
+    <value>Fil-ikon</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowOriginalPath.Text" xml:space="preserve">
+    <value>Opprinnelig sti-kolonne</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowItemType.Text" xml:space="preserve">
+    <value>Elementtype-kolonne</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowDateModified.Text" xml:space="preserve">
+    <value>Dato endret-kolonne</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowDateDeleted.Text" xml:space="preserve">
+    <value>Dato slettet-kolonne</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sorter</value>
+  </data>
+  <data name="DateModifiedLowerCase" xml:space="preserve">
+    <value>Dato endret</value>
+  </data>
+  <data name="OriginalFolder" xml:space="preserve">
+    <value>Opprinnelig mappe</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Synkende</value>
+  </data>
+  <data name="ItemSizeText_Huge" xml:space="preserve">
+    <value>Enorm</value>
+  </data>
+  <data name="ItemSizeText_VeryLarge" xml:space="preserve">
+    <value>Veldig stor</value>
+  </data>
+  <data name="ItemSizeText_Large" xml:space="preserve">
+    <value>Stor</value>
+  </data>
+  <data name="ItemSizeText_Medium" xml:space="preserve">
+    <value>Middels</value>
+  </data>
+  <data name="ItemSizeText_Small" xml:space="preserve">
+    <value>Liten</value>
+  </data>
+  <data name="ItemSizeText_Tiny" xml:space="preserve">
+    <value>Veldig liten</value>
+  </data>
+  <data name="Future" xml:space="preserve">
+    <value>Fremtid</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>I dag</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>I går</value>
+  </data>
+  <data name="EarlierThisWeek" xml:space="preserve">
+    <value>Tidligere denne uken</value>
+  </data>
+  <data name="LastWeek" xml:space="preserve">
+    <value>Forrige uke</value>
+  </data>
+  <data name="EarlierThisMonth" xml:space="preserve">
+    <value>Tidligere denne måneden</value>
+  </data>
+  <data name="LastMonth" xml:space="preserve">
+    <value>Forrige måned</value>
+  </data>
+  <data name="EarlierThisYear" xml:space="preserve">
+    <value>Tidligere i år</value>
+  </data>
+  <data name="LastYear" xml:space="preserve">
+    <value>I fjor</value>
+  </data>
+  <data name="YearN" xml:space="preserve">
+    <value>År {0}</value>
+  </data>
+  <data name="GroupItemsCount_Singular" xml:space="preserve">
+    <value>{0} element</value>
+  </data>
+  <data name="GroupItemsCount_Plural" xml:space="preserve">
+    <value>{0} elementer</value>
+  </data>
+  <data name="ReopenClosedTab" xml:space="preserve">
+    <value>Reopen tab</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Gi nytt navn</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Personvern</value>
+  </data>
+  <data name="TheRecycleBin" xml:space="preserve">
+    <value>Papirkurven</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Avbryter</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Tøm</value>
+  </data>
+  <data name="Widgets" xml:space="preserve">
+    <value>Widgeter</value>
+  </data>
+  <data name="SyncStatus" xml:space="preserve">
+    <value>Synkroniseringsstatus</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Sikkerhet</value>
+  </data>
+  <data name="AdvancedPermissions" xml:space="preserve">
+    <value>Avanserte rettigheter</value>
+  </data>
+  <data name="Allow" xml:space="preserve">
+    <value>Tillat</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>Avvis</value>
+  </data>
+  <data name="SecurityFullControlLabel.Text" xml:space="preserve">
+    <value>Full kontroll</value>
+  </data>
+  <data name="SecurityListDirectoryLabel.Text" xml:space="preserve">
+    <value>List opp innhold i mappe</value>
+  </data>
+  <data name="Modify" xml:space="preserve">
+    <value>Rediger</value>
+  </data>
+  <data name="SecurityPermissionsHeaderText" xml:space="preserve">
+    <value>Tillatelser for {0}</value>
+  </data>
+  <data name="SecurityReadAndExecuteLabel.Text" xml:space="preserve">
+    <value>Lese og eksekvere</value>
+  </data>
+  <data name="SecurityReadLabel.Text" xml:space="preserve">
+    <value>Lese</value>
+  </data>
+  <data name="SecurityUsersGroupLabel.Text" xml:space="preserve">
+    <value>Gruppe- eller brukernavn:</value>
+  </data>
+  <data name="Write" xml:space="preserve">
+    <value>Skriv</value>
+  </data>
+  <data name="SecurityUnknownAccount" xml:space="preserve">
+    <value>Ukjent konto</value>
+  </data>
+  <data name="SecurityCannotReadProperties.Text" xml:space="preserve">
+    <value>Du mangler rettigheter til å vise sikkerhetsegenskapene til dette objektet. Klikk "Avanserte rettigheter" for å fortsette.</value>
+  </data>
+  <data name="SecurityOwnerLabel.Text" xml:space="preserve">
+    <value>Eier:</value>
+  </data>
+  <data name="SecurityUnknownOwnerText.Text" xml:space="preserve">
+    <value>Ukjent eier</value>
+  </data>
+  <data name="ExtractArchive" xml:space="preserve">
+    <value>Pakk ut arkiv</value>
+  </data>
+  <data name="DecompressArchiveDialogOpenDestinationWhenComplete.Content" xml:space="preserve">
+    <value>Åpne destinasjonsmappen når fullført</value>
+  </data>
+  <data name="BaseLayoutItemContextFlyoutExtractToChildFolder" xml:space="preserve">
+    <value>Pakk ut til {0}\ </value>
+  </data>
+  <data name="SideBarCreateNewLibrary.Text" xml:space="preserve">
+    <value>Opprett nytt bibliotek</value>
+  </data>
+  <data name="SideBarRestoreLibraries.Text" xml:space="preserve">
+    <value>Gjenopprett standardbiblioteker</value>
+  </data>
+  <data name="DialogRestoreLibrariesSubtitleText" xml:space="preserve">
+    <value>Er du sikker på at du vil gjenopprette standardbibliotekene? Alle filene dine vil forbli lagret.</value>
+  </data>
+  <data name="DialogRestoreLibrariesTitleText" xml:space="preserve">
+    <value>Gjenopprett biblioteker</value>
+  </data>
+  <data name="PropertyFileOwner" xml:space="preserve">
+    <value>Eier</value>
+  </data>
+  <data name="SecuritySpecialLabel.Text" xml:space="preserve">
+    <value>Spesiell</value>
+  </data>
+  <data name="Access" xml:space="preserve">
+    <value>Tilgang</value>
+  </data>
+  <data name="SecurityAdvancedAppliesTo" xml:space="preserve">
+    <value>Gjelder for</value>
+  </data>
+  <data name="Principal" xml:space="preserve">
+    <value>Hoved</value>
+  </data>
+  <data name="SecurityAdvancedFlagsFilesLabel" xml:space="preserve">
+    <value>filer</value>
+  </data>
+  <data name="SecurityAdvancedFlagsFolderLabel" xml:space="preserve">
+    <value>denne mappen</value>
+  </data>
+  <data name="SecurityAdvancedFlagsSubfoldersLabel" xml:space="preserve">
+    <value>undermapper</value>
+  </data>
+  <data name="Inherited" xml:space="preserve">
+    <value>Arvet</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Tillatelser</value>
+  </data>
+  <data name="SecurityAdvancedCannotReadProperties.Text" xml:space="preserve">
+    <value>Du mangler rettigheter til å vise sikkerhetsegenskapene til dette objektet. Du kan forsøke å ta eierskap over objektet.</value>
+  </data>
+  <data name="SecurityAdvancedFolderFiles.Text" xml:space="preserve">
+    <value>Denne mappen og filer</value>
+  </data>
+  <data name="SecurityAdvancedFolderSubfoldersFiles.Text" xml:space="preserve">
+    <value>Denne mappen, undermapper og filer</value>
+  </data>
+  <data name="SecurityAdvancedOnlyFiles.Text" xml:space="preserve">
+    <value>Bare filer</value>
+  </data>
+  <data name="SecurityAdvancedOnlySubfolders.Text" xml:space="preserve">
+    <value>Bare undermapper</value>
+  </data>
+  <data name="SecurityAdvancedOnlySubfoldersFiles.Text" xml:space="preserve">
+    <value>Bare undermapper og filer</value>
+  </data>
+  <data name="SecurityAdvancedOnlyThisFolder.Text" xml:space="preserve">
+    <value>Bare denne mappen</value>
+  </data>
+  <data name="SecurityAdvancedFolderSubfolders.Text" xml:space="preserve">
+    <value>Denne mappen og undermapper</value>
+  </data>
+  <data name="SecurityAppendDataLabel.Text" xml:space="preserve">
+    <value>Tilføy data</value>
+  </data>
+  <data name="SecurityChangePermissionsLabel.Text" xml:space="preserve">
+    <value>Endre rettigheter</value>
+  </data>
+  <data name="SecurityCreateDirectoriesLabel.Text" xml:space="preserve">
+    <value>Opprett mapper</value>
+  </data>
+  <data name="SecurityCreateFilesLabel.Text" xml:space="preserve">
+    <value>Opprett filer</value>
+  </data>
+  <data name="SecurityDeleteSubdirectoriesAndFilesLabel.Text" xml:space="preserve">
+    <value>Slett undermapper og filer</value>
+  </data>
+  <data name="SecurityExecuteFileLabel.Text" xml:space="preserve">
+    <value>Eksekver filer</value>
+  </data>
+  <data name="SecurityReadAttributesLabel.Text" xml:space="preserve">
+    <value>Lese attributter</value>
+  </data>
+  <data name="SecurityReadDataLabel.Text" xml:space="preserve">
+    <value>Lese data</value>
+  </data>
+  <data name="SecurityReadExtendedAttributesLabel.Text" xml:space="preserve">
+    <value>Lese utvidede attributter</value>
+  </data>
+  <data name="SecurityReadPermissionsLabel.Text" xml:space="preserve">
+    <value>Lese rettigheter</value>
+  </data>
+  <data name="SecurityTakeOwnershipLabel.Text" xml:space="preserve">
+    <value>Overta eierskap</value>
+  </data>
+  <data name="SecurityTraverseLabel.Text" xml:space="preserve">
+    <value>Besøk mappe</value>
+  </data>
+  <data name="SecurityWriteAttributesLabel.Text" xml:space="preserve">
+    <value>Skriv attributter</value>
+  </data>
+  <data name="SecurityWriteDataLabel.Text" xml:space="preserve">
+    <value>Skriv data</value>
+  </data>
+  <data name="SecurityWriteExtendedAttributesLabel.Text" xml:space="preserve">
+    <value>Skriv utvidede attributter</value>
+  </data>
+  <data name="SecurityAdvancedInheritedConvert.Text" xml:space="preserve">
+    <value>Konverter arvede rettigheter til eksplisitte rettigheter</value>
+  </data>
+  <data name="SecurityAdvancedInheritedEnable.Text" xml:space="preserve">
+    <value>Aktiver nedarving</value>
+  </data>
+  <data name="SecurityAdvancedInheritedRemove.Text" xml:space="preserve">
+    <value>Fjern alle arvede rettigheter</value>
+  </data>
+  <data name="SecurityAdvancedReplaceChildPermissions.Text" xml:space="preserve">
+    <value>Tilbakestill rettigheter for barn</value>
+  </data>
+  <data name="SecurityAdvancedReplaceChildPermissions2.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Erstatt alle rettigheter for underobjekter med arvelige rettigheter fra dette objektet</value>
+  </data>
+  <data name="CloseActivePane" xml:space="preserve">
+    <value>Close pane</value>
+  </data>
+  <data name="EnterCompactOverlay" xml:space="preserve">
+    <value>Bytt til kompakt visning</value>
+  </data>
+  <data name="ExitCompactOverlay" xml:space="preserve">
+    <value>Avslutt kompakt visning</value>
+  </data>
+  <data name="PropertyFileDescription" xml:space="preserve">
+    <value>Filbeskrivelse</value>
+  </data>
+  <data name="PropertyCompany" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="PropertyLanguage" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="PropertyTrademarks" xml:space="preserve">
+    <value>Varemerker</value>
+  </data>
+  <data name="PropertyFileVersion" xml:space="preserve">
+    <value>Filversjon</value>
+  </data>
+  <data name="PreviewPaneLoadCloudItemButton.Text" xml:space="preserve">
+    <value>Last full forhåndsvisning</value>
+  </data>
+  <data name="PreviewPaneLoadCloudItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Laster ned elementet fra skyen og forhåndsviser</value>
+  </data>
+  <data name="DetailsArchiveItems" xml:space="preserve">
+    <value>{0, plural, one {# item} other {# items}} ({1, plural, one {# file} other {# files}}, {2, plural, one {# folder} other {# folders}})</value>
+  </data>
+  <data name="PropertyUncompressedSize" xml:space="preserve">
+    <value>Ukomprimert størrelse</value>
+  </data>
+  <data name="WSL" xml:space="preserve">
+    <value>WSL</value>
+  </data>
+  <data name="SideBarHideSectionFromSideBar.Text" xml:space="preserve">
+    <value>Skjul {0}-seksjon</value>
+  </data>
+  <data name="AddFile" xml:space="preserve">
+    <value>Legg til fil</value>
+  </data>
+  <data name="ConsentDialogTitle" xml:space="preserve">
+    <value>Oppdateringer tilgjengelig</value>
+  </data>
+  <data name="ConsentDialogContent" xml:space="preserve">
+    <value>Oppdateringer er klare til å installeres</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Lukk</value>
+  </data>
+  <data name="ConsentDialogPrimaryButtonText" xml:space="preserve">
+    <value>Oppdater</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Hjem</value>
+  </data>
+  <data name="ArchiveExtractionCompletedSuccessfullyText" xml:space="preserve">
+    <value>Utpakkinger av filer fra arkiv fullført.</value>
+  </data>
+  <data name="ExtractingArchiveText" xml:space="preserve">
+    <value>Pakker ut arkiv</value>
+  </data>
+  <data name="ExtractingCompleteText" xml:space="preserve">
+    <value>Utpakking fullført!</value>
+  </data>
+  <data name="BaseLayoutItemContextFlyoutOpenParentFolder.Text" xml:space="preserve">
+    <value>Åpne forelder-mappe</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Ukjent</value>
+  </data>
+  <data name="EditTags" xml:space="preserve">
+    <value>Rediger merkelapper</value>
+  </data>
+  <data name="PropertyPartOfSet" xml:space="preserve">
+    <value>Del av sett</value>
+  </data>
+  <data name="InsertDiscDialog.OpenDriveButton" xml:space="preserve">
+    <value>Åpne stasjon</value>
+  </data>
+  <data name="InsertDiscDialog.Text" xml:space="preserve">
+    <value>Vennligst sett inn en disk i enheten {0}</value>
+  </data>
+  <data name="InsertDiscDialog.Title" xml:space="preserve">
+    <value>Sett inn en disk</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="AskCredentialDialog.Title" xml:space="preserve">
+    <value>Legitimasjon kreves</value>
+  </data>
+  <data name="CredentialDialogAnonymous.Content" xml:space="preserve">
+    <value>Anonym</value>
+  </data>
+  <data name="CredentialDialogDescription.Text" xml:space="preserve">
+    <value>Legitimer deg:</value>
+  </data>
+  <data name="CredentialDialogUserName.PlaceholderText" xml:space="preserve">
+    <value>Brukernavn</value>
+  </data>
+  <data name="NoSearchResultsFound" xml:space="preserve">
+    <value>Ingen elementer funnet</value>
+  </data>
+  <data name="OpenLogLocation" xml:space="preserve">
+    <value>Åpne logg-plassering</value>
+  </data>
+  <data name="LinkToFolderCaptionText" xml:space="preserve">
+    <value>Opprett lenke i {0}</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Kolonner</value>
+  </data>
+  <data name="Cards" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="OpenFoldersInNewTab" xml:space="preserve">
+    <value>Åpne mapper i ny fane</value>
+  </data>
+  <data name="StatusCenter" xml:space="preserve">
+    <value>Statussenter</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowDateCreated.Text" xml:space="preserve">
+    <value>Dato opprettet-kolonne</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowItemSize.Text" xml:space="preserve">
+    <value>Elementstørrelse-kolonne</value>
+  </data>
+  <data name="ExperimentalFeatureFlags" xml:space="preserve">
+    <value>Eksperimentelle funksjoner</value>
+  </data>
+  <data name="HelpAndSupport" xml:space="preserve">
+    <value>Hjelp og support</value>
+  </data>
+  <data name="SubmitFeatureRequest" xml:space="preserve">
+    <value>Send inn funksjonsforespørsel</value>
+  </data>
+  <data name="SubmitBugReport" xml:space="preserve">
+    <value>Send inn feilrapport</value>
+  </data>
+  <data name="SettingsSetAsDefaultFileManager" xml:space="preserve">
+    <value>Bruk Files som standard filbehandler</value>
+  </data>
+  <data name="SettingsSetAsOpenDialog" xml:space="preserve">
+    <value>Bruk Files som åpne-dialog for filer</value>
+  </data>
+  <data name="Tag" xml:space="preserve">
+    <value>Fil-merkelapp</value>
+  </data>
+  <data name="SettingsOpenItemsWithOneClick" xml:space="preserve">
+    <value>Open files with a single click</value>
+  </data>
+  <data name="FolderPath" xml:space="preserve">
+    <value>Mappesti</value>
+  </data>
+  <data name="ExportSettings" xml:space="preserve">
+    <value>Eksporter innstillingene</value>
+  </data>
+  <data name="ImportSettings" xml:space="preserve">
+    <value>Importer innstillinger</value>
+  </data>
+  <data name="SettingsImportErrorDescription" xml:space="preserve">
+    <value>Kunne ikke importere innstillinger. Filen med innstilliger er ødelagt.</value>
+  </data>
+  <data name="SettingsImportErrorTitle" xml:space="preserve">
+    <value>Feil ved import av innstillinger</value>
+  </data>
+  <data name="EmptyRecycleBin" xml:space="preserve">
+    <value>Tøm papirkurven</value>
+  </data>
+  <data name="Sidebar" xml:space="preserve">
+    <value>Sidepanel</value>
+  </data>
+  <data name="ChooseCustomIcon" xml:space="preserve">
+    <value>Velg et eget mappe-ikon</value>
+  </data>
+  <data name="Customization" xml:space="preserve">
+    <value>Tilpasning</value>
+  </data>
+  <data name="RestoreDefault" xml:space="preserve">
+    <value>Tilbakestill</value>
+  </data>
+  <data name="OpenTabInExistingInstance" xml:space="preserve">
+    <value>Åpne fane i eksisterende instans når filer åpnes fra en annen app</value>
+  </data>
+  <data name="StartupSettings" xml:space="preserve">
+    <value>Innstillinger for oppstart</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Kompatibilitet</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="CompatibilityOnWindowsLogin" xml:space="preserve">
+    <value>Ved innlogging i Windows</value>
+  </data>
+  <data name="CompatibilityOnProgramStart" xml:space="preserve">
+    <value>Ved dette programmet start</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="CompatibilitySystemEnhanced" xml:space="preserve">
+    <value>System (Forbedret)</value>
+  </data>
+  <data name="CompatibilityReducedColorModeColor16bit" xml:space="preserve">
+    <value>16-bit (65536) farge</value>
+  </data>
+  <data name="CompatibilityReducedColorModeColor8bit" xml:space="preserve">
+    <value>8-bit (256) farge</value>
+  </data>
+  <data name="CompatibilityDisableFullscreenOptimizations" xml:space="preserve">
+    <value>Deaktiver optimalisering av fullskjerm</value>
+  </data>
+  <data name="CompatibilityRunIn640x480Resolution" xml:space="preserve">
+    <value>Kjør i 640 x 480 skjermoppløsning</value>
+  </data>
+  <data name="CompatibilityOverrideHighDPIBehavior" xml:space="preserve">
+    <value>Overstyr høy DPI skaleringsoppførsel</value>
+  </data>
+  <data name="CompatibilityReducedColorMode" xml:space="preserve">
+    <value>Redusert fargemodus</value>
+  </data>
+  <data name="CompatibilityRegisterThisProgramForRestart" xml:space="preserve">
+    <value>Registrer dette programmet for omstart</value>
+  </data>
+  <data name="StartWindow" xml:space="preserve">
+    <value>Start window</value>
+  </data>
+  <data name="NormalWindow" xml:space="preserve">
+    <value>Normal window</value>
+  </data>
+  <data name="Minimized" xml:space="preserve">
+    <value>Minimert</value>
+  </data>
+  <data name="Maximized" xml:space="preserve">
+    <value>Maksimert</value>
+  </data>
+  <data name="RunAsAdministrator" xml:space="preserve">
+    <value>Kjør som administrator</value>
+  </data>
+  <data name="CompatibilityRunTroubleshooter" xml:space="preserve">
+    <value>Kjør kompatibilitetsfeilsøking</value>
+  </data>
+  <data name="CompatibilityUseDPISettings" xml:space="preserve">
+    <value>Bruk DPI innstillinger fra hovedmonitoren</value>
+  </data>
+  <data name="CompatibilityDoNotAdjustDPI" xml:space="preserve">
+    <value>Ikke juster DPI</value>
+  </data>
+  <data name="CompatibilityDoNotOverrideDPI" xml:space="preserve">
+    <value>Ikke overstyr DPI</value>
+  </data>
+  <data name="CompatibilityMode" xml:space="preserve">
+    <value>Kompatibilitetsmodus</value>
+  </data>
+  <data name="CompatibilityNoReducedColor" xml:space="preserve">
+    <value>Ingen redusert farge</value>
+  </data>
+  <data name="ThirdPartyLibraries" xml:space="preserve">
+    <value>Third party libraries</value>
+  </data>
+  <data name="SettingsSetAsDefaultFileManagerDescription" xml:space="preserve">
+    <value>Denne innstillingen gjør endringer på systemfiler og kan ha uventede sideeffekter på din enhet. Utviklerne tar ikke ansvar dersom det resulterer i problemer. Ved å fortsette med denne innstillingen anerkjenner du risikoen involvert ved å gjøre det.</value>
+  </data>
+  <data name="ShowFlattenOptionsDescription" xml:space="preserve">
+    <value>The flatten operations are permanent and not recommended. Continue at your own risk.</value>
+  </data>
+  <data name="FolderWidgetCreateNewLibraryDialogTitleText" xml:space="preserve">
+    <value>Opprett bibliotek</value>
+  </data>
+  <data name="FolderWidgetCreateNewLibraryInputPlaceholderText" xml:space="preserve">
+    <value>Angi navn på bibliotek</value>
+  </data>
+  <data name="CalculateFolderSizes" xml:space="preserve">
+    <value>Beregn mappestørrelse</value>
+  </data>
+  <data name="RecentFiles" xml:space="preserve">
+    <value>Nylige filer</value>
+  </data>
+  <data name="SettingsOpenInLogin" xml:space="preserve">
+    <value>Åpne Files ved oppstart av Windows</value>
+  </data>
+  <data name="Attributes" xml:space="preserve">
+    <value>Attributter</value>
+  </data>
+  <data name="Hidden" xml:space="preserve">
+    <value>Skjult</value>
+  </data>
+  <data name="MoreDetails" xml:space="preserve">
+    <value>Fler detaljer</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Skrivebeskyttet</value>
+  </data>
+  <data name="CleanupDrive" xml:space="preserve">
+    <value>Rydd opp innhold på disken</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>Bytes</value>
+  </data>
+  <data name="Extract" xml:space="preserve">
+    <value>Pakk ut</value>
+  </data>
+  <data name="ExtractFiles" xml:space="preserve">
+    <value>Pakk ut filer</value>
+  </data>
+  <data name="ExtractHere" xml:space="preserve">
+    <value>Pakk ut her</value>
+  </data>
+  <data name="ExtractKeyboardAcceleratorTextOverride" xml:space="preserve">
+    <value>Ctrl+E</value>
+  </data>
+  <data name="ExtractToChildFolder" xml:space="preserve">
+    <value>Pakk ut til {0}</value>
+  </data>
+  <data name="RunScript" xml:space="preserve">
+    <value>Kjør skript</value>
+  </data>
+  <data name="RunWithPowerShell" xml:space="preserve">
+    <value>Kjør med PowerShell</value>
+  </data>
+  <data name="ShowFolderSizesWarning" xml:space="preserve">
+    <value>Beregning av mappestørrelser er ressurskrevende og kan føre til at prosessorbruken vil øke.</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Roter mot venstre</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Roter mot høyre</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installer</value>
+  </data>
+  <data name="CloseTabsToTheLeft" xml:space="preserve">
+    <value>Lukk faner til venstre</value>
+  </data>
+  <data name="CloseTabsToTheRight" xml:space="preserve">
+    <value>Lukk faner til høyre</value>
+  </data>
+  <data name="CloseOtherTabs" xml:space="preserve">
+    <value>Lukk andre faner</value>
+  </data>
+  <data name="CloseAllTabs" xml:space="preserve">
+    <value>Lukk alle faner</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Musikk</value>
+  </data>
+  <data name="Pictures" xml:space="preserve">
+    <value>Bilder</value>
+  </data>
+  <data name="UpdateFiles" xml:space="preserve">
+    <value>Oppdater Files</value>
+  </data>
+  <data name="FileTags" xml:space="preserve">
+    <value>Merker</value>
+  </data>
+  <data name="Universal" xml:space="preserve">
+    <value>Universell</value>
+  </data>
+  <data name="DateFormatSample" xml:space="preserve">
+    <value>eks: {0}, {1}</value>
+  </data>
+  <data name="SettingsFilesAndFoldersShowThumbnails" xml:space="preserve">
+    <value>Vis miniatyrbilder</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Prøv på nytt</value>
+  </data>
+  <data name="ErrorDialogUnsupportedMoveOperation" xml:space="preserve">
+    <value>Flytting er ikke mulig i dette tilfellet. Vil du kopiere filene i stedet?</value>
+  </data>
+  <data name="HiddenItems" xml:space="preserve">
+    <value>Skjulte elementer</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Tilpasset</value>
+  </data>
+  <data name="SetAsSlideshow" xml:space="preserve">
+    <value>Bruk som lysbildeserie på skrivebordet</value>
+  </data>
+  <data name="SizeAllColumnsToFit" xml:space="preserve">
+    <value>Tilpass alle kolonner så de passer</value>
+  </data>
+  <data name="Adaptive" xml:space="preserve">
+    <value>Automatically choose the best layout</value>
+  </data>
+  <data name="AdaptiveShortcutTooltip" xml:space="preserve">
+    <value>Tilpassende (Ctrl+Shift+7)</value>
+  </data>
+  <data name="BaseLayoutContextFlyoutAdaptive.KeyboardAcceleratorTextOverride" xml:space="preserve">
+    <value>Ctrl+Shift+7</value>
+  </data>
+  <data name="ShowAlternateStreams" xml:space="preserve">
+    <value>Vis alternative datastrømmer</value>
+  </data>
+  <data name="Behaviors" xml:space="preserve">
+    <value>Oppførsel</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello!</value>
+  </data>
+  <data name="ReviewFilesSubtitle" xml:space="preserve">
+    <value>Enjoying Files? Please consider reviewing in the Microsoft Store.</value>
+  </data>
+  <data name="SponsorSubtitle" xml:space="preserve">
+    <value>Enjoying Files? Please consider supporting the project on GitHub.</value>
+  </data>
+  <data name="Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="RateUs" xml:space="preserve">
+    <value>Rate us</value>
+  </data>
+  <data name="Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="SetAsBackgroundFlyout" xml:space="preserve">
+    <value>Bruk som bakgrunn</value>
+  </data>
+  <data name="SetAsBackground" xml:space="preserve">
+    <value>Bruk som bakgrunn på skrivebord</value>
+  </data>
+  <data name="SetAsDefault" xml:space="preserve">
+    <value>Angi som standard</value>
+  </data>
+  <data name="DateColumn" xml:space="preserve">
+    <value>Datokolonne</value>
+  </data>
+  <data name="DateCreatedColumn" xml:space="preserve">
+    <value>Dato opprettet-kolonne</value>
+  </data>
+  <data name="SizeColumn" xml:space="preserve">
+    <value>Størrelse kolonne</value>
+  </data>
+  <data name="TagColumn" xml:space="preserve">
+    <value>Merke kolonne</value>
+  </data>
+  <data name="TypeColumn" xml:space="preserve">
+    <value>Type kolonne</value>
+  </data>
+  <data name="Lockscreen" xml:space="preserve">
+    <value>Låseskjerm</value>
+  </data>
+  <data name="OpenFolderWithOneClick" xml:space="preserve">
+    <value>Open folders with a single click</value>
+  </data>
+  <data name="OpeningItems" xml:space="preserve">
+    <value>Åpner elementer</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Komprimer</value>
+  </data>
+  <data name="FlattenFolderDescription" xml:space="preserve">
+    <value>Move all contents from subfolders into the selected location</value>
+  </data>
+  <data name="FlattenFolder" xml:space="preserve">
+    <value>Flatten folder</value>
+  </data>
+  <data name="Flatten" xml:space="preserve">
+    <value>Flatten</value>
+  </data>
+  <data name="FlattenFolderDialogContent" xml:space="preserve">
+    <value>Flattening a folder will move all contents from its subfolders to the selected location. This operation is permanent and cannot be undone. By using this experimental feature, you acknowledge the risk and agree not to hold the Files team responsible for any data loss.</value>
+  </data>
+  <data name="ShowFlattenOptions" xml:space="preserve">
+    <value>Show flatten options</value>
+  </data>
+  <data name="SelectFilesAndFoldersOnHover" xml:space="preserve">
+    <value>Velg filer og mapper ved å holde musepekeren over dem</value>
+  </data>
+  <data name="ConfirmRestoreBinDialogContent" xml:space="preserve">
+    <value>Er du sikker på at du vil gjenopprette alle elementene i papirkurven?</value>
+  </data>
+  <data name="ConfirmRestoreBinDialogTitle" xml:space="preserve">
+    <value>Gjenopprett alle elementer</value>
+  </data>
+  <data name="ConfirmRestoreSelectionBinDialogContent" xml:space="preserve">
+    <value>Do you want to restore the {0, plural, one {selected item} other {{0} selected items}}?</value>
+  </data>
+  <data name="ConfirmRestoreSelectionBinDialogTitle" xml:space="preserve">
+    <value>Gjenopprett utvalgte</value>
+  </data>
+  <data name="RestoreAllItems" xml:space="preserve">
+    <value>Gjenopprett alle elementer</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Gjenopprett</value>
+  </data>
+  <data name="ShortcutCannotBeOpened" xml:space="preserve">
+    <value>Snarvei kan ikke åpnes</value>
+  </data>
+  <data name="DeleteShortcutDescription" xml:space="preserve">
+    <value>Måldestinasjonen ble ikke funnet {0}. Vil du slette denne snarveien?</value>
+  </data>
+  <data name="AccessDeniedToFolder" xml:space="preserve">
+    <value>Du har ikke tilgang til denne mappen.</value>
+  </data>
+  <data name="ArchivePassword" xml:space="preserve">
+    <value>Arkivpassord</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="EncodingDetected" xml:space="preserve">
+    <value>{0} (detected)</value>
+  </data>
+  <data name="ExtractToPath" xml:space="preserve">
+    <value>Sti</value>
+  </data>
+  <data name="SortingAndGrouping" xml:space="preserve">
+    <value>Sortering og gruppering</value>
+  </data>
+  <data name="CreateArchive" xml:space="preserve">
+    <value>Opprett arkiv</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Opprett</value>
+  </data>
+  <data name="CreateNamedArchive" xml:space="preserve">
+    <value>Opprett {0}</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Angi et navn</value>
+  </data>
+  <data name="CompressionLevel" xml:space="preserve">
+    <value>Komprimerings nivå</value>
+  </data>
+  <data name="CompressionLevelUltra" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="CompressionLevelHigh" xml:space="preserve">
+    <value>Høy</value>
+  </data>
+  <data name="CompressionLevelNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="CompressionLevelLow" xml:space="preserve">
+    <value>Lav</value>
+  </data>
+  <data name="CompressionLevelFast" xml:space="preserve">
+    <value>Hurtig</value>
+  </data>
+  <data name="CompressionLevelNone" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="SplittingSize" xml:space="preserve">
+    <value>Dele størrelse</value>
+  </data>
+  <data name="DoNotSplit" xml:space="preserve">
+    <value>Do not split</value>
+  </data>
+  <data name="CD" xml:space="preserve">
+    <value>CD</value>
+  </data>
+  <data name="DVD" xml:space="preserve">
+    <value>DVD</value>
+  </data>
+  <data name="FAT" xml:space="preserve">
+    <value>FAT</value>
+  </data>
+  <data name="Bluray" xml:space="preserve">
+    <value>Blu-ray</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Kryptering</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passord</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="DetailsViewHeaderFlyout_ShowSyncStatus.Text" xml:space="preserve">
+    <value>Synkroniser statuskolonne</value>
+  </data>
+  <data name="GroupBy" xml:space="preserve">
+    <value>Gruppér etter</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sorter etter</value>
+  </data>
+  <data name="GroupInDescendingOrder" xml:space="preserve">
+    <value>Grupper i synkende rekkefølge</value>
+  </data>
+  <data name="SortInDescendingOrder" xml:space="preserve">
+    <value>Sorter i synkende rekkefølge</value>
+  </data>
+  <data name="NewShortcutDialogTitle" xml:space="preserve">
+    <value>Opprett snarvei</value>
+  </data>
+  <data name="NewShortcutDialogDescription" xml:space="preserve">
+    <value>Opprett snarveier til lokale eller nettverksprogrammer, filer, mapper, datamaskiner eller Internett-adresser.</value>
+  </data>
+  <data name="NewShortcutDialogPrompt" xml:space="preserve">
+    <value>Angi lokasjonen til elementet:</value>
+  </data>
+  <data name="AddDialogListShortcutSubHeader" xml:space="preserve">
+    <value>Oppretter en snarvei</value>
+  </data>
+  <data name="RecentFilesDisabledOnWindowsWarning" xml:space="preserve">
+    <value>Nylig brukte filer er deaktivert i Windows-File Explorer.</value>
+  </data>
+  <data name="EditSettingsFile" xml:space="preserve">
+    <value>Rediger innstillingsfilen</value>
+  </data>
+  <data name="EditSettingsFileDescription" xml:space="preserve">
+    <value>Open settings file in your default editor</value>
+  </data>
+  <data name="ReleaseNotes" xml:space="preserve">
+    <value>Release Notes</value>
+  </data>
+  <data name="ReleaseNotesDescription" xml:space="preserve">
+    <value>Open Release Notes</value>
+  </data>
+  <data name="CannotCreateShortcutDialogTitle" xml:space="preserve">
+    <value>Oppretting av en snarvei på denne plasseringen krever administratorrettigheter</value>
+  </data>
+  <data name="CannotCreateShortcutDialogMessage" xml:space="preserve">
+    <value>Vil du opprette snarveien på skrivebordet i stedet?</value>
+  </data>
+  <data name="ErrorDialogNameNotAllowed" xml:space="preserve">
+    <value>Det angitte navnet på elementet er ugyldig</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Innstillinger</value>
+  </data>
+  <data name="DoubleClickBlankSpaceToGoUp" xml:space="preserve">
+    <value>Dobbeltklikk på et tomt område for å gå én katalog opp</value>
+  </data>
+  <data name="ViewMore" xml:space="preserve">
+    <value>Vis mer</value>
+  </data>
+  <data name="ShowEditTagsMenu" xml:space="preserve">
+    <value>Vis menyen for redigering av merkelapper</value>
+  </data>
+  <data name="ShowCompressionOptions" xml:space="preserve">
+    <value>Vis komprimeringsalternativer</value>
+  </data>
+  <data name="ShowSendToMenu" xml:space="preserve">
+    <value>Vis send til meny</value>
+  </data>
+  <data name="ShowOpenInNewTab" xml:space="preserve">
+    <value>Vis alternativ for å åpne mapper i et nytt panel</value>
+  </data>
+  <data name="ShowOpenInNewWindow" xml:space="preserve">
+    <value>Vis alternativ for å åpne mapper i et nytt vindu</value>
+  </data>
+  <data name="QuickAccess" xml:space="preserve">
+    <value>Rask tilgang</value>
+  </data>
+  <data name="NetworkAuthenticationDialogMessage" xml:space="preserve">
+    <value>Angi innloggingsinformasjonen for å koble til: {0}</value>
+  </data>
+  <data name="NetworkAuthenticationDialogTitle" xml:space="preserve">
+    <value>Angi påloggingsinformasjon for nettverket</value>
+  </data>
+  <data name="NetworkAuthenticationSaveCheckbox" xml:space="preserve">
+    <value>Husk mine innloggingsopplysninger</value>
+  </data>
+  <data name="NetworkFolderErrorDialogTitle" xml:space="preserve">
+    <value>Feil i nettverksmappen</value>
+  </data>
+  <data name="AppVersion" xml:space="preserve">
+    <value>App-versjon</value>
+  </data>
+  <data name="WindowsVersion" xml:space="preserve">
+    <value>Windows versjon</value>
+  </data>
+  <data name="Always" xml:space="preserve">
+    <value>Alltid</value>
+  </data>
+  <data name="PermanentDeletionOnly" xml:space="preserve">
+    <value>Bare permanent sletting</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>Aldri</value>
+  </data>
+  <data name="TagColor" xml:space="preserve">
+    <value>Tagg farge</value>
+  </data>
+  <data name="NewTag" xml:space="preserve">
+    <value>Ny merkelapp</value>
+  </data>
+  <data name="CreateNewTag" xml:space="preserve">
+    <value>Opprett ny tagg</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Laster...</value>
+  </data>
+  <data name="ContextMenuOptions" xml:space="preserve">
+    <value>Sammenhengsmeny alternativer</value>
+  </data>
+  <data name="ShowFileExtensions" xml:space="preserve">
+    <value>File extensions</value>
+  </data>
+  <data name="FormatDriveText" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Hjelp</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>Full screen</value>
+  </data>
+  <data name="ConfirmDeleteTag" xml:space="preserve">
+    <value>Er du sikker på at du vil slette denne taggen?</value>
+  </data>
+  <data name="PlayAll" xml:space="preserve">
+    <value>Spill av</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Høyde</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Bredde</value>
+  </data>
+  <data name="ApplyToAllConflictingItems" xml:space="preserve">
+    <value>Bruk handlingen for alle konflikter</value>
+  </data>
+  <data name="OpenTerminal" xml:space="preserve">
+    <value>Åpne i Windows terminal</value>
+  </data>
+  <data name="OpenTerminalAsAdmin" xml:space="preserve">
+    <value>Åpne i Windows Terminal som administrator</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lagre</value>
+  </data>
+  <data name="MultiSelect" xml:space="preserve">
+    <value>Marker flere</value>
+  </data>
+  <data name="ReorderSidebarItemsDialogText" xml:space="preserve">
+    <value>Ordne sidestolpe elementer</value>
+  </data>
+  <data name="Hashes" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="CalculationError" xml:space="preserve">
+    <value>Det oppstod en feil under beregningen</value>
+  </data>
+  <data name="CalculationErrorFileIsOpen" xml:space="preserve">
+    <value>Klarte ikke beregne hash, lukk filen og prøv på nytt.</value>
+  </data>
+  <data name="CalculationOnlineFileHashError" xml:space="preserve">
+    <value>Hasher er ikke tilgjengelig for online filer</value>
+  </data>
+  <data name="Algorithm" xml:space="preserve">
+    <value>Algoritme</value>
+  </data>
+  <data name="HashValue" xml:space="preserve">
+    <value>Hash verdi</value>
+  </data>
+  <data name="SelectHashesToShow" xml:space="preserve">
+    <value>Velg hash som skal vises</value>
+  </data>
+  <data name="Calculating" xml:space="preserve">
+    <value>Beregner...</value>
+  </data>
+  <data name="JumpListPinnedGroupHeader" xml:space="preserve">
+    <value>Festede elementer</value>
+  </data>
+  <data name="DecreaseSize" xml:space="preserve">
+    <value>Reduser størrelse</value>
+  </data>
+  <data name="IncreaseSize" xml:space="preserve">
+    <value>Øk størrelse</value>
+  </data>
+  <data name="ToggleSortDirection" xml:space="preserve">
+    <value>Sort direction</value>
+  </data>
+  <data name="InvalidTagNameWarning" xml:space="preserve">
+    <value>Ugyldig navn</value>
+  </data>
+  <data name="TagNameRules" xml:space="preserve">
+    <value>Navnet kan ikke være tomt eller starte eller slutte med punktum.</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videoer</value>
+  </data>
+  <data name="LaunchPreviewPopup" xml:space="preserve">
+    <value>Preview popup</value>
+  </data>
+  <data name="ToggleCompactOverlay" xml:space="preserve">
+    <value>Kompakt overlegg av/på</value>
+  </data>
+  <data name="OpenHelpDescription" xml:space="preserve">
+    <value>Åpne online hjelpeside i nettleseren</value>
+  </data>
+  <data name="ToggleFullScreenDescription" xml:space="preserve">
+    <value>Toggle full screen mode</value>
+  </data>
+  <data name="EnterCompactOverlayDescription" xml:space="preserve">
+    <value>Enter compact overlay mode</value>
+  </data>
+  <data name="ExitCompactOverlayDescription" xml:space="preserve">
+    <value>Exit compact overlay mode</value>
+  </data>
+  <data name="ToggleCompactOverlayDescription" xml:space="preserve">
+    <value>Toggle compact overlay mode</value>
+  </data>
+  <data name="SearchDescription" xml:space="preserve">
+    <value>Start search in the OmniBar</value>
+  </data>
+  <data name="ToggleShowHiddenItemsDescription" xml:space="preserve">
+    <value>Toggle visibility of hidden items</value>
+  </data>
+  <data name="ToggleDotFilesSettingDescription" xml:space="preserve">
+    <value>Toggle visibility of dot files</value>
+  </data>
+  <data name="ToggleShowFileExtensionsDescription" xml:space="preserve">
+    <value>Toggle visibility of file extensions</value>
+  </data>
+  <data name="TogglePreviewPaneDescription" xml:space="preserve">
+    <value>Veksle forhåndsvisningsruten for å vise forhåndsvisninger av filen</value>
+  </data>
+  <data name="ToggleSidebarDescription" xml:space="preserve">
+    <value>Velg om du vil vise sidepanelet</value>
+  </data>
+  <data name="CopyItemDescription" xml:space="preserve">
+    <value>Copy selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="CopyPathDescription" xml:space="preserve">
+    <value>Copy path of the current directory</value>
+  </data>
+  <data name="CopyItemPathDescription" xml:space="preserve">
+    <value>Copy path of selected items</value>
+  </data>
+  <data name="CopyItemPathWithQuotesDescription" xml:space="preserve">
+    <value>Copy path of selected items with quotes</value>
+  </data>
+  <data name="CopyPathWithQuotesDescription" xml:space="preserve">
+    <value>Copy path of the current directory with quotes</value>
+  </data>
+  <data name="CutItemDescription" xml:space="preserve">
+    <value>Cut selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="PasteItemDescription" xml:space="preserve">
+    <value>Lim inn elementer i den gjeldende mappen</value>
+  </data>
+  <data name="PasteShortcutDescription" xml:space="preserve">
+    <value>Lim elementer inn i den gjeldende mappen som snarveier</value>
+  </data>
+  <data name="PasteItemToSelectionDescription" xml:space="preserve">
+    <value>Lim inn elementer i den valgte mappen</value>
+  </data>
+  <data name="PasteToSelectedFolder" xml:space="preserve">
+    <value>Lim inn i valgt mappe</value>
+  </data>
+  <data name="DeleteItemDescription" xml:space="preserve">
+    <value>Delete selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="CreateFolderDescription" xml:space="preserve">
+    <value>Lag ny mappe</value>
+  </data>
+  <data name="CreateShortcutDescription" xml:space="preserve">
+    <value>Create new {0, plural, one {shortcut} other {shortcuts}} to selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="CreateShortcutFromDialogDescription" xml:space="preserve">
+    <value>Lag ny snarvei til et hvilket som helst element</value>
+  </data>
+  <data name="EmptyRecycleBinDescription" xml:space="preserve">
+    <value>Tøm innholdet i papirkurven</value>
+  </data>
+  <data name="FormatDriveDescription" xml:space="preserve">
+    <value>Åpne "Formater stasjon" meny for valgt element</value>
+  </data>
+  <data name="RestoreRecycleBinDescription" xml:space="preserve">
+    <value>Gjenopprett {0, plural, one {valgt element} other {valgte elementer}} fra papirkurven</value>
+  </data>
+  <data name="RestoreAllRecycleBinDescription" xml:space="preserve">
+    <value>Gjenopprett alle elementer fra papirkurven</value>
+  </data>
+  <data name="OpenItemDescription" xml:space="preserve">
+    <value>Åpne {0, plural, one {element} other {elementer}}</value>
+  </data>
+  <data name="OpenItemWithApplicationPickerDescription" xml:space="preserve">
+    <value>Åpne {0, plural, one {element} other {elementer}} med valgt applikasjon</value>
+  </data>
+  <data name="OpenParentFolderDescription" xml:space="preserve">
+    <value>Åpne overordnet mappe for søkt element</value>
+  </data>
+  <data name="RefreshItemsDescription" xml:space="preserve">
+    <value>Oppdater sideinnhold</value>
+  </data>
+  <data name="RenameDescription" xml:space="preserve">
+    <value>Endre navn på valgt element</value>
+  </data>
+  <data name="SelectAllDescription" xml:space="preserve">
+    <value>Velg alle elementer</value>
+  </data>
+  <data name="InvertSelectionDescription" xml:space="preserve">
+    <value>Invert selected items</value>
+  </data>
+  <data name="ClearSelectionDescription" xml:space="preserve">
+    <value>Clear selected items</value>
+  </data>
+  <data name="ToggleSelectDescription" xml:space="preserve">
+    <value>Veksle elementvalg</value>
+  </data>
+  <data name="ShareItemDescription" xml:space="preserve">
+    <value>Share selected {0, plural, one {file} other {files}} with others</value>
+  </data>
+  <data name="PinToStartDescription" xml:space="preserve">
+    <value>Pin {0, plural, one {item} other {items}} to the Start Menu</value>
+  </data>
+  <data name="UnpinFromStartDescription" xml:space="preserve">
+    <value>Unpin {0, plural, one {item} other {items}} from the Start Menu</value>
+  </data>
+  <data name="PinFolderToSidebarDescription" xml:space="preserve">
+    <value>Pin {0, plural, one {folder} other {folders}} to Sidebar</value>
+  </data>
+  <data name="UnpinFolderFromSidebarDescription" xml:space="preserve">
+    <value>Unpin {0, plural, one {folder} other {folders}} from Sidebar</value>
+  </data>
+  <data name="SetAsWallpaperBackgroundDescription" xml:space="preserve">
+    <value>Angi valgt bilde som skrivebordsbakgrunn</value>
+  </data>
+  <data name="SetAsSlideshowBackgroundDescription" xml:space="preserve">
+    <value>Angi utvalgte bilder som skrivebordsbildeserie</value>
+  </data>
+  <data name="SetAsLockscreenBackgroundDescription" xml:space="preserve">
+    <value>Velg valgt bilde som bakgrunn på låseskjerm</value>
+  </data>
+  <data name="SetAsAppBackgroundDescription" xml:space="preserve">
+    <value>Angi valgt bilde som appbakgrunn</value>
+  </data>
+  <data name="InstallFont" xml:space="preserve">
+    <value>Install font</value>
+  </data>
+  <data name="InstallDriver" xml:space="preserve">
+    <value>Install driver</value>
+  </data>
+  <data name="InstallCertificate" xml:space="preserve">
+    <value>Install certificate</value>
+  </data>
+  <data name="InstallFontDescription" xml:space="preserve">
+    <value>Install selected {0, plural, one {font} other {fonts}}</value>
+  </data>
+  <data name="InstallInfDriverDescription" xml:space="preserve">
+    <value>Install {0, plural, one {driver} other {drivers}} using selected inf {0, plural, one {file} other {files}}</value>
+  </data>
+  <data name="InstallCertificateDescription" xml:space="preserve">
+    <value>Install selected {0, plural, one {certificate} other {certificates}}</value>
+  </data>
+  <data name="RunAsAdminDescription" xml:space="preserve">
+    <value>Kjør valgt program som administrator</value>
+  </data>
+  <data name="RunAsAnotherUserDescription" xml:space="preserve">
+    <value>Kjør valgt program som en annen bruker</value>
+  </data>
+  <data name="RunWithPowershellDescription" xml:space="preserve">
+    <value>Kjør valgt PowerShell-skript</value>
+  </data>
+  <data name="LaunchPreviewPopupDescription" xml:space="preserve">
+    <value>Start forhåndsvisning i popup-vindu</value>
+  </data>
+  <data name="CompressIntoArchiveDescription" xml:space="preserve">
+    <value>Create archive with selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="CompressIntoSevenZipDescription" xml:space="preserve">
+    <value>Create 7z archive with selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="CompressIntoZipDescription" xml:space="preserve">
+    <value>Create zip archive with selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="DecompressArchiveDescription" xml:space="preserve">
+    <value>Extract selected {0, plural, one {archive} other {archives}} to any folder</value>
+  </data>
+  <data name="DecompressArchiveHereDescription" xml:space="preserve">
+    <value>Extract selected {0, plural, one {archive} other {archives}} to the current folder</value>
+  </data>
+  <data name="DecompressArchiveToChildFolderDescription" xml:space="preserve">
+    <value>Extract selected {0, plural, one {archive} other {archives}} to new folder</value>
+  </data>
+  <data name="RotateLeftDescription" xml:space="preserve">
+    <value>Rotate selected {0, plural, one {image} other {images}} to the left</value>
+  </data>
+  <data name="RotateRightDescription" xml:space="preserve">
+    <value>Rotate selected {0, plural, one {image} other {images}} to the right</value>
+  </data>
+  <data name="OpenSettingsDescription" xml:space="preserve">
+    <value>Åpne innstillingssiden</value>
+  </data>
+  <data name="OpenTerminalDescription" xml:space="preserve">
+    <value>Åpne mappe i terminal</value>
+  </data>
+  <data name="OpenTerminalAsAdminDescription" xml:space="preserve">
+    <value>Åpne i terminal som administrator</value>
+  </data>
+  <data name="LayoutDecreaseSizeDescription" xml:space="preserve">
+    <value>Reduser størrelsen på elementet i gjeldende visning</value>
+  </data>
+  <data name="LayoutIncreaseSizeDescription" xml:space="preserve">
+    <value>Øk størrelsen på elementet i gjeldende visning</value>
+  </data>
+  <data name="LayoutDetailsDescription" xml:space="preserve">
+    <value>Bytt til detaljvisning</value>
+  </data>
+  <data name="LayoutCardsDescription" xml:space="preserve">
+    <value>Switch to cards view</value>
+  </data>
+  <data name="LayoutListDescription" xml:space="preserve">
+    <value>Bytt til listevisning</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Rutenett</value>
+  </data>
+  <data name="LayoutGridDescription" xml:space="preserve">
+    <value>Bytt til rutenettvisning</value>
+  </data>
+  <data name="LayoutColumnsDescription" xml:space="preserve">
+    <value>Bytt til kolonnevisning</value>
+  </data>
+  <data name="LayoutAdaptiveDescription" xml:space="preserve">
+    <value>Bytt visninger adaptivt</value>
+  </data>
+  <data name="SortByNameDescription" xml:space="preserve">
+    <value>Sorter elementer etter navn</value>
+  </data>
+  <data name="SortByDateModifiedDescription" xml:space="preserve">
+    <value>Sorter elementer etter dato endret</value>
+  </data>
+  <data name="SortByDateCreatedDescription" xml:space="preserve">
+    <value>Sorter elementer etter dato opprettet</value>
+  </data>
+  <data name="SortBySizeDescription" xml:space="preserve">
+    <value>Sorter elementer etter størrelse</value>
+  </data>
+  <data name="SortByTypeDescription" xml:space="preserve">
+    <value>Sorter elementer etter type</value>
+  </data>
+  <data name="SortBySyncStatusDescription" xml:space="preserve">
+    <value>Sorter elementer etter synkroniseringsstatus</value>
+  </data>
+  <data name="SortByTagDescription" xml:space="preserve">
+    <value>Sorter elementer etter merkelapper</value>
+  </data>
+  <data name="SortByOriginalFolderDescription" xml:space="preserve">
+    <value>Sorter elementer etter originalmappe</value>
+  </data>
+  <data name="SortByDateDeletedDescription" xml:space="preserve">
+    <value>Sorter etter dato slettet</value>
+  </data>
+  <data name="SortAscendingDescription" xml:space="preserve">
+    <value>Sorter elementer i stigende rekkefølge</value>
+  </data>
+  <data name="SortDescendingDescription" xml:space="preserve">
+    <value>Sorter elementer i synkende rekkefølge</value>
+  </data>
+  <data name="ToggleSortDirectionDescription" xml:space="preserve">
+    <value>Velg sorteringsrekkefølge</value>
+  </data>
+  <data name="GroupByNoneDescription" xml:space="preserve">
+    <value>Vis elementer uten gruppering</value>
+  </data>
+  <data name="GroupByNameDescription" xml:space="preserve">
+    <value>Gruppere elementer etter navn</value>
+  </data>
+  <data name="GroupByDateModifiedDescription" xml:space="preserve">
+    <value>Gruppere elementer etter dato endret</value>
+  </data>
+  <data name="GroupByDateCreatedDescription" xml:space="preserve">
+    <value>Gruppere elementer etter dato opprettet</value>
+  </data>
+  <data name="GroupBySizeDescription" xml:space="preserve">
+    <value>Gruppere elementer etter størrelse</value>
+  </data>
+  <data name="GroupByTypeDescription" xml:space="preserve">
+    <value>Gruppere elementer etter type</value>
+  </data>
+  <data name="GroupBySyncStatusDescription" xml:space="preserve">
+    <value>Gruppere elementer etter synkroniseringsstatus</value>
+  </data>
+  <data name="GroupByTagDescription" xml:space="preserve">
+    <value>Gruppere elementer etter merkelapper</value>
+  </data>
+  <data name="GroupByOriginalFolderDescription" xml:space="preserve">
+    <value>Gruppere elementer etter originalmappe</value>
+  </data>
+  <data name="GroupByDateDeletedDescription" xml:space="preserve">
+    <value>Gruppere elementer etter dato slettet</value>
+  </data>
+  <data name="GroupByFolderPathDescription" xml:space="preserve">
+    <value>Gruppere elementer etter mappeplassering</value>
+  </data>
+  <data name="GroupAscendingDescription" xml:space="preserve">
+    <value>Sorter grupper i stigende rekkefølge</value>
+  </data>
+  <data name="GroupDescendingDescription" xml:space="preserve">
+    <value>Sorter grupper i synkende rekkefølge</value>
+  </data>
+  <data name="ToggleGroupDirectionDescription" xml:space="preserve">
+    <value>Velg sorteringsrekkefølge</value>
+  </data>
+  <data name="NewTabDescription" xml:space="preserve">
+    <value>Åpne en ny fane</value>
+  </data>
+  <data name="NavigateBackDescription" xml:space="preserve">
+    <value>Gå tilbake</value>
+  </data>
+  <data name="NavigateForwardDescription" xml:space="preserve">
+    <value>Gå fremover</value>
+  </data>
+  <data name="NavigateUpDescription" xml:space="preserve">
+    <value>Naviger opp en mappe</value>
+  </data>
+  <data name="DuplicateCurrentTabDescription" xml:space="preserve">
+    <value>Dupliser nåværende fane</value>
+  </data>
+  <data name="DuplicateSelectedTabDescription" xml:space="preserve">
+    <value>Dupliser valgte fane</value>
+  </data>
+  <data name="CloseTabsToTheLeftCurrentDescription" xml:space="preserve">
+    <value>Lukk faner til venstre for gjeldende fane</value>
+  </data>
+  <data name="CloseTabsToTheLeftSelectedDescription" xml:space="preserve">
+    <value>Lukk faner til venstre for valgte fane</value>
+  </data>
+  <data name="CloseTabsToTheRightCurrentDescription" xml:space="preserve">
+    <value>Lukk faner til høyre for gjeldende fane</value>
+  </data>
+  <data name="CloseTabsToTheRightSelectedDescription" xml:space="preserve">
+    <value>Lukk faner til høyre for valgte fane</value>
+  </data>
+  <data name="CloseOtherTabsCurrentDescription" xml:space="preserve">
+    <value>Lukk faner bortsett fra gjeldende fane</value>
+  </data>
+  <data name="CloseOtherTabsSelectedDescription" xml:space="preserve">
+    <value>Lukk faner bortsett fra valgte fane</value>
+  </data>
+  <data name="CloseAllTabsDescription" xml:space="preserve">
+    <value>Lukk alle faner inkludert gjeldende fane</value>
+  </data>
+  <data name="ReopenClosedTabDescription" xml:space="preserve">
+    <value>Åpne nylig lukket fane</value>
+  </data>
+  <data name="PreviousTabDescription" xml:space="preserve">
+    <value>Flytt til forrige fane</value>
+  </data>
+  <data name="NextTabDescription" xml:space="preserve">
+    <value>Flytt til neste fane</value>
+  </data>
+  <data name="CloseSelectedTabDescription" xml:space="preserve">
+    <value>Lukk gjeldende fane</value>
+  </data>
+  <data name="CloseActivePaneDescription" xml:space="preserve">
+    <value>Lukk den aktive ruten</value>
+  </data>
+  <data name="FocusOtherPane" xml:space="preserve">
+    <value>Fokuser på annen rute</value>
+  </data>
+  <data name="FocusOtherPaneDescription" xml:space="preserve">
+    <value>Flytt fokuset til annen rute</value>
+  </data>
+  <data name="ToggleSidebar" xml:space="preserve">
+    <value>Slå av/på sidepanelet</value>
+  </data>
+  <data name="Key.Menu" xml:space="preserve">
+    <value>Alt</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Control" xml:space="preserve">
+    <value>Ctrl</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Shift" xml:space="preserve">
+    <value>Skift</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Windows" xml:space="preserve">
+    <value>Vinn</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Enter" xml:space="preserve">
+    <value>Angi</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Space" xml:space="preserve">
+    <value>Mellomrom</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Escape" xml:space="preserve">
+    <value>Esc-dansk</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Back" xml:space="preserve">
+    <value>Bakovertast</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Tab" xml:space="preserve">
+    <value>Tab</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Insert" xml:space="preserve">
+    <value>Ins</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Delete" xml:space="preserve">
+    <value>Del</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Left" xml:space="preserve">
+    <value>Venstre</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Right" xml:space="preserve">
+    <value>Høyre</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Down" xml:space="preserve">
+    <value>Ned</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Up" xml:space="preserve">
+    <value>Opp (Alt+Pil Opp)</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Home" xml:space="preserve">
+    <value>Hjem</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.End" xml:space="preserve">
+    <value>Slutt</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.PageDown" xml:space="preserve">
+    <value>Sidened</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.PageUp" xml:space="preserve">
+    <value>SageUp</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Separator" xml:space="preserve">
+    <value>sep</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Pause" xml:space="preserve">
+    <value>pause</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Sleep" xml:space="preserve">
+    <value>Hvilemodus</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Clear" xml:space="preserve">
+    <value>Tøm</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Print" xml:space="preserve">
+    <value>Utskrift</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Help" xml:space="preserve">
+    <value>Hjelp</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Mouse4" xml:space="preserve">
+    <value>Mus4</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Mouse5" xml:space="preserve">
+    <value>Mus5</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Application" xml:space="preserve">
+    <value>App</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Application1" xml:space="preserve">
+    <value>App1</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Application2" xml:space="preserve">
+    <value>App2</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.Mail" xml:space="preserve">
+    <value>E-post</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserGoHome" xml:space="preserve">
+    <value>Gå</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserGoBack" xml:space="preserve">
+    <value>GoBack</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserGoForward" xml:space="preserve">
+    <value>Videresend</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserRefresh" xml:space="preserve">
+    <value>NettleserOppdater</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserStop" xml:space="preserve">
+    <value>BrowserStop</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserSearch" xml:space="preserve">
+    <value>Søk</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.BrowserFavorites" xml:space="preserve">
+    <value>Favoritter</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaPlayPause" xml:space="preserve">
+    <value>PlayPause</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaStop" xml:space="preserve">
+    <value>MediaStop</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaPreviousTrack" xml:space="preserve">
+    <value>PrevTrack</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaNextTrack" xml:space="preserve">
+    <value>Nestesespor</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaSelect" xml:space="preserve">
+    <value>MediaVelg</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaMute" xml:space="preserve">
+    <value>Demp</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaVolumeDown" xml:space="preserve">
+    <value>Voled</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Key.MediaVolumeUp" xml:space="preserve">
+    <value>VolUp</value>
+    <comment>Key name for hotkeys in menus. Use abbreviation if possible.</comment>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Endre</value>
+  </data>
+  <data name="ToggleSelect" xml:space="preserve">
+    <value>Veksle utvalg</value>
+  </data>
+  <data name="ShowFileExtensionWarning" xml:space="preserve">
+    <value>Vis advarsel ved endring av filendelser</value>
+  </data>
+  <data name="ThisPC" xml:space="preserve">
+    <value>Denne PCen</value>
+  </data>
+  <data name="RecycleBin" xml:space="preserve">
+    <value>Papirkurv</value>
+  </data>
+  <data name="Untagged" xml:space="preserve">
+    <value>Umerket</value>
+  </data>
+  <data name="PreviousTab" xml:space="preserve">
+    <value>Forrige fane</value>
+  </data>
+  <data name="NextTab" xml:space="preserve">
+    <value>Neste fane</value>
+  </data>
+  <data name="CloseTab" xml:space="preserve">
+    <value>Lukk fane</value>
+  </data>
+  <data name="EditPath" xml:space="preserve">
+    <value>Endre sti</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Gjenta</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Angre</value>
+  </data>
+  <data name="InvalidLocation" xml:space="preserve">
+    <value>Ugyldig plassering</value>
+  </data>
+  <data name="CopyFileWithoutProperties" xml:space="preserve">
+    <value>Er du sikker på at du vil kopiere disse filene uten sine egenskaper?</value>
+  </data>
+  <data name="FilePropertiesCannotBeCopied" xml:space="preserve">
+    <value>Disse filene har egenskaper som ikke kan kopieres til den nye plasseringen</value>
+  </data>
+  <data name="FilePropertiesCannotBeMoved" xml:space="preserve">
+    <value>Disse filene har egenskaper som ikke kan flyttes til den nye plasseringen</value>
+  </data>
+  <data name="MoveFileWithoutProperties" xml:space="preserve">
+    <value>Er du sikker på at du vil flytte disse filene uten sine egenskaper?</value>
+  </data>
+  <data name="ShowCheckboxesWhenSelectingItems" xml:space="preserve">
+    <value>Vis avmerkingsbokser når du velger elementer</value>
+  </data>
+  <data name="EditPathDescription" xml:space="preserve">
+    <value>Edit path in the OmniBar</value>
+  </data>
+  <data name="AddItemDescription" xml:space="preserve">
+    <value>Lag nytt element</value>
+  </data>
+  <data name="SecurityNoAccessControlEntriesText" xml:space="preserve">
+    <value>Ingen grupper eller brukere har tillatelse til å få tilgang til dette objektet. Imidlertid kan eieren av dette objektet tildele tillatelser.</value>
+  </data>
+  <data name="OpenFileLocationDescription" xml:space="preserve">
+    <value>Åpne elementets plassering</value>
+  </data>
+  <data name="DeletePermanently" xml:space="preserve">
+    <value>Slett permanent</value>
+  </data>
+  <data name="DeleteItemPermanentlyDescription" xml:space="preserve">
+    <value>Delete selected {0, plural, one {item} other {items}} permanently</value>
+  </data>
+  <data name="PlayAllDescription" xml:space="preserve">
+    <value>Spill av de valgte mediafilene</value>
+  </data>
+  <data name="UndoDescription" xml:space="preserve">
+    <value>Angre operasjonen av forrige fil</value>
+  </data>
+  <data name="RedoDescription" xml:space="preserve">
+    <value>Gjenta den siste filoperasjonen</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Sted:</value>
+  </data>
+  <data name="GroupByMonthDescription" xml:space="preserve">
+    <value>Gruppere elementer etter måned</value>
+  </data>
+  <data name="GroupByYearDescription" xml:space="preserve">
+    <value>Gruppere produkter etter år</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Måned</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Dag</value>
+  </data>
+  <data name="ToggleGroupByDateUnitDescription" xml:space="preserve">
+    <value>Veksle enhet for gruppering etter dato</value>
+  </data>
+  <data name="ToggleGroupingUnit" xml:space="preserve">
+    <value>Veksle grupperingsenhet</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>År</value>
+  </data>
+  <data name="GroupByDateUnit" xml:space="preserve">
+    <value>Gruppere etter dato</value>
+  </data>
+  <data name="GroupByDateCreatedDayDescription" xml:space="preserve">
+    <value>Grupper på elementer etter dato opprettet</value>
+  </data>
+  <data name="GroupByDateCreatedMonthDescription" xml:space="preserve">
+    <value>Grupper elementer etter måned av dato opprettet</value>
+  </data>
+  <data name="GroupByDateCreatedYearDescription" xml:space="preserve">
+    <value>Gruppere produkter etter år med dato opprettet</value>
+  </data>
+  <data name="GroupByDateDeletedDayDescription" xml:space="preserve">
+    <value>Gruppere elementer etter dato slettet</value>
+  </data>
+  <data name="GroupByDateDeletedMonthDescription" xml:space="preserve">
+    <value>Gruppere elementer etter måned av dato slettet</value>
+  </data>
+  <data name="GroupByDateDeletedYearDescription" xml:space="preserve">
+    <value>Gruppere produkter etter år med dato slettet</value>
+  </data>
+  <data name="GroupByDateModifiedDayDescription" xml:space="preserve">
+    <value>Grupper elementer etter dag for dato endret</value>
+  </data>
+  <data name="GroupByDateModifiedMonthDescription" xml:space="preserve">
+    <value>Grupper elementer etter måned etter dato endret</value>
+  </data>
+  <data name="GroupByDateModifiedYearDescription" xml:space="preserve">
+    <value>Grupper elementer etter år med dato endret</value>
+  </data>
+  <data name="SecurityClickAdvancedPermissions" xml:space="preserve">
+    <value>Klikk på "Avanserte tillatelser" for å fortsette.</value>
+  </data>
+  <data name="SecurityRequireReadPermissions" xml:space="preserve">
+    <value>Du må ha lesetilgang for å se egenskapene til dette elementet.</value>
+  </data>
+  <data name="SecuritySuggestToTakeOwnership" xml:space="preserve">
+    <value>Prøv å ta eierskap til produktet, som har tillatelse til å se egenskapene, klikk Endre ovenfor.</value>
+  </data>
+  <data name="SecurityUnableToDisplayPermissions" xml:space="preserve">
+    <value>Kan ikke vise tillatelser.</value>
+  </data>
+  <data name="StashChanges" xml:space="preserve">
+    <value>Forlat mine endringer på '{0}'</value>
+  </data>
+  <data name="DiscardChanges" xml:space="preserve">
+    <value>Forkast endringene mine</value>
+  </data>
+  <data name="BringChanges" xml:space="preserve">
+    <value>Bring mine endringer til '{0}'</value>
+  </data>
+  <data name="UncommittedChanges" xml:space="preserve">
+    <value>Har du ubegått endringer på denne grenen. Hva vil du gjøre med dem?</value>
+  </data>
+  <data name="MergeInProgress" xml:space="preserve">
+    <value>You have an ongoing merge with unresolved conflicts. Please resolve the conflicts or abort the merge to switch branches.</value>
+  </data>
+  <data name="AbortMergeAndSwitch" xml:space="preserve">
+    <value>Abort merge and switch to '{0}'</value>
+  </data>
+  <data name="StayAndResolveConflicts" xml:space="preserve">
+    <value>Stay on '{0}' and resolve conflicts</value>
+  </data>
+  <data name="SwitchBranch" xml:space="preserve">
+    <value>Bytt gren</value>
+  </data>
+  <data name="Branches" xml:space="preserve">
+    <value>Grener</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>Bytt</value>
+  </data>
+  <data name="NewBranch" xml:space="preserve">
+    <value>Ny gren</value>
+  </data>
+  <data name="InvalidBranchName" xml:space="preserve">
+    <value>Ugyldig filialnavn</value>
+  </data>
+  <data name="CreateBranch" xml:space="preserve">
+    <value>Opprett gren</value>
+  </data>
+  <data name="CreateNewBranch" xml:space="preserve">
+    <value>Opprett gren</value>
+  </data>
+  <data name="BasedOn" xml:space="preserve">
+    <value>Basert på</value>
+  </data>
+  <data name="SwitchToNewBranch" xml:space="preserve">
+    <value>Bytt til ny gren</value>
+  </data>
+  <data name="CreateFolderWithSelectionDescription" xml:space="preserve">
+    <value>Create a folder with the currently selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="OpenProperties" xml:space="preserve">
+    <value>Egenskaper</value>
+  </data>
+  <data name="OpenClassicProperties" xml:space="preserve">
+    <value>Open File Explorer properties</value>
+  </data>
+  <data name="OpenPropertiesDescription" xml:space="preserve">
+    <value>Åpne egenskaper vindu</value>
+  </data>
+  <data name="OpenClassicPropertiesDescription" xml:space="preserve">
+    <value>Open File Explorer properties window</value>
+  </data>
+  <data name="Locals" xml:space="preserve">
+    <value>Lokaler</value>
+  </data>
+  <data name="Remotes" xml:space="preserve">
+    <value>Remotes</value>
+  </data>
+  <data name="ImproveTranslation" xml:space="preserve">
+    <value>Oversett på Crowdin</value>
+  </data>
+  <data name="GitFetch" xml:space="preserve">
+    <value>Hent</value>
+  </data>
+  <data name="GitPull" xml:space="preserve">
+    <value>Trekk</value>
+  </data>
+  <data name="GitFetchDescription" xml:space="preserve">
+    <value>Kjør git henting</value>
+  </data>
+  <data name="GitCloneDescription" xml:space="preserve">
+    <value>Clone a git repo</value>
+  </data>
+  <data name="GitPullDescription" xml:space="preserve">
+    <value>Run git pull</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Forhåndsvisning</value>
+  </data>
+  <data name="GitStatus" xml:space="preserve">
+    <value>Git status</value>
+  </data>
+  <data name="GitError" xml:space="preserve">
+    <value>Feil i Git</value>
+  </data>
+  <data name="PullTimeoutError" xml:space="preserve">
+    <value>git trekkingen mislyktes på grunn av en tidsavbruddfeil</value>
+  </data>
+  <data name="MultipleValues" xml:space="preserve">
+    <value>(flere verdier)</value>
+    <comment>Text indicating that multiple selected files have different metadata values.</comment>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Forfatter</value>
+  </data>
+  <data name="DateCommitted" xml:space="preserve">
+    <value>Dato overtatt</value>
+  </data>
+  <data name="CommitMessage" xml:space="preserve">
+    <value>Send inn meldingen</value>
+  </data>
+  <data name="CommitSha" xml:space="preserve">
+    <value>Send inn SHA</value>
+  </data>
+  <data name="Git" xml:space="preserve">
+    <value>Git</value>
+  </data>
+  <data name="Acrylic" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Mica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="MicaAlt" xml:space="preserve">
+    <value>Mica Alt</value>
+  </data>
+  <data name="BackdropMaterial" xml:space="preserve">
+    <value>Bakgrunnsmateriale</value>
+  </data>
+  <data name="Solid" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="ManageBranches" xml:space="preserve">
+    <value>Administrer filialer</value>
+  </data>
+  <data name="Push" xml:space="preserve">
+    <value>Trykk</value>
+  </data>
+  <data name="GitPushDescription" xml:space="preserve">
+    <value>Kjør git push</value>
+  </data>
+  <data name="GitSync" xml:space="preserve">
+    <value>Synkronisering</value>
+  </data>
+  <data name="GitSyncDescription" xml:space="preserve">
+    <value>Kjør git trekk og deretter git trykk</value>
+  </data>
+  <data name="GitSyncStatusExtendedInfo" xml:space="preserve">
+    <value>{0} outgoing / {1} incoming commits</value>
+  </data>
+  <data name="ConnectGitHub" xml:space="preserve">
+    <value>Koble til GitHub</value>
+  </data>
+  <data name="ConnectGitHubDescription" xml:space="preserve">
+    <value>Skriv inn følgende kode på linken nedenfor for å begynne å arbeide med GitHub repositorier.</value>
+  </data>
+  <data name="CannotReachGitHubError" xml:space="preserve">
+    <value>Filer kan ikke få tilgang til GitHub akkurat nå.</value>
+  </data>
+  <data name="OpenInIDE" xml:space="preserve">
+    <value>Åpne mappe i {0}</value>
+  </data>
+  <data name="OpenInIDEDescription" xml:space="preserve">
+    <value>Åpne gjeldende mappe i {0}</value>
+  </data>
+  <data name="OpenRepoInIDE" xml:space="preserve">
+    <value>Open repo in {0}</value>
+  </data>
+  <data name="OpenRepoInIDEDescription" xml:space="preserve">
+    <value>Open the root of the Git repo in {0}</value>
+  </data>
+  <data name="CopyCode" xml:space="preserve">
+    <value>Kopier koden</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Lagt til</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Slettet</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Endret</value>
+  </data>
+  <data name="Untracked" xml:space="preserve">
+    <value>Usporet</value>
+  </data>
+  <data name="UnableToDisplayOwner" xml:space="preserve">
+    <value>Kan ikke vise gjeldende eier.</value>
+  </data>
+  <data name="AuthorizationSucceded" xml:space="preserve">
+    <value>Flott! Du er nå godkjent.</value>
+  </data>
+  <data name="InitRepo" xml:space="preserve">
+    <value>Aktiver repot</value>
+  </data>
+  <data name="InitRepoDescription" xml:space="preserve">
+    <value>Initialize current folder as a git repository</value>
+  </data>
+  <data name="GitOriginRepositoryName" xml:space="preserve">
+    <value>Ekstern datakatalog navn</value>
+  </data>
+  <data name="GitCurrentBranch" xml:space="preserve">
+    <value>Gjeldende avdeling</value>
+  </data>
+  <data name="PathColumn" xml:space="preserve">
+    <value>Kolonne for sti</value>
+  </data>
+  <data name="SortByPathDescription" xml:space="preserve">
+    <value>Sorter elementer etter sti</value>
+  </data>
+  <data name="OpenDirectoryInNewPaneDescription" xml:space="preserve">
+    <value>Open selected directory in a new pane</value>
+  </data>
+  <data name="OpenDirectoryInNewTabDescription" xml:space="preserve">
+    <value>Open selected directory in a new tab</value>
+  </data>
+  <data name="OpenInNewWindowDescription" xml:space="preserve">
+    <value>Åpne valgt mappe i nytt vindu</value>
+  </data>
+  <data name="OpenAllTaggedItems" xml:space="preserve">
+    <value>Åpne alle sider</value>
+  </data>
+  <data name="OpenAllTaggedItemsDescription" xml:space="preserve">
+    <value>Åpne alle merkede elementer</value>
+  </data>
+  <data name="DriveWithLetter" xml:space="preserve">
+    <value>Disk ({0})</value>
+    <comment>{0} is the drive letter.</comment>
+  </data>
+  <data name="InvalidCommand" xml:space="preserve">
+    <value>Ugyldig kommando</value>
+  </data>
+  <data name="InvalidCommandContent" xml:space="preserve">
+    <value>'{0}' gjenkjennes ikke som en kommando.</value>
+  </data>
+  <data name="CommandNotExecutable" xml:space="preserve">
+    <value>Kommandoen ikke kjørbar</value>
+  </data>
+  <data name="CommandNotExecutableContent" xml:space="preserve">
+    <value>Kommandoen '{0}er ikke klar for å bli utført.</value>
+  </data>
+  <data name="CommandPalette" xml:space="preserve">
+    <value>Command Palette</value>
+  </data>
+  <data name="OpenCommandPaletteDescription" xml:space="preserve">
+    <value>Open Command Palette in the OmniBar</value>
+  </data>
+  <data name="ShortcutItemWorkingDir" xml:space="preserve">
+    <value>Begynn i:</value>
+  </data>
+  <data name="TurnOnBitLocker" xml:space="preserve">
+    <value>Slå på BitLocker</value>
+  </data>
+  <data name="ManageBitLocker" xml:space="preserve">
+    <value>Administrer BitLocker</value>
+  </data>
+  <data name="CopyFailureFileToLarge" xml:space="preserve">
+    <value>Følgende elementer er for store til å kopieres til denne stasjonen</value>
+  </data>
+  <data name="FormatDrive" xml:space="preserve">
+    <value>Formatér stasjon</value>
+  </data>
+  <data name="DontShowAgain" xml:space="preserve">
+    <value>Ikke vis igjen</value>
+  </data>
+  <data name="FilesRunningAsAdmin" xml:space="preserve">
+    <value>Filer kjører som administrator</value>
+  </data>
+  <data name="FilesRunningAsAdminContent" xml:space="preserve">
+    <value>På grunn av en begrensning med Windows og WinAppSdk, er det ikke tilgjengelig dra og slipp ved kjøring av filer som admin. Hvis du vil bruke dra og slipp, du kan arbeide rundt denne begrensningen ved å åpne UAC (brukerkontokontroll) fra Startmenyen og velge tredje nivå og starte Windows på nytt. Ellers kan du fortsette å bruke filer uten å dra og slippe.</value>
+  </data>
+  <data name="SettingsLeaveAppRunning" xml:space="preserve">
+    <value>La appen kjøre i bakgrunnen når vinduet er lukket</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Blå</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="BlueGray" xml:space="preserve">
+    <value>Blå grå</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="BrickRed" xml:space="preserve">
+    <value>Murstein rød</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Camouflage" xml:space="preserve">
+    <value>Kamuflasje</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="CoolBlueBright" xml:space="preserve">
+    <value>Kul blå lys</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Gray" xml:space="preserve">
+    <value>Grå</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="GrayDark" xml:space="preserve">
+    <value>Grå mørk</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Grønn</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="IrisPastel" xml:space="preserve">
+    <value>Iris Pastel</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="MintLight" xml:space="preserve">
+    <value>Mint lys</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="ModRed" xml:space="preserve">
+    <value>Mod Red</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="OrangeBright" xml:space="preserve">
+    <value>Oransje Lys</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Overcast" xml:space="preserve">
+    <value>Overskyet</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Rød</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="RoseBright" xml:space="preserve">
+    <value>Rose Lyst</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Seafoam" xml:space="preserve">
+    <value>Sjøfolk</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="Storm" xml:space="preserve">
+    <value>Storm</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="VioletRedLight" xml:space="preserve">
+    <value>Fiolett rødt lys</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="YellowGold" xml:space="preserve">
+    <value>Gult gull</value>
+    <comment>One of the custom color themes</comment>
+  </data>
+  <data name="ClearCompleted" xml:space="preserve">
+    <value>Fjern ferdige oppgaver</value>
+  </data>
+  <data name="NameWithColon" xml:space="preserve">
+    <value>Navn:</value>
+  </data>
+  <data name="StatusCenter_ProcessedSize_Header" xml:space="preserve">
+    <value>{0} av {1} behandlet</value>
+    <comment>Shown in a StatusCenter card. Used as "64 MB of 1 GB processed"</comment>
+  </data>
+  <data name="ItemsLower" xml:space="preserve">
+    <value>elementer</value>
+  </data>
+  <data name="CannotInitializeGitRepo" xml:space="preserve">
+    <value>Filene kan ikke initialisere mappen som et Git repository.</value>
+  </data>
+  <data name="ContributingArtist" xml:space="preserve">
+    <value>Bidrar med Artist</value>
+  </data>
+  <data name="AddPage" xml:space="preserve">
+    <value>Legg til side</value>
+  </data>
+  <data name="ProcessingItems" xml:space="preserve">
+    <value>Behandler elementer...</value>
+  </data>
+  <data name="DiscoveringItems" xml:space="preserve">
+    <value>Discovering items...</value>
+  </data>
+  <data name="SpeedWithColon" xml:space="preserve">
+    <value>Hastighet:</value>
+  </data>
+  <data name="StatusCenter_CompressCanceled_Header" xml:space="preserve">
+    <value>Kansellert komprimering av {0} elementer til "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressCanceled_SubHeader" xml:space="preserve">
+    <value>Kansellert komprimering av {0} elementer fra "{1}" til "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressComplete_Header" xml:space="preserve">
+    <value>Compressed {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressComplete_SubHeader" xml:space="preserve">
+    <value>Compressed {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressFailed_Header" xml:space="preserve">
+    <value>Error compressing {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressFailed_SubHeader" xml:space="preserve">
+    <value>Failed to compress {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressInProgress_Header" xml:space="preserve">
+    <value>Compressing {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CompressInProgress_SubHeader" xml:space="preserve">
+    <value>Compressing {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneCanceled_Header" xml:space="preserve">
+    <value>Canceled cloning {0} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneCanceled_SubHeader" xml:space="preserve">
+    <value>Canceled cloning {0} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneComplete_Header" xml:space="preserve">
+    <value>Cloned "{0}" to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneComplete_SubHeader" xml:space="preserve">
+    <value>Cloned {0} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneFailed_Header" xml:space="preserve">
+    <value>Error cloning "{0}" to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneFailed_SubHeader" xml:space="preserve">
+    <value>Failed to clone {0} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneInProgress_Header" xml:space="preserve">
+    <value>Cloning "{0}" to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_GitCloneInProgress_SubHeader" xml:space="preserve">
+    <value>Cloning {0} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontCanceled_Header" xml:space="preserve">
+    <value>Canceled installing {0} fonts</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontCanceled_SubHeader" xml:space="preserve">
+    <value>Canceled installing {0, plural, one {# font} other {# fonts}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontComplete_Header" xml:space="preserve">
+    <value>Installed {0, plural, one {# font} other {# fonts}}</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontComplete_SubHeader" xml:space="preserve">
+    <value>Installed {0, plural, one {# font} other {# fonts}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontFailed_Header" xml:space="preserve">
+    <value>Error installing {0, plural, one {# font} other {# fonts}}</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontFailed_SubHeader" xml:space="preserve">
+    <value>Failed to install {0, plural, one {# font} other {# fonts}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontInProgress_Header" xml:space="preserve">
+    <value>Installing {0, plural, one {# font} other {# fonts}}</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_InstallFontInProgress_SubHeader" xml:space="preserve">
+    <value>Installing {0, plural, one {# font} other {# fonts}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyCanceled_Header" xml:space="preserve">
+    <value>Canceled copying {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyCanceled_SubHeader" xml:space="preserve">
+    <value>Canceled copying {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyComplete_Header" xml:space="preserve">
+    <value>Copied {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyComplete_SubHeader" xml:space="preserve">
+    <value>Copied {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyFailed_Header" xml:space="preserve">
+    <value>Error copying {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyFailed_SubHeader" xml:space="preserve">
+    <value>Failed to copy {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyInProgress_Header" xml:space="preserve">
+    <value>Copying {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyInProgress_SubHeader" xml:space="preserve">
+    <value>Copying {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_CopyDiscovery_Header" xml:space="preserve">
+    <value>Discovered {0, plural, one {# item} other {# items}}</value>
+    <comment>Shown in a StatusCenter card during file discovery phase.</comment>
+  </data>
+  <data name="StatusCenter_DecompressCanceled_Header" xml:space="preserve">
+    <value>Avbrutt utpakking "{0}" til "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressCanceled_SubHeader" xml:space="preserve">
+    <value>Avbrutt utpakking "{0}" fra "{1}" til "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressComplete_Header" xml:space="preserve">
+    <value>Pakket ut "{0}" til "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressComplete_SubHeader" xml:space="preserve">
+    <value>Pakket ut "{0}" fra "{1}" til "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressFailed_Header" xml:space="preserve">
+    <value>Feil ved utpakking "{0}" til "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressFailed_SubHeader" xml:space="preserve">
+    <value>Kan ikke pakke ut "{0}" fra "{1}" til "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressInProgress_Header" xml:space="preserve">
+    <value>Trekker ut "{0}" til "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DecompressInProgress_SubHeader" xml:space="preserve">
+    <value>Trekker ut "{0}" fra "{1}" til "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DeleteCanceled_Header" xml:space="preserve">
+    <value>Canceled deleting {0, plural, one {# item} other {# items}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DeleteComplete_Header" xml:space="preserve">
+    <value>Deleted {0, plural, one {# item} other {# items}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DeleteFailed_Header" xml:space="preserve">
+    <value>Error deleting {0, plural, one {# item} other {# items}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DeleteFailed_SubHeader" xml:space="preserve">
+    <value>Failed to delete {0, plural, one {# item} other {# items}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_DeleteInProgress_Header" xml:space="preserve">
+    <value>Deleting {0, plural, one {# item} other {# items}} from "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveCanceled_Header" xml:space="preserve">
+    <value>Canceled moving {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveCanceled_SubHeader" xml:space="preserve">
+    <value>Canceled moving {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveComplete_Header" xml:space="preserve">
+    <value>Moved {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveComplete_SubHeader" xml:space="preserve">
+    <value>Moved {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveInProgress_Header" xml:space="preserve">
+    <value>Moving {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveInProgress_SubHeader" xml:space="preserve">
+    <value>Moving {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveFailed_Header" xml:space="preserve">
+    <value>Error moving {0, plural, one {# item} other {# items}} to "{1}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_MoveFailed_SubHeader" xml:space="preserve">
+    <value>Failed to move {0, plural, one {# item} other {# items}} from "{1}" to "{2}"</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_EmptyRecycleBinCancel_Header" xml:space="preserve">
+    <value>Kansellerte tømming av papirkurven</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_EmptyRecycleBinComplete_Header" xml:space="preserve">
+    <value>Tømt papirkurv</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_EmptyRecycleBinInProgress_Header" xml:space="preserve">
+    <value>Tømmer papirkurven</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_EmptyRecycleBinFailed_Header" xml:space="preserve">
+    <value>Feil ved tømming av papirkurven</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_EmptyRecycleBinFailed_SubHeader" xml:space="preserve">
+    <value>Kunne ikke tømme papirkurven</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_Prepare_Header" xml:space="preserve">
+    <value>Forberedelse av operasjonen...</value>
+    <comment>Shown in a StatusCenter card.</comment>
+  </data>
+  <data name="StatusCenter_ProcessedItems_Header" xml:space="preserve">
+    <value>{0}/{1, plural, one {# item} other {# items}} processed</value>
+    <comment>Shown in a StatusCenter card. Used as "8/20 items processed"</comment>
+  </data>
+  <data name="UnblockDownloadedFile" xml:space="preserve">
+    <value>Avblokker nedlastet fil</value>
+  </data>
+  <data name="NoFileOperations" xml:space="preserve">
+    <value>Ingen pågående filoperasjoner</value>
+  </data>
+  <data name="OpenOnStartupDisabled" xml:space="preserve">
+    <value>Muligheten for å åpne filer ved oppstart av Windows er ikke tilgjengelig på grunn av systeminnstillinger eller grupperingspolicy. For å aktivere på nytt, åpne startsiden i Oppgavebehandler igjen.</value>
+  </data>
+  <data name="FailedToRestore" xml:space="preserve">
+    <value>Gjenoppretting av papirkurven mislyktes</value>
+  </data>
+  <data name="FailedToSetBackground" xml:space="preserve">
+    <value>Kunne ikke angi bakgrunnsbilde</value>
+  </data>
+  <data name="FailedToOpenSettingsFile" xml:space="preserve">
+    <value>Failed to open the settings file</value>
+  </data>
+  <data name="GitDeleteBranch" xml:space="preserve">
+    <value>Slett Git gren</value>
+  </data>
+  <data name="GitDeleteBranchSubtitle" xml:space="preserve">
+    <value>Er du sikker på at du vil slette "{0}" grenen permanent?</value>
+  </data>
+  <data name="ConnectedToGitHub" xml:space="preserve">
+    <value>Tilkoblet GitHub</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logg ut</value>
+  </data>
+  <data name="ConnectToGitHub" xml:space="preserve">
+    <value>Koble til GitHub</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Logg inn</value>
+  </data>
+  <data name="ErrorApplyingTagContent" xml:space="preserve">
+    <value>Merkelapper er for tiden bare kompatible med disker formatert som NTFS.</value>
+  </data>
+  <data name="ErrorApplyingTagTitle" xml:space="preserve">
+    <value>Det oppstod en feil ved å legge til denne taggen</value>
+  </data>
+  <data name="DecompressArchiveHereSmartDescription" xml:space="preserve">
+    <value>Extract selected {0, plural, one {archive} other {archives}} here for single-item or to new folder for multi-item</value>
+  </data>
+  <data name="ExtractHereSmart" xml:space="preserve">
+    <value>Pakk ut her (mart)</value>
+  </data>
+  <data name="SortFilesAndFoldersTogether" xml:space="preserve">
+    <value>Sorter filer og mapper sammen</value>
+  </data>
+  <data name="SortFilesAndFoldersTogetherDescription" xml:space="preserve">
+    <value>Sort files and folders in the same list</value>
+  </data>
+  <data name="SortFilesFirst" xml:space="preserve">
+    <value>Sorter filer først</value>
+  </data>
+  <data name="SortFilesFirstDescription" xml:space="preserve">
+    <value>Sorter filer først og deretter mapper</value>
+  </data>
+  <data name="SortFoldersFirst" xml:space="preserve">
+    <value>Sorter mapper først</value>
+  </data>
+  <data name="SortFoldersFirstDescription" xml:space="preserve">
+    <value>Sorter mapper først og deretter filer</value>
+  </data>
+  <data name="SortPriority" xml:space="preserve">
+    <value>Sorter prioritet</value>
+  </data>
+  <data name="FailedToRotateImage" xml:space="preserve">
+    <value>Kunne ikke rotere bildet</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Omstart</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Avslutt</value>
+  </data>
+  <data name="FaildToShareItems" xml:space="preserve">
+    <value>Kunne ikke dele elementer</value>
+  </data>
+  <data name="ScrollToPreviousFolderWhenNavigatingUp" xml:space="preserve">
+    <value>Bla til forrige mappe når du naviger opp</value>
+  </data>
+  <data name="NewWindowDescription" xml:space="preserve">
+    <value>Åpne nytt vindu</value>
+  </data>
+  <data name="ChangeAlbumCover" xml:space="preserve">
+    <value>Endre albumomslag</value>
+  </data>
+  <data name="ItemRenameFailed" xml:space="preserve">
+    <value>Kunne ikke gi elementet nytt navn</value>
+  </data>
+  <data name="HigherPermissionsRequired" xml:space="preserve">
+    <value>Redigering "{0}" krever ytterligere tillatelser</value>
+  </data>
+  <data name="EditPermissions" xml:space="preserve">
+    <value>Redigere tillatelser</value>
+  </data>
+  <data name="BackgroundRunningNotificationBody" xml:space="preserve">
+    <value>Files kjører fortsatt i bakgrunnen for raskere oppstart.</value>
+  </data>
+  <data name="BackgroundRunningNotificationHeader" xml:space="preserve">
+    <value>Hvor ble det av Files?</value>
+  </data>
+  <data name="QuestionsAndDiscussions" xml:space="preserve">
+    <value>Spørsmål og diskusjoner</value>
+  </data>
+  <data name="Compact" xml:space="preserve">
+    <value>Kompakt</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Liten</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Middels</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Medium+" xml:space="preserve">
+    <value>Middels +</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Medium++" xml:space="preserve">
+    <value>Middels ++</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Medium+++" xml:space="preserve">
+    <value>Medium +++</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Medium++++" xml:space="preserve">
+    <value>Middels +++</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Medium+++++" xml:space="preserve">
+    <value>Middels ++++</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Large" xml:space="preserve">
+    <value>Stor</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Large+" xml:space="preserve">
+    <value>Stor +</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Large++" xml:space="preserve">
+    <value>Stor ++</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="Large+++" xml:space="preserve">
+    <value>Stor +++</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="ExtraLarge" xml:space="preserve">
+    <value>Ekstra stor</value>
+    <comment>Used to describe layout sizes</comment>
+  </data>
+  <data name="DetailsView" xml:space="preserve">
+    <value>Vis detaljer</value>
+  </data>
+  <data name="LayoutType" xml:space="preserve">
+    <value>Oppsett type</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Handlinger</value>
+  </data>
+  <data name="Commands" xml:space="preserve">
+    <value>Kommandoer</value>
+  </data>
+  <data name="AddCommand" xml:space="preserve">
+    <value>Legg til kommando</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Gjenopprett standarder</value>
+  </data>
+  <data name="ChooseAnAction" xml:space="preserve">
+    <value>Velg en handling</value>
+  </data>
+  <data name="RestoreDefaultKeybindingsConfirmation" xml:space="preserve">
+    <value>Er du sikker på at du vil gjenopprette standard hurtigtaster ? Denne handlingen kan ikke angres.</value>
+  </data>
+  <data name="KeybindingAlreadyUsedNotification" xml:space="preserve">
+    <value>Denne nøkkelbindingen er allerede i bruk, vennligst velg en annen nøkkel binding for å fortsette.</value>
+  </data>
+  <data name="KeybindingInvalidKeyNotification" xml:space="preserve">
+    <value>The key binding you choose cannot be used, please try again using a different key binding.</value>
+  </data>
+  <data name="Customized" xml:space="preserve">
+    <value>Tilpasset</value>
+  </data>
+  <data name="AdaptiveLayoutDisabledNotification" xml:space="preserve">
+    <value>Adaptivt oppsett er ikke tilgjengelig når innstillingene er synkronisert, standardoppsettet er endret til detaljer.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Bakgrunnsbilde</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Bunn</value>
+    <comment>Image alignment type</comment>
+  </data>
+  <data name="Center" xml:space="preserve">
+    <value>Midtstilt</value>
+    <comment>Image alignment type</comment>
+  </data>
+  <data name="Fill" xml:space="preserve">
+    <value>Fyll</value>
+    <comment>Image stretch type</comment>
+  </data>
+  <data name="HorizontalAlignment" xml:space="preserve">
+    <value>Horisontal justering</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Bilde passer</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Venstre</value>
+    <comment>Image alignment type</comment>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Opasitet</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Høyre</value>
+    <comment>Image alignment type</comment>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Topp</value>
+    <comment>Image alignment type</comment>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>Enhetlig</value>
+    <comment>Image stretch type</comment>
+  </data>
+  <data name="UniformToFill" xml:space="preserve">
+    <value>Enhetlig å fylle ut</value>
+    <comment>Image stretch type</comment>
+  </data>
+  <data name="VerticalAlignment" xml:space="preserve">
+    <value>Vertikal justering</value>
+  </data>
+  <data name="ThinAcrylic" xml:space="preserve">
+    <value>Tynt akryl</value>
+    <comment>This is a type of backdrop for the application background</comment>
+  </data>
+  <data name="AllLocations" xml:space="preserve">
+    <value>Vis for alle steder</value>
+    <comment>Setting where users can choose to display "Open IDE" button for Git Repos</comment>
+  </data>
+  <data name="DevTools" xml:space="preserve">
+    <value>Utvikler verktøy</value>
+  </data>
+  <data name="DisplayOpenIDE" xml:space="preserve">
+    <value>Konfigurer "åpen IDE"-knappen i statuslinjen</value>
+  </data>
+  <data name="GitRepos" xml:space="preserve">
+    <value>Vis for Git repos</value>
+    <comment>Setting where users can choose to display "Open IDE" button for all locations.</comment>
+  </data>
+  <data name="ApplicationExtension" xml:space="preserve">
+    <value>Applikasjons utvidelse</value>
+    <comment>This is the friendly name for DLL files.</comment>
+  </data>
+  <data name="IcoFileCapitalized" xml:space="preserve">
+    <value>ICO fil</value>
+    <comment>This is the friendly name for ICO files.</comment>
+  </data>
+  <data name="IclFileCapitalized" xml:space="preserve">
+    <value>ICL File</value>
+    <comment>This is the friendly name for ICL files.</comment>
+  </data>
+  <data name="ZipFileCapitalized" xml:space="preserve">
+    <value>Pakk fil</value>
+    <comment>This is the friendly name for ZIP files.</comment>
+  </data>
+  <data name="BitmapFiles" xml:space="preserve">
+    <value>Bitmap filer</value>
+    <comment>This is the friendly name for bitmap files.</comment>
+  </data>
+  <data name="ImageFiles" xml:space="preserve">
+    <value>Image Files</value>
+    <comment>This is the friendly name for image files.</comment>
+  </data>
+  <data name="NumPadTypeName" xml:space="preserve">
+    <value>Num</value>
+  </data>
+  <data name="NetworkLocations" xml:space="preserve">
+    <value>Nettverk lokasjoner</value>
+  </data>
+  <data name="NoNetworkLocationsInfo" xml:space="preserve">
+    <value>Det er ingen nettverkssteder. Hvis du ikke bruker nettverkslokasjoner, kan du deaktivere widgeten.</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>Deaktiver</value>
+  </data>
+  <data name="EditInNotepad" xml:space="preserve">
+    <value>Rediger i Notatblokk</value>
+  </data>
+  <data name="EditInNotepadDescription" xml:space="preserve">
+    <value>Rediger den valgte filen i Notepad</value>
+  </data>
+  <data name="PropertyDimensionsColon" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="StatusWithColon" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="ShowToolbar" xml:space="preserve">
+    <value>Show toolbar</value>
+    <comment>Setting that controls if the toolbar is shown in the main view</comment>
+  </data>
+  <data name="TabActions" xml:space="preserve">
+    <value>Tab actions menu</value>
+  </data>
+  <data name="SplitPaneVertically" xml:space="preserve">
+    <value>Split vertically</value>
+  </data>
+  <data name="AddVerticalPaneDescription" xml:space="preserve">
+    <value>Split pane vertically</value>
+  </data>
+  <data name="SplitPaneHorizontally" xml:space="preserve">
+    <value>Split horizontally</value>
+  </data>
+  <data name="SplitPaneHorizontallyDescription" xml:space="preserve">
+    <value>Split pane horizontally</value>
+  </data>
+  <data name="ArrangePanesVertically" xml:space="preserve">
+    <value>Arrange vertically</value>
+  </data>
+  <data name="ArrangePanesVerticallyDescription" xml:space="preserve">
+    <value>Arrange panes vertically</value>
+  </data>
+  <data name="ArrangePanesHorizontally" xml:space="preserve">
+    <value>Arrange horizontally</value>
+  </data>
+  <data name="ArrangePanesHorizontallyDescription" xml:space="preserve">
+    <value>Arrange panes horizontally</value>
+  </data>
+  <data name="SplitPane" xml:space="preserve">
+    <value>Split pane</value>
+  </data>
+  <data name="ShowTabActions" xml:space="preserve">
+    <value>Show tab actions button in the title bar</value>
+  </data>
+  <data name="ArrangePanes" xml:space="preserve">
+    <value>Arrange panes</value>
+  </data>
+  <data name="DualPaneSplitDirection" xml:space="preserve">
+    <value>Default dual pane split direction</value>
+  </data>
+  <data name="DualPane" xml:space="preserve">
+    <value>Dual pane mode</value>
+  </data>
+  <data name="Horizontal" xml:space="preserve">
+    <value>Horizontal</value>
+  </data>
+  <data name="Vertical" xml:space="preserve">
+    <value>Vertical</value>
+  </data>
+  <data name="ShowSystemTrayIcon" xml:space="preserve">
+    <value>Vis Files-ikon i systemstatusfeltet</value>
+  </data>
+  <data name="CPUThreads" xml:space="preserve">
+    <value>CPU threads</value>
+  </data>
+  <data name="NavigateHomeDescription" xml:space="preserve">
+    <value>Navigate to the home page</value>
+  </data>
+  <data name="Toolbars" xml:space="preserve">
+    <value>Toolbars</value>
+  </data>
+  <data name="UserID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="BulkRename" xml:space="preserve">
+    <value>Gi nytt navn til flere elementer</value>
+  </data>
+  <data name="CompressContents" xml:space="preserve">
+    <value>Compress contents</value>
+  </data>
+  <data name="ShowCreateAlternateDataStream" xml:space="preserve">
+    <value>Show option to create alternate data stream</value>
+  </data>
+  <data name="CreateAlternateDataStream" xml:space="preserve">
+    <value>Create alternate data stream</value>
+  </data>
+  <data name="CreateAlternateDataStreamDescription" xml:space="preserve">
+    <value>Create alternate data stream for the selected {0, plural, one {item} other {items}}</value>
+  </data>
+  <data name="EnterDataStreamName" xml:space="preserve">
+    <value>Enter data stream name</value>
+  </data>
+  <data name="ErrorCreatingDataStreamTitle" xml:space="preserve">
+    <value>There was an error creating the alternate data stream</value>
+  </data>
+  <data name="ErrorCreatingDataStreamDescription" xml:space="preserve">
+    <value>Please note that alternate data streams only work on drives formatted as NTFS.</value>
+  </data>
+  <data name="DataStreamsAreHiddenTitle" xml:space="preserve">
+    <value>Alternate data streams are currently hidden</value>
+  </data>
+  <data name="DataStreamsAreHiddenDescription" xml:space="preserve">
+    <value>Would you like to display alternate data streams? You can modify this setting anytime from the files and folders settings page.</value>
+  </data>
+  <data name="ManageTags" xml:space="preserve">
+    <value>Administrer merkelapper</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="AlwaysSwitchToNewlyOpenedTab" xml:space="preserve">
+    <value>Always switch focus to newly created tab</value>
+  </data>
+  <data name="ToggleShelfPane" xml:space="preserve">
+    <value>Toggle shelf pane</value>
+  </data>
+  <data name="ToggleShelfPaneDescription" xml:space="preserve">
+    <value>Toggle the visibility of the shelf pane</value>
+  </data>
+  <data name="ShowShelfPaneButtonInAddressBar" xml:space="preserve">
+    <value>Show shelf pane toggle in address bar</value>
+  </data>
+  <data name="Shelf" xml:space="preserve">
+    <value>Shelf</value>
+    <comment>'Shelf' refers to the Shelf Pane feature, where users can conveniently drag and drop files for quick access and perform bulk actions with ease.</comment>
+  </data>
+  <data name="ClearItems" xml:space="preserve">
+    <value>Clear items</value>
+  </data>
+  <data name="RemoveFromShelf" xml:space="preserve">
+    <value>Remove from shelf</value>
+  </data>
+  <data name="AddToShelf" xml:space="preserve">
+    <value>Add to shelf</value>
+    <comment>Tooltip that displays when dragging items to the Shelf Pane</comment>
+  </data>
+  <data name="EnterHashToCompare" xml:space="preserve">
+    <value>Enter a hash to compare</value>
+    <comment>Placeholder that appears in the compare hash text box</comment>
+  </data>
+  <data name="HashesMatch" xml:space="preserve">
+    <value>Matches {0}</value>
+    <comment>Appears when two compared hashes match, e.g. "Matches SHA256"</comment>
+  </data>
+  <data name="HashesDoNotMatch" xml:space="preserve">
+    <value>No matches found</value>
+    <comment>Appears when two compared hashes don't match</comment>
+  </data>
+  <data name="PathOrAlias" xml:space="preserve">
+    <value>Sti eller alias</value>
+  </data>
+  <data name="InvalidPath" xml:space="preserve">
+    <value>Invalid path</value>
+  </data>
+  <data name="TestIntegration" xml:space="preserve">
+    <value>Test integration</value>
+  </data>
+  <data name="IDENotLocatedContent" xml:space="preserve">
+    <value>{0} ble ikke funnet. Sjekk innstillingene og prøv igjen.</value>
+  </data>
+  <data name="IDENotLocatedTitle" xml:space="preserve">
+    <value>Den konfigurerte IDE-en ble ikke funnet</value>
+  </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
+  <data name="VisualStudioCode" xml:space="preserve">
+    <value>Visual Studio Code</value>
+  </data>
+  <data name="IDEPathPlaceholder" xml:space="preserve">
+    <value>Skriv inn en sti eller startalias</value>
+  </data>
+  <data name="InvalidIDENameError" xml:space="preserve">
+    <value>Angi et navn for IDE-en</value>
+  </data>
+  <data name="CloneRepo" xml:space="preserve">
+    <value>Clone repo</value>
+    <comment>Clone repo dialog title</comment>
+  </data>
+  <data name="Clone" xml:space="preserve">
+    <value>Clone</value>
+    <comment>Primary action button in the clone repo dialog</comment>
+  </data>
+  <data name="RepositoryURL" xml:space="preserve">
+    <value>Repository URL</value>
+    <comment>URL textbox header in the clone repo dialog</comment>
+  </data>
+  <data name="CannotCloneRepoTitle" xml:space="preserve">
+    <value>Cannot clone repo</value>
+    <comment>Cannot clone repo dialog title</comment>
+  </data>
+  <data name="CompareFile" xml:space="preserve">
+    <value>Compare a file</value>
+    <comment>Button that appears in file hash properties that allows the user to compare two files</comment>
+  </data>
+  <data name="SizeFormat" xml:space="preserve">
+    <value>Size format</value>
+  </data>
+  <data name="Binary" xml:space="preserve">
+    <value>Binary</value>
+  </data>
+  <data name="Decimal" xml:space="preserve">
+    <value>Decimal</value>
+  </data>
+  <data name="SectionsHiddenMessage" xml:space="preserve">
+    <value>You can add sections to the sidebar by right-clicking and selecting the sections you want to add</value>
+  </data>
+  <data name="EmptyShelfText" xml:space="preserve">
+    <value>Drag files or folders here to interact with them across different tabs</value>
+  </data>
+  <data name="OmnibarPathModeTextPlaceholder" xml:space="preserve">
+    <value>Angi en sti å navigere til...</value>
+  </data>
+  <data name="OmnibarCommandPaletteModeTextPlaceholder" xml:space="preserve">
+    <value>Finn funksjoner og kommandoer...</value>
+  </data>
+  <data name="OmnibarSearchModeTextPlaceholder" xml:space="preserve">
+    <value>Søk etter filer og mapper...</value>
+  </data>
+  <data name="DuringOngoingFileOperations" xml:space="preserve">
+    <value>During file operations</value>
+  </data>
+  <data name="ShowStatusCenterButton" xml:space="preserve">
+    <value>Show status center button</value>
+  </data>
+  <data name="StatusCenterProgressRing" xml:space="preserve">
+    <value>Status center progress ring</value>
+    <comment>Screen reader name for the status center progress ring</comment>
+  </data>
+  <data name="IconFiles" xml:space="preserve">
+    <value>Icon files</value>
+    <comment>This is the friendly name for a variety of different icon files.</comment>
+  </data>
+  <data name="BreadcrumbBarEllipsisButtonToolTip" xml:space="preserve">
+    <value>Show collapsed path breadcrumbs</value>
+  </data>
+  <data name="BreadcrumbBarChevronButtonToolTip" xml:space="preserve">
+    <value>Show folders in {0}</value>
+  </data>
+  <data name="BreadcrumbBarRootChevronButtonToolTip" xml:space="preserve">
+    <value>Show folders in Home</value>
+  </data>
+  <data name="NoCommandsFound" xml:space="preserve">
+    <value>There are no commands containing {0}</value>
+  </data>
+  <data name="SeeMore" xml:space="preserve">
+    <value>Se mer</value>
+  </data>
+  <data name="FilteringFor" xml:space="preserve">
+    <value>Filtering for</value>
+  </data>
+  <data name="Filename" xml:space="preserve">
+    <value>Filename</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Signatures</value>
+  </data>
+  <data name="SignatureList" xml:space="preserve">
+    <value>Signature list</value>
+  </data>
+  <data name="IssuedBy" xml:space="preserve">
+    <value>Issued by:</value>
+  </data>
+  <data name="IssuedTo" xml:space="preserve">
+    <value>Issued to:</value>
+  </data>
+  <data name="ValidFrom" xml:space="preserve">
+    <value>Valid from:</value>
+  </data>
+  <data name="ValidTo" xml:space="preserve">
+    <value>Valid to:</value>
+  </data>
+  <data name="NoSignatureFound" xml:space="preserve">
+    <value>No signature was found.</value>
+  </data>
+  <data name="ShowOpenTerminal" xml:space="preserve">
+    <value>Show option to open folders in Windows Terminal</value>
+  </data>
+  <data name="OpenLogFile" xml:space="preserve">
+    <value>Open log file</value>
+  </data>
+  <data name="OpenLogFileDescription" xml:space="preserve">
+    <value>Open log file in your default editor</value>
+  </data>
+  <data name="OpenLogFileLocationDescription" xml:space="preserve">
+    <value>Open log file location in your default file manager</value>
+  </data>
+  <data name="FailedToOpenLogFile" xml:space="preserve">
+    <value>Unable to open the log file</value>
+  </data>
+  <data name="ShowStatusBar" xml:space="preserve">
+    <value>Show status bar</value>
+  </data>
+  <data name="OnlyInColumnsView" xml:space="preserve">
+    <value>Only in Columns View</value>
+  </data>
+  <data name="CreateNewFile" xml:space="preserve">
+    <value>New {0}</value>
+  </data>
+  <data name="EnableSmoothScrolling" xml:space="preserve">
+    <value>Enable smooth scrolling</value>
+  </data>
+  <data name="Scrolling" xml:space="preserve">
+    <value>Scrolling</value>
+  </data>
+  <data name="ShowPinToSideBar" xml:space="preserve">
+    <value>Show option to Pin to Sidebar</value>
+  </data>
+  <data name="ShowPinToStart" xml:space="preserve">
+    <value>Show option to Pin to the Start Menu</value>
+  </data>
+</root>

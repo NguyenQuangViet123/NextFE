@@ -1,0 +1,56 @@
+﻿// Copyright (c) Files Community
+// Licensed under the MIT License.
+
+namespace Files.App.Actions
+{
+	[GeneratedRichCommand]
+	internal sealed partial class NavigateForwardAction : ObservableObject, IAction
+	{
+		private readonly IContentPageContext context;
+
+		public string Label
+			=> Strings.Forward.GetLocalizedResource();
+
+		public string Description
+			=> Strings.NavigateForwardDescription.GetLocalizedResource();
+
+		public HotKey HotKey
+			=> new(Keys.Right, KeyModifiers.Alt);
+
+		public HotKey SecondHotKey
+			=> new(Keys.Mouse5);
+
+		public HotKey MediaHotKey
+			=> new(Keys.GoForward, KeyModifiers.None, false);
+
+		public RichGlyph Glyph
+			=> new("\uE72A");
+
+		public bool IsExecutable
+			=> context.CanGoForward;
+
+		public NavigateForwardAction()
+		{
+			context = Ioc.Default.GetRequiredService<IContentPageContext>();
+
+			context.PropertyChanged += Context_PropertyChanged;
+		}
+
+		public Task ExecuteAsync(object? parameter = null)
+		{
+			context.ShellPage!.Forward_Click();
+
+			return Task.CompletedTask;
+		}
+
+		private void Context_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+		{
+			switch (e.PropertyName)
+			{
+				case nameof(IContentPageContext.CanGoForward):
+					OnPropertyChanged(nameof(IsExecutable));
+					break;
+			}
+		}
+	}
+}

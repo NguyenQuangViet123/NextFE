@@ -1,0 +1,27 @@
+﻿<!--  Copyright (c) Files Community. Licensed under the MIT License.  -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>$(WindowsTargetFramework)</TargetFramework>
+        <DefaultLanguage>en-US</DefaultLanguage>
+        <TargetPlatformMinVersion>$(MinimalWindowsVersion)</TargetPlatformMinVersion>
+        <IsTrimmable>true</IsTrimmable>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>x86;x64;ARM64</Platforms>
+        <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <IsAotCompatible>true</IsAotCompatible>
+        <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <CsWinRTComponent>true</CsWinRTComponent>
+        <CsWinRTWindowsMetadata>$(TargetWindowsVersion)</CsWinRTWindowsMetadata>
+        <CsWinRTGeneratedFilesDir>$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)</CsWinRTGeneratedFilesDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Windows.CsWinRT" />
+    </ItemGroup>
+
+</Project>

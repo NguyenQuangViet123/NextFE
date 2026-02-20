@@ -1,0 +1,545 @@
+﻿<!--  Copyright (c) Files Community. Licensed under the MIT License.  -->
+<Page
+	x:Class="Files.App.Views.MainPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+	xmlns:controls="using:Files.App.Controls"
+	xmlns:converters="using:Files.App.Converters"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:helpers="using:Files.App.Helpers"
+	xmlns:i="using:Microsoft.Xaml.Interactivity"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:tabbar="using:Files.App.UserControls.TabBar"
+	xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
+	xmlns:uc="using:Files.App.UserControls"
+	xmlns:viewmodels="using:Files.App.ViewModels"
+	xmlns:wctconverters="using:CommunityToolkit.WinUI.Converters"
+	AllowDrop="True"
+	Background="{ThemeResource App.Theme.BackgroundBrush}"
+	DataContext="{x:Bind ViewModel, Mode=OneWay}"
+	HighContrastAdjustment="None"
+	KeyboardAcceleratorPlacementMode="Hidden"
+	Loaded="Page_Loaded"
+	NavigationCacheMode="Required"
+	PointerReleased="Page_PointerReleased"
+	SizeChanged="Page_SizeChanged"
+	mc:Ignorable="d">
+
+	<Page.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="ms-appx:///Styles/DefaultGridSplitterStyle.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<ImageSource x:Key="EmptySidebar.48">ms-appx:///Assets/Sidebar/EmptySidebar_48_ThemeLight.svg</ImageSource>
+					<ImageSource x:Key="EmptySidebar.100">ms-appx:///Assets/Sidebar/EmptySidebar_100_ThemeLight.svg</ImageSource>
+					<ImageSource x:Key="EmptySidebar.200">ms-appx:///Assets/Sidebar/EmptySidebar_200_ThemeLight.svg</ImageSource>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<ImageSource x:Key="EmptySidebar.48">ms-appx:///Assets/Sidebar/EmptySidebar_48_ThemeDark.svg</ImageSource>
+					<ImageSource x:Key="EmptySidebar.100">ms-appx:///Assets/Sidebar/EmptySidebar_100_ThemeDark.svg</ImageSource>
+					<ImageSource x:Key="EmptySidebar.200">ms-appx:///Assets/Sidebar/EmptySidebar_200_ThemeDark.svg</ImageSource>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="HighContrast">
+					<ImageSource x:Key="EmptySidebar.48">ms-appx:///Assets/Sidebar/EmptySidebar_48_ThemeDark.svg</ImageSource>
+					<ImageSource x:Key="EmptySidebar.100">ms-appx:///Assets/Sidebar/EmptySidebar_100_ThemeDark.svg</ImageSource>
+					<ImageSource x:Key="EmptySidebar.200">ms-appx:///Assets/Sidebar/EmptySidebar_200_ThemeDark.svg</ImageSource>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+
+			<x:Boolean x:Key="True">True</x:Boolean>
+			<x:Boolean x:Key="False">False</x:Boolean>
+
+			<wctconverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+
+
+			<MenuFlyout x:Key="SidebarContextMenu">
+				<ToggleMenuFlyoutItem IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowPinnedFoldersSection, Mode=TwoWay}" Text="{helpers:ResourceString Name=Pinned}" />
+				<ToggleMenuFlyoutItem IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowLibrarySection, Mode=TwoWay}" Text="{helpers:ResourceString Name=SidebarLibraries}" />
+				<ToggleMenuFlyoutItem IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowDrivesSection, Mode=TwoWay}" Text="{helpers:ResourceString Name=Drives}" />
+				<ToggleMenuFlyoutItem IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowCloudDrivesSection, Mode=TwoWay}" Text="{helpers:ResourceString Name=SidebarCloudDrives}" />
+				<ToggleMenuFlyoutItem IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowNetworkSection, Mode=TwoWay}" Text="{helpers:ResourceString Name=Network}" />
+				<ToggleMenuFlyoutItem IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowWslSection, Mode=TwoWay}" Text="{helpers:ResourceString Name=WSL}" />
+				<ToggleMenuFlyoutItem
+					x:Name="SidebarContextMenuFileTagsSection"
+					IsChecked="{x:Bind SidebarAdaptiveViewModel.ShowFileTagsSection, Mode=TwoWay}"
+					Text="{helpers:ResourceString Name=FileTags}" />
+			</MenuFlyout>
+		</ResourceDictionary>
+	</Page.Resources>
+
+	<Page.KeyboardAccelerators>
+		<KeyboardAccelerator Key="Number1" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number2" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number3" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number4" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number5" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number6" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number7" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number8" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+		<KeyboardAccelerator Key="Number9" Modifiers="Control">
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="Invoked">
+					<i:InvokeCommandAction Command="{x:Bind ViewModel.NavigateToNumberedTabKeyboardAcceleratorCommand}" />
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</KeyboardAccelerator>
+	</Page.KeyboardAccelerators>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!--  Background Image  -->
+		<Image
+			Grid.RowSpan="3"
+			HorizontalAlignment="{x:Bind ViewModel.AppThemeBackgroundImageHorizontalAlignment, Mode=OneWay}"
+			VerticalAlignment="{x:Bind ViewModel.AppThemeBackgroundImageVerticalAlignment, Mode=OneWay}"
+			Opacity="{x:Bind ViewModel.AppThemeBackgroundImageOpacity, Mode=OneWay}"
+			Source="{x:Bind ViewModel.AppThemeBackgroundImageSource, Mode=OneWay}"
+			Stretch="{x:Bind ViewModel.AppThemeBackgroundImageFit, Mode=OneWay}" />
+
+		<!--  Tab Bar  -->
+		<tabbar:TabBar
+			x:Name="TabControl"
+			HorizontalContentAlignment="Stretch"
+			x:Load="False"
+			Loaded="HorizontalMultitaskingControl_Loaded"
+			TabIndex="0" />
+
+		<!--  Address Bar  -->
+		<uc:NavigationToolbar
+			x:Name="NavToolbar"
+			Grid.Row="1"
+			HorizontalAlignment="Stretch"
+			HorizontalContentAlignment="Stretch"
+			x:Load="False"
+			Loaded="NavToolbar_Loaded"
+			ShowOngoingTasks="True"
+			TabIndex="1" />
+
+		<!--  Content Area  -->
+		<controls:SidebarView
+			x:Name="SidebarControl"
+			Grid.Row="2"
+			HorizontalAlignment="Stretch"
+			HorizontalContentAlignment="Stretch"
+			Background="{ThemeResource App.Theme.Sidebar.BackgroundBrush}"
+			DisplayMode="{x:Bind SidebarAdaptiveViewModel.SidebarDisplayMode, Mode=TwoWay}"
+			IsPaneOpen="{x:Bind ViewModel.IsSidebarPaneOpen, Mode=TwoWay}"
+			ItemContextInvoked="SidebarControl_ItemContextInvoked"
+			ItemDragOver="SidebarControl_ItemDragOver"
+			ItemDropped="SidebarControl_ItemDropped"
+			ItemInvoked="SidebarControl_ItemInvoked"
+			Loaded="SidebarControl_Loaded"
+			MenuItemsSource="{x:Bind SidebarAdaptiveViewModel.SidebarItems, Mode=OneWay}"
+			OpenPaneLength="{x:Bind UserSettingsService.AppearanceSettingsService.SidebarWidth, Mode=TwoWay}"
+			SelectedItem="{x:Bind SidebarAdaptiveViewModel.SidebarSelectedItem, Mode=TwoWay}">
+
+			<!--  Inner Content  -->
+			<controls:SidebarView.InnerContent>
+
+				<!-- [NEXTFE UI/UX OVERHAUL] RootGrid sử dụng màu Sidebar để phân mảng không gian, tạo độ sâu -->
+				<Grid
+					x:Name="RootGrid"
+					Background="{ThemeResource App.Theme.Sidebar.BackgroundBrush}"
+					PreviewKeyDown="RootGrid_PreviewKeyDown"
+					SizeChanged="RootGrid_SizeChanged">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition
+							x:Name="ContentRow"
+							Height="*"
+							MinHeight="100" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition x:Name="InfoPaneRowDefinition" Height="Auto" />
+						<RowDefinition Height="Auto" MinHeight="8" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							x:Name="ContentColumn"
+							Width="*"
+							MinWidth="208" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition x:Name="InfoPaneColumnDefinition" Width="Auto" />
+						<ColumnDefinition x:Name="ShelfPaneColumn" Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<!--  File Navigation Toolbar (Pill-shaped Floating Design) -->
+					<uc:Toolbar
+						x:Name="InnerNavigationToolbar"
+						Grid.Row="0"
+						Grid.ColumnSpan="3"
+						Margin="12,12,12,8"
+						Padding="0"
+						Background="{ThemeResource App.Theme.FileArea.BackgroundBrush}"
+						BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+						BorderThickness="1"
+						CornerRadius="8"
+						x:Load="False"
+						Loaded="NavToolbar_Loaded"
+						ShowPreviewPaneButton="{x:Bind ViewModel.ShouldPreviewPaneBeDisplayed, Mode=OneWay}"
+						ShowViewControlButton="{x:Bind ViewModel.ShouldViewControlBeDisplayed, Mode=OneWay}"
+						TabIndex="2"
+						Visibility="{x:Bind ViewModel.ShowToolbar, Mode=OneWay}" />
+
+					<!--  Page Content Wrapper (Card UI Island) -->
+					<Border
+						Grid.Row="1"
+						Grid.Column="0"
+						Margin="12,0,4,12"
+						Background="{ThemeResource App.Theme.FileArea.BackgroundBrush}"
+						BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+						BorderThickness="1"
+						CornerRadius="8"
+						Padding="0">
+						<ContentPresenter
+							x:Name="PageContent"
+							HorizontalContentAlignment="Stretch"
+							VerticalContentAlignment="Stretch"
+							Content="{x:Bind ViewModel.SelectedTabItem.ContentFrame, Mode=OneWay}"
+							CornerRadius="8" />
+					</Border>
+
+					<!--  Info Pane Splitter  -->
+					<controls:GridSplitter
+						x:Name="InfoPaneSizer"
+						Grid.Row="1"
+						Grid.Column="1"
+						Margin="0,0,0,12"
+						x:Load="{x:Bind ViewModel.ShouldPreviewPaneBeActive, Mode=OneWay}"
+						ManipulationCompleted="PaneSplitter_ManipulationCompleted"
+						ManipulationStarted="PaneSplitter_ManipulationStarted"
+						Opacity="0"
+						ResizeBehavior="BasedOnAlignment"
+						Style="{StaticResource DefaultGridSplitterStyle}" />
+
+					<!--  Info Pane (Card UI Island) -->
+					<uc:InfoPane
+						x:Name="InfoPane"
+						Grid.Row="1"
+						Grid.Column="2"
+						Margin="4,0,12,12"
+						Background="{ThemeResource App.Theme.FileArea.BackgroundBrush}"
+						BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+						BorderThickness="1"
+						CornerRadius="8"
+						HorizontalContentAlignment="Stretch"
+						x:Load="{x:Bind ViewModel.ShouldPreviewPaneBeActive, Mode=OneWay}"
+						Loaded="PreviewPane_Loaded"
+						Unloaded="PreviewPane_Unloaded" />
+
+					<!--  Status Bar (Floating Mini-Card) -->
+					<uc:StatusBar
+						x:Name="StatusBar"
+						Grid.Row="4"
+						Grid.ColumnSpan="3"
+						Margin="12,0,12,12"
+						Background="{ThemeResource App.Theme.FileArea.BackgroundBrush}"
+						BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+						BorderThickness="1"
+						CornerRadius="8"
+						x:Load="False"
+						ShowInfoText="{x:Bind ViewModel.ShowStatusBar, Mode=OneWay}"
+						Visibility="{x:Bind ViewModel.ShowStatusBar, Mode=OneWay}" />
+
+					<!--  Shelf Pane (Card UI Island) -->
+					<uc:ShelfPane
+						x:Name="ShelfPane"
+						Grid.Row="0"
+						Grid.RowSpan="5"
+						Grid.Column="3"
+						Margin="4,12,12,12"
+						Background="{ThemeResource App.Theme.FileArea.BackgroundBrush}"
+						BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+						BorderThickness="1"
+						CornerRadius="8"
+						x:Load="{x:Bind ViewModel.ShowShelfPane, Mode=OneWay}"
+						ClearCommand="{x:Bind ViewModel.ShelfViewModel.ClearItemsCommand}"
+						ItemFocusedCommand="{x:Bind Commands.ClearSelection, Mode=OneWay}"
+						ItemsSource="{x:Bind ViewModel.ShelfViewModel.Items}" />
+				</Grid>
+			</controls:SidebarView.InnerContent>
+
+			<!--  Sidebar Content  -->
+			<controls:SidebarView.SidebarContent>
+				<StackPanel
+					x:Name="SidebarContent"
+					Padding="16,0,16,0"
+					VerticalAlignment="Center"
+					Orientation="Vertical"
+					Spacing="16"
+					Visibility="{x:Bind SidebarAdaptiveViewModel.AreSectionsHidden, Mode=OneWay}">
+
+					<Image
+						x:Name="EmptySidebarImage"
+						MaxHeight="48"
+						Source="{ThemeResource EmptySidebar.48}" />
+
+					<!-- [NEXTFE UI/UX] Cải thiện Font và trọng lượng để Sidebar trống bớt nhàm chán -->
+					<TextBlock
+						MaxWidth="240"
+						FontWeight="Medium"
+						Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+						Style="{StaticResource App.Theme.CaptionTextBlockStyle}"
+						Text="{helpers:ResourceString Name=SectionsHiddenMessage}"
+						TextAlignment="Center" />
+
+				</StackPanel>
+			</controls:SidebarView.SidebarContent>
+
+			<!--  Footer  -->
+			<controls:SidebarView.Footer>
+				<StackPanel Padding="4" Spacing="4">
+					<Border
+						Height="1"
+						HorizontalAlignment="Stretch"
+						BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+						BorderThickness="1" />
+					<!--  Open the Settings dialog (Bo cong và Typography nhấn mạnh) -->
+					<Button
+						x:Name="SettingsButton"
+						Height="40"
+						Margin="12,8,12,12"
+						Padding="12,0,12,0"
+						HorizontalAlignment="Stretch"
+						HorizontalContentAlignment="Stretch"
+						AccessKey="I"
+						AccessKeyInvoked="SettingsButton_AccessKeyInvoked"
+						AutomationProperties.AutomationId="SettingsButton"
+						AutomationProperties.Name="{x:Bind Commands.OpenSettings.Label, Mode=OneWay}"
+						Background="Transparent"
+						BorderThickness="0"
+						CornerRadius="8"
+						Command="{x:Bind Commands.OpenSettings, Mode=OneWay}"
+						ToolTipService.Placement="Bottom">
+						<Button.Resources>
+							<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource SubtleFillColorSecondary}" />
+							<SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{ThemeResource TextFillColorPrimary}" />
+						</Button.Resources>
+						<Grid HorizontalAlignment="Stretch">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<AnimatedIcon
+								x:Name="SettingAnimatedIcon"
+								Height="16"
+								Margin="4,0,0,0">
+								<AnimatedIcon.Source>
+									<animatedvisuals:AnimatedSettingsVisualSource />
+								</AnimatedIcon.Source>
+								<AnimatedIcon.FallbackIconSource>
+									<SymbolIconSource Symbol="Setting" />
+								</AnimatedIcon.FallbackIconSource>
+							</AnimatedIcon>
+
+							<TextBlock
+								Grid.Column="1"
+								Margin="12,0,0,0"
+								FontWeight="SemiBold"
+								VerticalAlignment="Center"
+								Text="{x:Bind Commands.OpenSettings.Label, Mode=OneWay}" />
+						</Grid>
+
+						<Button.ContextFlyout>
+							<MenuFlyout>
+								<MenuFlyoutItem
+									Command="{x:Bind Commands.OpenSettingsFile, Mode=OneWay}"
+									Icon="{x:Bind Commands.OpenSettingsFile.FontIcon, Mode=OneWay}"
+									Text="{x:Bind Commands.OpenSettingsFile.Label, Mode=OneWay}" />
+							</MenuFlyout>
+						</Button.ContextFlyout>
+					</Button>
+				</StackPanel>
+			</controls:SidebarView.Footer>
+		</controls:SidebarView>
+
+		<!--  Review Files Prompt  -->
+		<TeachingTip
+			Title="{helpers:ResourceString Name=Hello}"
+			Grid.RowSpan="3"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Bottom"
+			ActionButtonCommand="{x:Bind ViewModel.ReviewAppCommand}"
+			ActionButtonContent="{helpers:ResourceString Name=RateUs}"
+			CloseButtonCommand="{x:Bind ViewModel.DismissReviewPromptCommand}"
+			CloseButtonContent="{helpers:ResourceString Name=Dismiss}"
+			IsOpen="{x:Bind ViewModel.ShowReviewPrompt, Mode=OneWay}"
+			Subtitle="{helpers:ResourceString Name=ReviewFilesSubtitle}" />
+
+		<!--  Sponsor Prompt  -->
+		<TeachingTip
+			Title="{helpers:ResourceString Name=Hello}"
+			Grid.RowSpan="3"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Bottom"
+			ActionButtonCommand="{x:Bind ViewModel.SponsorCommand}"
+			ActionButtonContent="{helpers:ResourceString Name=Sponsor}"
+			CloseButtonCommand="{x:Bind ViewModel.DismissSponsorPromptCommand}"
+			CloseButtonContent="{helpers:ResourceString Name=Dismiss}"
+			IsOpen="{x:Bind ViewModel.ShowSponsorPrompt, Mode=OneWay}"
+			Subtitle="{helpers:ResourceString Name=SponsorSubtitle}" />
+
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="SidebarWidthStates">
+				<VisualState x:Name="SmallSidebarWidthState">
+					<VisualState.Setters>
+						<Setter Target="EmptySidebarImage.MaxHeight" Value="48" />
+						<Setter Target="EmptySidebarImage.Source" Value="{ThemeResource EmptySidebar.48}" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="MediumSidebarWidthState">
+					<VisualState.Setters>
+						<Setter Target="EmptySidebarImage.MaxHeight" Value="100" />
+						<Setter Target="EmptySidebarImage.Source" Value="{ThemeResource EmptySidebar.100}" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="LargeSidebarWidthState">
+					<VisualState.Setters>
+						<Setter Target="EmptySidebarImage.MaxHeight" Value="200" />
+						<Setter Target="EmptySidebarImage.Source" Value="{ThemeResource EmptySidebar.200}" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+
+			<VisualStateGroup x:Name="WindowHeightStates">
+				<VisualState>
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger x:Name="SmallHeightAdaptiveTrigger" MinWindowHeight="440" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="EmptySidebarImage.Visibility" Value="Visible" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState>
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger x:Name="MediumHeightAdaptiveTrigger" MinWindowHeight="0" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="EmptySidebarImage.Visibility" Value="Collapsed" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+
+			<VisualStateGroup x:Name="SidebarStates">
+				<VisualState x:Name="NormalSidebarState">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="0" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="SidebarControl.DisplayMode" Value="Minimal" />
+						<Setter Target="NavToolbar.IsSidebarPaneOpenToggleButtonVisible" Value="True" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="MinimalSidebarState">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger x:Name="MinimalSidebarAdaptiveTrigger" MinWindowWidth="641" />
+					</VisualState.StateTriggers>
+				</VisualState>
+			</VisualStateGroup>
+
+			<VisualStateGroup x:Name="InfoPanePositionStates">
+				<VisualState x:Name="InfoPanePositionNone">
+					<VisualState.Setters>
+						<Setter Target="InfoPaneRowDefinition.MinHeight" Value="0" />
+						<Setter Target="InfoPaneRowDefinition.Height" Value="0" />
+						<Setter Target="InfoPaneColumnDefinition.MinWidth" Value="0" />
+						<Setter Target="InfoPaneColumnDefinition.Width" Value="0" />
+					</VisualState.Setters>
+				</VisualState>
+
+				<!-- [NEXTFE UI/UX OVERHAUL] Cập nhật lại Margin của các thẻ khi Bảng thông tin (InfoPane) thay đổi vị trí -->
+				<VisualState x:Name="InfoPanePositionRight">
+					<VisualState.Setters>
+						<Setter Target="InfoPane.(Grid.Row)" Value="1" />
+						<Setter Target="InfoPane.(Grid.Column)" Value="2" />
+						<Setter Target="InfoPane.Margin" Value="4,0,12,12" />
+
+						<Setter Target="InfoPaneSizer.(Grid.Row)" Value="1" />
+						<Setter Target="InfoPaneSizer.(Grid.Column)" Value="1" />
+						<Setter Target="InfoPaneSizer.Width" Value="2" />
+						<Setter Target="InfoPaneSizer.Margin" Value="0,0,0,12" />
+						<Setter Target="InfoPaneSizer.GripperCursor" Value="SizeWestEast" />
+
+						<Setter Target="InfoPaneColumnDefinition.MinWidth" Value="{x:Bind InfoPane.MinWidth, Mode=OneWay}" />
+						<Setter Target="InfoPaneRowDefinition.MinHeight" Value="0" />
+						<Setter Target="InfoPaneRowDefinition.Height" Value="0" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="InfoPanePositionBottom">
+					<VisualState.Setters>
+						<Setter Target="InfoPane.(Grid.Row)" Value="3" />
+						<Setter Target="InfoPane.(Grid.Column)" Value="0" />
+						<Setter Target="InfoPane.Margin" Value="12,4,12,12" />
+
+						<Setter Target="InfoPaneSizer.(Grid.Row)" Value="2" />
+						<Setter Target="InfoPaneSizer.(Grid.Column)" Value="0" />
+						<Setter Target="InfoPaneSizer.Height" Value="2" />
+						<Setter Target="InfoPaneSizer.Margin" Value="12,0,12,0" />
+						<Setter Target="InfoPaneSizer.GripperCursor" Value="SizeNorthSouth" />
+
+						<Setter Target="InfoPaneColumnDefinition.Width" Value="0" />
+						<Setter Target="InfoPaneColumnDefinition.MinWidth" Value="0" />
+						<Setter Target="InfoPaneRowDefinition.MinHeight" Value="{x:Bind InfoPane.MinHeight, Mode=OneWay}" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+
+		</VisualStateManager.VisualStateGroups>
+	</Grid>
+</Page>

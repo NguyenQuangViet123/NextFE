@@ -1,0 +1,147 @@
+// Copyright (c) Files Community
+// Licensed under the MIT License.
+
+using Microsoft.UI.Xaml.Controls;
+using System.Runtime.InteropServices;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+
+namespace Files.App.Data.Models
+{
+	public sealed partial class AppModel : ObservableObject
+	{
+		public AppModel()
+		{
+			Clipboard.ContentChanged += Clipboard_ContentChanged;
+		}
+
+		// TODO: Refactor this method
+		public void Clipboard_ContentChanged(object sender, object e)
+		{
+			try
+			{
+				DataPackageView packageView = Clipboard.GetContent();
+				IsPasteEnabled = packageView.Contains(StandardDataFormats.StorageItems) || packageView.Contains(StandardDataFormats.Bitmap);
+			}
+			catch
+			{
+				IsPasteEnabled = false;
+			}
+		}
+
+		private int _TabStripSelectedIndex = 0;
+		public int TabStripSelectedIndex
+		{
+			get => _TabStripSelectedIndex;
+			set
+			{
+				SetProperty(ref _TabStripSelectedIndex, value);
+
+				try
+				{
+					if (value >= 0 && value < MainPageViewModel.AppInstances.Count)
+					{
+						if (MainWindow.Instance.Content is Frame rootFrame && rootFrame.Content is MainPage mainView)
+							mainView.ViewModel.SelectedTabItem = MainPageViewModel.AppInstances[value];
+					}
+				}
+				catch (COMException)
+				{
+
+				}
+			}
+		}
+
+		private bool _IsAppElevated = false;
+		public bool IsAppElevated
+		{
+			get => _IsAppElevated;
+			set => SetProperty(ref _IsAppElevated, value);
+		}
+
+		private bool _IsPasteEnabled = false;
+		public bool IsPasteEnabled
+		{
+			get => _IsPasteEnabled;
+			set => SetProperty(ref _IsPasteEnabled, value);
+		}
+
+		private volatile int _IsMainWindowClosed = 0;
+		public bool IsMainWindowClosed
+		{
+			get => _IsMainWindowClosed == 1;
+			set
+			{
+				int orig = Interlocked.Exchange(ref _IsMainWindowClosed, value ? 1 : 0);
+				if (_IsMainWindowClosed != orig)
+					OnPropertyChanged();
+			}
+		}
+
+		private int _PropertiesWindowCount = 0;
+		public int PropertiesWindowCount
+		{
+			get => _PropertiesWindowCount;
+		}
+
+		public int IncrementPropertiesWindowCount()
+		{
+			var result = Interlocked.Increment(ref _PropertiesWindowCount);
+			OnPropertyChanged(nameof(PropertiesWindowCount));
+			return result;
+		}
+
+		public int DecrementPropertiesWindowCount()
+		{
+			var result = Interlocked.Decrement(ref _PropertiesWindowCount);
+			OnPropertyChanged(nameof(PropertiesWindowCount));
+			return result;
+		}
+
+		private bool _ForceProcessTermination = false;
+		public bool ForceProcessTermination
+		{
+			get => _ForceProcessTermination;
+			set => SetProperty(ref _ForceProcessTermination, value);
+		}
+
+		private string _GoogleDrivePath = string.Empty;
+		/// <summary>
+		/// Gets or sets a value indicating the path for Google Drive.
+		/// </summary>
+		public string GoogleDrivePath
+		{
+			get => _GoogleDrivePath;
+			set => SetProperty(ref _GoogleDrivePath, value);
+		}
+
+		private string _PCloudDrivePath = string.Empty;
+		/// <summary>
+		/// Gets or sets a value indicating the path for pCloud Drive.
+		/// </summary>
+		public string PCloudDrivePath
+		{
+			get => _PCloudDrivePath;
+			set => SetProperty(ref _PCloudDrivePath, value);
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating the AppWindow DPI.
+		/// </summary>
+		private float? _AppWindowDPI = null;
+		public float AppWindowDPI
+		{
+			get
+			{
+				if (_AppWindowDPI is null || _AppWindowDPI == 0f)
+				{
+					var dpi = PInvoke.GetDpiForWindow((HWND)MainWindow.Instance.WindowHandle);
+					_AppWindowDPI = dpi > 0 ? dpi / 96f : 1.0f; // Fallback to 1.0f if invalid DPI
+				}
+				return _AppWindowDPI.Value;
+			}
+			set => SetProperty(ref _AppWindowDPI, value);
+		}
+	}
+}
