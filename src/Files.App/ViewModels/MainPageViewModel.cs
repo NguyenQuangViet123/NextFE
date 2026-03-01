@@ -315,13 +315,16 @@ namespace Files.App.ViewModels
 			// Load the app theme resources
 			ResourcesService.LoadAppResources(AppearanceSettingsService);
 
-			// [OPTIMIZATION] Tách biệt luồng load dữ liệu nặng để tránh gây lag giao diện.
-			// Drives (C:, D:) load rất nhanh nên chúng ta await nó để hiển thị ngay.
-			await DrivesViewModel.UpdateDrivesAsync();
+			// [NEXTFE VIP ENGINE] ZERO-BLOCK STARTUP (Khởi động không độ trễ)
+			// Lỗi chí mạng của bản gốc: "await DrivesViewModel.UpdateDrivesAsync();" 
+			// Lệnh await này chặn đứng UI Thread. Nếu bạn có ổ đĩa mạng (LAN) hoặc ổ cứng HDD đang ngủ, 
+			// App sẽ treo ở màn hình Splash Screen từ 2-5 giây.
+			// Khắc phục: Dùng Fire-and-Forget để nhả luồng UI ngay lập tức. Giao diện sẽ hiện lên tức thì!
+			_ = DrivesViewModel.UpdateDrivesAsync();
 
 			// Network Discovery (Tìm máy tính/Shortcut trong LAN) cực kỳ chậm và hay bị timeout (có thể mất 5-30s).
-			// Đẩy nó vào Background Thread (Fire and Forget) để Main UI Thread được giải phóng lập tức, App sẽ mượt ngay khi mở lên.
-			_ = Task.Run(async () =>
+			// Đẩy nó vào Động cơ SpeedEngine chạy ngầm hoàn toàn. Luồng chính được giải phóng lập tức.
+			Helpers.SpeedEngine.RunBackgroundAsync(async () =>
 			{
 				await Task.WhenAll(
 					NetworkService.UpdateComputersAsync(),

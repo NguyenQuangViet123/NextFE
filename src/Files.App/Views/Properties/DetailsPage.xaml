@@ -21,14 +21,7 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<!-- [UX UPGRADE] Thêm transition cho toàn bộ nội dung trang -->
 	<Grid>
-		<Grid.Transitions>
-			<TransitionCollection>
-				<ContentThemeTransition />
-			</TransitionCollection>
-		</Grid.Transitions>
-
 		<ScrollViewer>
 			<Grid Padding="12">
 

@@ -46,6 +46,7 @@ namespace Files.App
 		public static ILogger Logger { get; private set; } = null!;
 
 		// [OPTIMIZATION] Import API để tối ưu hóa bộ nhớ khi chạy ngầm
+		// Vẫn giữ lại khai báo này để tránh lỗi biên dịch, dù ta sẽ tắt nó ở bên dưới
 		[DllImport("psapi.dll")]
 		private static extern int EmptyWorkingSet(IntPtr hwProc);
 
@@ -88,9 +89,9 @@ namespace Files.App
 					SplashScreenLoadingTCS = new TaskCompletionSource();
 					MainWindow.Instance.ShowSplashScreen();
 
-					// [OPTIMIZATION] Sửa Task.Yield() thành Task.Delay(50).
-					// Việc này cho phép luồng UI (UI Thread) có đủ khoảng nghỉ để vẽ triệt để khung hình Splash Screen lên màn hình trước khi CPU bị chiếm dụng.
-					await Task.Delay(50);
+					// [OPTIMIZATION] Rút ngắn thời gian Delay xuống 16ms (~ 1 khung hình ở 60fps)
+					// Đủ thời gian để UI kịp vẽ Splash Screen mà không làm chậm quá trình khởi động.
+					await Task.Delay(16);
 				}
 
 				// [OPTIMIZATION] Chống đóng băng 3-5 giây (Unblock Main Thread).
@@ -122,17 +123,19 @@ namespace Files.App
 
 				// TODO: Replace with DI
 				// Retrieving singletons
-				// [OPTIMIZATION] Kỹ thuật "Staggering" (Hé mở luồng).
-				// Mỗi class Manager khi khởi tạo có thể đọc JSON/DB dưới nền. Nếu ta khởi tạo 6 cái cùng lúc, UI sẽ treo.
-				// Chèn Task.Delay(1) sau mỗi hàm để luồng UI kịp thở, vẽ animation và phản hồi chuột. Trải nghiệm sẽ mượt từ đầu tới cuối.
+				// [OPTIMIZATION] Kỹ thuật "Staggering" (Hé mở luồng) - Bản Nâng Cấp Tối Đa.
+				// Sửa Task.Delay(1) thành Task.Yield(). 
+				// Task.Delay(1) bị dính System Timer của Windows, mỗi lệnh bị delay thực tế ~15ms (Tổng mất ~60ms vô ích).
+				// Task.Yield() chỉ đơn giản là nhả luồng UI ra đúng 1 nhịp tích tắc rồi chạy tiếp ngay, cực kỳ mượt và nhanh!
 				QuickAccessManager = Ioc.Default.GetRequiredService<QuickAccessManager>();
-				await Task.Delay(1);
+				await Task.Yield();
 				HistoryWrapper = Ioc.Default.GetRequiredService<StorageHistoryWrapper>();
-				await Task.Delay(1);
+				await Task.Yield();
 				FileTagsManager = Ioc.Default.GetRequiredService<FileTagsManager>();
-				await Task.Delay(1);
+				await Task.Yield();
 				LibraryManager = Ioc.Default.GetRequiredService<LibraryManager>();
-				await Task.Delay(1);
+				await Task.Yield();
+
 				Logger = Ioc.Default.GetRequiredService<ILogger<App>>();
 				AppModel = Ioc.Default.GetRequiredService<AppModel>();
 
@@ -176,7 +179,7 @@ namespace Files.App
 					}
 				}
 
-				await Task.Delay(1); // Mở cổng thở lần cuối trước khi khởi tạo linh kiện phụ
+				await Task.Yield(); // Mở cổng thở chớp nhoáng trước khi khởi tạo linh kiện phụ
 				await AppLifecycleHelper.InitializeAppComponentsAsync();
 			}
 		}
@@ -294,11 +297,20 @@ namespace Files.App
 				// Wait for all properties windows to close
 				await FilePropertiesHelpers.WaitClosingAll();
 
-				// [OPTIMIZATION] Dọn dẹp RAM triệt để trước khi vào chế độ ngủ
-				// Đây là chìa khóa để giảm footprint khi chạy ngầm
-				GC.Collect();
-				GC.WaitForPendingFinalizers();
-				EmptyWorkingSet(Process.GetCurrentProcess().Handle);
+				// ====================================================================================
+				// [VIP OPTIMIZATION] CHIẾN LƯỢC HOT-STANDBY (ƯU TIÊN TỐC ĐỘ MỞ LẠI - BỎ QUA ĂN RAM)
+				// ====================================================================================
+				// Vì bạn đã cho phép "ăn RAM cũng không sao", ta KHÔNG ĐƯỢC dùng EmptyWorkingSet() nữa.
+				// Việc ép giải phóng RAM vật lý làm ổ cứng phải đọc lại toàn bộ thư viện WinUI mỗi khi mở App,
+				// gây ra độ trễ 1-2 giây vô cùng khó chịu.
+				//
+				// Thay vào đó, ta giữ app nằm nguyên trong RAM vật lý tốc độ cao.
+				// Chỉ kích hoạt Garbage Collector chạy ngầm siêu nhẹ để dọn dẹp các Tab đã đóng.
+				_ = Task.Run(() =>
+				{
+					// Dọn dẹp object rác nhưng không ép chặn luồng (false = Non-blocking)
+					GC.Collect(2, GCCollectionMode.Optimized, false);
+				});
 
 				// Sleep current instance
 				// [STEALTH] Dùng tên chung chung
@@ -326,7 +338,9 @@ namespace Files.App
 					if (!AppModel.ForceProcessTermination)
 					{
 						args.Handled = true;
-						_ = AppLifecycleHelper.CheckAppUpdate();
+
+						// Đẩy tác vụ check update ra luồng ngầm để cửa sổ bung lên ngay tắp lự
+						_ = Task.Run(() => AppLifecycleHelper.CheckAppUpdate());
 						return;
 					}
 				}

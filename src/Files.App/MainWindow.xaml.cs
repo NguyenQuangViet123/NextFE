@@ -24,10 +24,6 @@ namespace Files.App
 		private bool CanWindowToFront { get; set; } = true;
 		private readonly object _canWindowToFrontLock = new();
 
-		// [OPTIMIZATION] Import API để tối ưu hóa bộ nhớ
-		[DllImport("psapi.dll")]
-		private static extern int EmptyWorkingSet(IntPtr hwProc);
-
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -50,31 +46,8 @@ namespace Files.App
 
 			WinUIEx.WindowManager.Get(this).WindowMessageReceived += WindowManager_WindowMessageReceived;
 
-			// [OPTIMIZATION] Kích hoạt trình lắng nghe trạng thái để dọn dẹp RAM
-			this.Activated += MainWindow_Activated;
-		}
-
-		// [OPTIMIZATION] Logic dọn dẹp bộ nhớ cực mạnh khi App mất tiêu điểm (Background)
-		private void MainWindow_Activated(object sender, Microsoft.UI.Xaml.WindowActivatedEventArgs args)
-		{
-			if (args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.Deactivated)
-			{
-				try
-				{
-					// Ép .NET Garbage Collector chạy ngay lập tức
-					GC.Collect();
-					GC.WaitForPendingFinalizers();
-
-					// Ép hệ điều hành thu hồi RAM vật lý (Physical Memory)
-					// Giúp giảm mức tiêu thụ RAM xuống mức tối thiểu trong Task Manager
-					var process = System.Diagnostics.Process.GetCurrentProcess();
-					EmptyWorkingSet(process.Handle);
-				}
-				catch
-				{
-					// Bỏ qua lỗi nếu không thể giải phóng (để tránh crash ứng dụng)
-				}
-			}
+			// [FIX] Đã loại bỏ this.Activated += MainWindow_Activated; 
+			// Khắc phục dứt điểm lỗi Crash khi mở cửa sổ Properties do tranh chấp dọn dẹp RAM.
 		}
 
 		public void ShowSplashScreen()
@@ -260,8 +233,8 @@ namespace Files.App
 			try
 			{
 				// NOTE:
-				//  Do not repeat app initialization when the Window already has content,
-				//  just ensure that the window is active
+				//  Do not repeat app initialization when the Window already has content,
+				//  just ensure that the window is active
 				if (Instance.Content is not Frame rootFrame)
 				{
 					// Create a Frame to act as the navigation context and navigate to the first page

@@ -792,7 +792,17 @@ namespace Files.App.ViewModels
 
 		private void FilesAndFolderFilterUpdated()
 		{
-			_ = ApplyFilesAndFoldersChangesAsync();
+			// [NEXTFE VIP ENGINE] Gắn Động cơ Siêu tốc vào bộ Lọc
+			// Khi gõ liên tục vào ô Lọc (Filter), app sẽ KHÔNG bị đơ nữa.
+			// Nó sẽ chờ bạn ngừng gõ 150 mili-giây rồi mới mượt mà cập nhật danh sách.
+			Helpers.SpeedEngine.Debounce("FilterUpdate", () =>
+			{
+				// Đẩy tác vụ tính toán, vẽ lại List sang luồng Background để UI Thread không bị giật
+				Helpers.SpeedEngine.RunBackgroundAsync(async () =>
+				{
+					await ApplyFilesAndFoldersChangesAsync();
+				});
+			}, 150);
 		}
 
 

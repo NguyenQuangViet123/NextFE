@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Files Community
 // Licensed under the MIT License.
 
+#pragma warning disable CS0618 // Tắt cảnh báo Obsolete để bảo toàn cấu trúc liên kết nội bộ
+
 namespace Files.App.Data.Contracts
 {
 	/// <summary>

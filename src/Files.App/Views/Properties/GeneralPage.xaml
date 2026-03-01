@@ -39,14 +39,7 @@
 		</ResourceDictionary>
 	</vm:BasePropertiesPage.Resources>
 
-	<!-- [UX UPGRADE] Thêm hiệu ứng chuyển tab mượt mà cho toàn bộ trang -->
 	<Grid>
-		<Grid.Transitions>
-			<TransitionCollection>
-				<ContentThemeTransition />
-			</TransitionCollection>
-		</Grid.Transitions>
-
 		<ScrollViewer>
 			<StackPanel Padding="12" Spacing="4">
 

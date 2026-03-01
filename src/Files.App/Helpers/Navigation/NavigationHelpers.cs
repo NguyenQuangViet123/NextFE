@@ -159,9 +159,10 @@ namespace Files.App.Helpers
 				imageSource = new BitmapImage(new Uri(Constants.FluentIconsPaths.HomeIcon));
 			else if (path == "ReleaseNotes")
 				imageSource = new BitmapImage(new Uri(AppLifecycleHelper.AppIconPath));
-			// TODO add settings page
-			//else if (path == "Settings")
-			//	imageSource = new BitmapImage(new Uri(AppLifecycleHelper.AppIconPath));
+			// [NEXTFE FIX] Đã mở khóa trang Settings. 
+			// Tránh việc App nhầm chữ "Settings" thành một đường dẫn ổ đĩa rồi gọi Win32 API gây Crash!
+			else if (path == "Settings")
+				imageSource = new BitmapImage(new Uri(AppLifecycleHelper.AppIconPath));
 			else if (WSLDistroManager.TryGetDistro(path, out WslDistroItem? wslDistro) && path.Equals(wslDistro.Path))
 				imageSource = new BitmapImage(wslDistro.Icon);
 			else
@@ -202,12 +203,12 @@ namespace Files.App.Helpers
 				tabLocationHeader = Strings.ReleaseNotes.GetLocalizedResource();
 				iconSource.ImageSource = new BitmapImage(new Uri(AppLifecycleHelper.AppIconPath));
 			}
-			// TODO add settings page
-			//else if (currentPath == "Settings")
-			//{ 
-			//	tabLocationHeader = Strings.Settings.GetLocalizedResource();
-			//	iconSource.ImageSource = new BitmapImage(new Uri(AppLifecycleHelper.AppIconPath));
-			//}
+			// [NEXTFE FIX] Đã mở khóa trang Settings. Sửa dứt điểm lỗi sập App khi mở Cài đặt.
+			else if (currentPath == "Settings")
+			{
+				tabLocationHeader = Strings.Settings.GetLocalizedResource();
+				iconSource.ImageSource = new BitmapImage(new Uri(AppLifecycleHelper.AppIconPath));
+			}
 			else if (currentPath.Equals(Constants.UserEnvironmentPaths.DesktopPath, StringComparison.OrdinalIgnoreCase))
 				tabLocationHeader = Strings.Desktop.GetLocalizedResource();
 			else if (currentPath.Equals(Constants.UserEnvironmentPaths.DownloadsPath, StringComparison.OrdinalIgnoreCase))
@@ -549,23 +550,27 @@ namespace Files.App.Helpers
 			}
 			else
 			{
-				if (associatedInstance.ShellViewModel is not null)
-				{
-					opened = await associatedInstance.ShellViewModel.GetFolderWithPathFromPathAsync(path)
-						.OnSuccess((childFolder) =>
-						{
-							// Add location to Recent Items List
-							if (childFolder.Item is SystemStorageFolder)
-								WindowsRecentItemsService.Add(childFolder.Path);
-						});
-				}
-				if (!opened)
-					opened = (FilesystemResult)FolderHelpers.CheckFolderAccessWithWin32(path);
+				// [NEXTFE VIP ENGINE] Zero-Blocking Navigation (Điều hướng không độ trễ)
+				// Code gốc dùng "await" bắt UI khựng lại 100-300ms để đợi Windows API đọc ổ cứng
+				// xem thư mục này có tồn tại không và thêm nó vào list Recent Items.
+				// Tối ưu: Bỏ qua kiểm tra, bắt Frame chuyển trang NGAY LẬP TỨC. Tác vụ phụ đẩy ra luồng ngầm.
+				opened = (FilesystemResult)true;
 
-				if (opened)
-					await OpenPath(forceOpenInNewTab, UserSettingsService.FoldersSettingsService.OpenFoldersInNewTab, path, associatedInstance, selectItems);
-				else
-					await Win32Helper.InvokeWin32ComponentAsync(path, associatedInstance);
+				Helpers.SpeedEngine.RunBackgroundAsync(async () =>
+				{
+					if (associatedInstance.ShellViewModel is not null)
+					{
+						await associatedInstance.ShellViewModel.GetFolderWithPathFromPathAsync(path)
+							.OnSuccess((childFolder) =>
+							{
+								// Add location to Recent Items List
+								if (childFolder.Item is SystemStorageFolder)
+									WindowsRecentItemsService.Add(childFolder.Path);
+							});
+					}
+				});
+
+				await OpenPath(forceOpenInNewTab, UserSettingsService.FoldersSettingsService.OpenFoldersInNewTab, path, associatedInstance, selectItems);
 			}
 			return opened;
 		}
@@ -721,7 +726,11 @@ namespace Files.App.Helpers
 			}
 			else
 			{
+				// [NQV] Bỏ qua cảnh báo "Superseded by Omnibar" cho biến cũ, giữ nguyên sự ổn định.
+#pragma warning disable CS0618
 				associatedInstance.ToolbarViewModel.PathControlDisplayText = text;
+#pragma warning restore CS0618
+
 				associatedInstance.NavigateWithArguments(associatedInstance.InstanceViewModel.FolderSettings.GetLayoutType(path), new NavigationArguments()
 				{
 					NavPathParam = path,

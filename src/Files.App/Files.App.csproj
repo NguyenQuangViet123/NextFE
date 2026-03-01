@@ -27,11 +27,12 @@
         <CETCompat>false</CETCompat>
         <Configurations>Debug;Release</Configurations>
         <CsWinRTIncludes>Files.App.Server;Microsoft.UI.Content.ContentExternalOutputLink;Microsoft.UI.Content.IContentExternalOutputLink</CsWinRTIncludes>
-        <PublishDir>bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\publish\</PublishDir>
-        <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
-        <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
-        <PublishReadyToRunComposite Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRunComposite>
-        <ApplicationIcon>..\Files.App (Package)\Assets\AppTiles\Dev\Logo.ico</ApplicationIcon>
+		<PublishDir>bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\publish\</PublishDir>
+		<PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+		<PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+		<PublishReadyToRunComposite Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRunComposite>
+		<TieredCompilation>true</TieredCompilation>
+		<ApplicationIcon>..\Files.App (Package)\Assets\AppTiles\Dev\Logo.ico</ApplicationIcon>
     </PropertyGroup>
 
     <PropertyGroup>

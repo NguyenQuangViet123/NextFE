@@ -15,7 +15,7 @@
 
     <Identity
         Name="FilesDev"
-        Publisher="CN=Files"
+        Publisher="CN=truon"
         Version="4.0.29.0" />
 
     <Properties>

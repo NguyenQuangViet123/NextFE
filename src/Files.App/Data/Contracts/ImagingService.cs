@@ -26,7 +26,9 @@ namespace Files.App.Data.Contracts
 
 		public async Task<IImage?> GetImageModelFromPathAsync(string filePath, uint thumbnailSize = 64)
 		{
-			if (await FileThumbnailHelper.LoadIconFromPathAsync(filePath, thumbnailSize, ThumbnailMode.ListView, ThumbnailOptions.ResizeThumbnail) is byte[] imageBuffer)
+			// [FIX] Thay thế hàm LoadIconFromPathAsync (đã obsolete) bằng GetIconAsync API mới.
+			// Truyền false cho tham số isFolder (vì thường lấy ảnh từ file) và dùng các option tương đương.
+			if (await FileThumbnailHelper.GetIconAsync(filePath, thumbnailSize, false, IconOptions.UseCurrentScale) is byte[] imageBuffer)
 				return await GetImageModelFromDataAsync(imageBuffer);
 
 			return null;
