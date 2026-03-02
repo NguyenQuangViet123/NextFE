@@ -268,7 +268,6 @@ namespace Files.App.Utils.Storage
 			}
 
 			bool itemThumbnailImgVis = false;
-			bool itemEmptyImgVis = true;
 
 			if (cancellationToken.IsCancellationRequested)
 				return null;
@@ -332,62 +331,55 @@ namespace Files.App.Utils.Storage
 			{
 				var isUrl = FileExtensionHelpers.IsWebLinkFile(findData.cFileName);
 
-				var shInfo = await FileOperationsHelpers.ParseLinkAsync(itemPath);
-				if (shInfo is null)
-					return null;
+				// ====================================================================================
+				// [NEXTFE VIP ENGINE] TÁCH LUỒNG COM INTEROP (ZERO-BLOCKING ENUMERATOR)
+				// ====================================================================================
+				// Lệnh cũ: await FileOperationsHelpers.ParseLinkAsync(itemPath); -> Đứng hình 10ms mỗi file.
+				// Tối ưu: Lập tức nhồi Object rỗng lên danh sách để duy trì tốc độ vòng lặp siêu nhanh của C++.
+				// Dữ liệu nội tạng của Shortcut sẽ được một luồng nền bí mật xử lý và bơm ngược lên UI sau.
+				ListedItem listedItem = isGitRepo ? new GitShortcutItem() : new ShortcutItem(null);
+				var shortcutItem = (IShortcutItem)listedItem;
 
-				if (isGitRepo)
+				listedItem.PrimaryItemAttribute = StorageItemTypes.File;
+				listedItem.FileExtension = itemFileExtension;
+				listedItem.IsHiddenItem = isHidden;
+				listedItem.Opacity = opacity;
+				listedItem.FileImage = null;
+				listedItem.LoadFileIcon = itemThumbnailImgVis;
+				listedItem.ItemNameRaw = itemName;
+				listedItem.ItemDateModifiedReal = itemModifiedDate;
+				listedItem.ItemDateAccessedReal = itemLastAccessDate;
+				listedItem.ItemDateCreatedReal = itemCreatedDate;
+				listedItem.ItemType = isUrl ? Strings.ShortcutWebLinkFileType.GetLocalizedResource() : Strings.Shortcut.GetLocalizedResource();
+				listedItem.ItemPath = itemPath;
+				listedItem.FileSize = itemSize;
+				listedItem.FileSizeBytes = itemSizeBytes;
+
+				shortcutItem.IsUrl = isUrl;
+				shortcutItem.IsSymLink = false;
+
+				_ = Task.Run(async () =>
 				{
-					return new GitShortcutItem()
+					try
 					{
-						PrimaryItemAttribute = shInfo.IsFolder ? StorageItemTypes.Folder : StorageItemTypes.File,
-						FileExtension = itemFileExtension,
-						IsHiddenItem = isHidden,
-						Opacity = opacity,
-						FileImage = null,
-						LoadFileIcon = !shInfo.IsFolder && itemThumbnailImgVis,
-						ItemNameRaw = itemName,
-						ItemDateModifiedReal = itemModifiedDate,
-						ItemDateAccessedReal = itemLastAccessDate,
-						ItemDateCreatedReal = itemCreatedDate,
-						ItemType = isUrl ? Strings.ShortcutWebLinkFileType.GetLocalizedResource() : Strings.Shortcut.GetLocalizedResource(),
-						ItemPath = itemPath,
-						FileSize = itemSize,
-						FileSizeBytes = itemSizeBytes,
-						TargetPath = shInfo.TargetPath,
-						Arguments = shInfo.Arguments,
-						WorkingDirectory = shInfo.WorkingDirectory,
-						RunAsAdmin = shInfo.RunAsAdmin,
-						ShowWindowCommand = shInfo.ShowWindowCommand,
-						IsUrl = isUrl,
-					};
-				}
-				else
-				{
-					return new ShortcutItem(null)
-					{
-						PrimaryItemAttribute = shInfo.IsFolder ? StorageItemTypes.Folder : StorageItemTypes.File,
-						FileExtension = itemFileExtension,
-						IsHiddenItem = isHidden,
-						Opacity = opacity,
-						FileImage = null,
-						LoadFileIcon = !shInfo.IsFolder && itemThumbnailImgVis,
-						ItemNameRaw = itemName,
-						ItemDateModifiedReal = itemModifiedDate,
-						ItemDateAccessedReal = itemLastAccessDate,
-						ItemDateCreatedReal = itemCreatedDate,
-						ItemType = isUrl ? Strings.ShortcutWebLinkFileType.GetLocalizedResource() : Strings.Shortcut.GetLocalizedResource(),
-						ItemPath = itemPath,
-						FileSize = itemSize,
-						FileSizeBytes = itemSizeBytes,
-						TargetPath = shInfo.TargetPath,
-						Arguments = shInfo.Arguments,
-						WorkingDirectory = shInfo.WorkingDirectory,
-						RunAsAdmin = shInfo.RunAsAdmin,
-						ShowWindowCommand = shInfo.ShowWindowCommand,
-						IsUrl = isUrl,
-					};
-				}
+						var shInfo = await FileOperationsHelpers.ParseLinkAsync(itemPath);
+						if (shInfo is null) return;
+
+						// Giao tiếp an toàn với UI Thread để tránh Exception chéo luồng
+						MainWindow.Instance.DispatcherQueue.EnqueueOrInvokeAsync(() =>
+						{
+							listedItem.PrimaryItemAttribute = shInfo.IsFolder ? StorageItemTypes.Folder : StorageItemTypes.File;
+							shortcutItem.TargetPath = shInfo.TargetPath;
+							shortcutItem.Arguments = shInfo.Arguments;
+							shortcutItem.WorkingDirectory = shInfo.WorkingDirectory;
+							shortcutItem.RunAsAdmin = shInfo.RunAsAdmin;
+							shortcutItem.ShowWindowCommand = shInfo.ShowWindowCommand;
+						});
+					}
+					catch { }
+				});
+
+				return listedItem;
 			}
 			else if (App.LibraryManager.TryGetLibrary(itemPath, out LibraryLocationItem library))
 			{

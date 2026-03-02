@@ -37,13 +37,17 @@ namespace Files.App
 			}
 		}
 
-		// TODO: Replace with DI
-		public static QuickAccessManager QuickAccessManager { get; private set; } = null!;
-		public static StorageHistoryWrapper HistoryWrapper { get; private set; } = null!;
-		public static FileTagsManager FileTagsManager { get; private set; } = null!;
-		public static LibraryManager LibraryManager { get; private set; } = null!;
-		public static AppModel AppModel { get; private set; } = null!;
-		public static ILogger Logger { get; private set; } = null!;
+		// ============================================================================
+		// [NEXTFE VIP ENGINE] LAZY EVALUATION (LƯỜI KHỞI TẠO ĐỂ TĂNG TỐC STARTUP)
+		// ============================================================================
+		// Thay vì cấp phát bộ nhớ ngay lập tức, ta biến chúng thành thuộc tính động (=>).
+		// Tụi này sẽ KHÔNG ngốn 1 byte RAM hay chu kỳ CPU nào cho đến khi thực sự được dùng!
+		public static QuickAccessManager QuickAccessManager => Ioc.Default.GetRequiredService<QuickAccessManager>();
+		public static StorageHistoryWrapper HistoryWrapper => Ioc.Default.GetRequiredService<StorageHistoryWrapper>();
+		public static FileTagsManager FileTagsManager => Ioc.Default.GetRequiredService<FileTagsManager>();
+		public static LibraryManager LibraryManager => Ioc.Default.GetRequiredService<LibraryManager>();
+		public static AppModel AppModel => Ioc.Default.GetRequiredService<AppModel>();
+		public static ILogger Logger => Ioc.Default.GetRequiredService<ILogger<App>>();
 
 		// [OPTIMIZATION] Import API để tối ưu hóa bộ nhớ khi chạy ngầm
 		// Vẫn giữ lại khai báo này để tránh lỗi biên dịch, dù ta sẽ tắt nó ở bên dưới
@@ -102,13 +106,6 @@ namespace Files.App
 					Ioc.Default.ConfigureServices(host.Services);
 				});
 
-				// Configure Sentry
-				// [OPTIMIZATION] Tắt Sentry để giảm RAM và tránh gửi data về server (Stealth)
-				/*
-				if (AppLifecycleHelper.AppEnvironment is not AppEnvironment.Dev)
-					AppLifecycleHelper.ConfigureSentry();
-				*/
-
 				var userSettingsService = Ioc.Default.GetRequiredService<IUserSettingsService>();
 				var isLeaveAppRunning = userSettingsService.GeneralSettingsService.LeaveAppRunning;
 
@@ -121,23 +118,19 @@ namespace Files.App
 					MainWindow.Instance.ShowSplashScreen();
 				}
 
-				// TODO: Replace with DI
-				// Retrieving singletons
-				// [OPTIMIZATION] Kỹ thuật "Staggering" (Hé mở luồng) - Bản Nâng Cấp Tối Đa.
-				// Sửa Task.Delay(1) thành Task.Yield(). 
-				// Task.Delay(1) bị dính System Timer của Windows, mỗi lệnh bị delay thực tế ~15ms (Tổng mất ~60ms vô ích).
-				// Task.Yield() chỉ đơn giản là nhả luồng UI ra đúng 1 nhịp tích tắc rồi chạy tiếp ngay, cực kỳ mượt và nhanh!
-				QuickAccessManager = Ioc.Default.GetRequiredService<QuickAccessManager>();
-				await Task.Yield();
-				HistoryWrapper = Ioc.Default.GetRequiredService<StorageHistoryWrapper>();
-				await Task.Yield();
-				FileTagsManager = Ioc.Default.GetRequiredService<FileTagsManager>();
-				await Task.Yield();
-				LibraryManager = Ioc.Default.GetRequiredService<LibraryManager>();
-				await Task.Yield();
-
-				Logger = Ioc.Default.GetRequiredService<ILogger<App>>();
-				AppModel = Ioc.Default.GetRequiredService<AppModel>();
+				// ============================================================================
+				// [NEXTFE VIP ENGINE] BACKGROUND WARM-UP (HÂM NÓNG NGẦM)
+				// ============================================================================
+				// Đã xóa bỏ chuỗi lệnh khởi tạo tuần tự (await Task.Yield) chậm chạp của bản gốc.
+				// Ta tạo một luồng phụ (Fire and Forget) để âm thầm gọi dậy các Manager nặng nề.
+				// Nhờ vậy, Main Thread được giải phóng lập tức, App sẽ qua mặt Splash Screen ngay!
+				_ = Task.Run(() =>
+				{
+					_ = QuickAccessManager;
+					_ = HistoryWrapper;
+					_ = FileTagsManager;
+					_ = LibraryManager;
+				});
 
 				// Hook events for the window
 				MainWindow.Instance.Closed += Window_Closed;
