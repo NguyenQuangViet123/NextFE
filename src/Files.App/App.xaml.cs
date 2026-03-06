@@ -12,6 +12,8 @@ using Windows.Storage;
 // [OPTIMIZATION] Thêm thư viện để xử lý API bộ nhớ
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+// [NEXTFE] Khai báo Workspaces
+using Files.App.Data.Models.Workspaces;
 
 namespace Files.App
 {
@@ -46,6 +48,7 @@ namespace Files.App
 		public static StorageHistoryWrapper HistoryWrapper => Ioc.Default.GetRequiredService<StorageHistoryWrapper>();
 		public static FileTagsManager FileTagsManager => Ioc.Default.GetRequiredService<FileTagsManager>();
 		public static LibraryManager LibraryManager => Ioc.Default.GetRequiredService<LibraryManager>();
+		public static WorkspaceManager WorkspaceManager => Ioc.Default.GetRequiredService<WorkspaceManager>();
 		public static AppModel AppModel => Ioc.Default.GetRequiredService<AppModel>();
 		public static ILogger Logger => Ioc.Default.GetRequiredService<ILogger<App>>();
 
@@ -130,6 +133,7 @@ namespace Files.App
 					_ = HistoryWrapper;
 					_ = FileTagsManager;
 					_ = LibraryManager;
+					_ = WorkspaceManager;
 				});
 
 				// Hook events for the window

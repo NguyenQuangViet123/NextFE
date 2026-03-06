@@ -17,6 +17,8 @@ using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.System;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+// [NEXTFE] Khai báo thư viện Workspaces
+using Files.App.Data.Models.Workspaces;
 
 namespace Files.App.Helpers
 {
@@ -285,6 +287,8 @@ namespace Files.App.Helpers
 					.AddSingleton<FileTagsManager>()
 					.AddSingleton<LibraryManager>()
 					.AddSingleton<AppModel>()
+					// [NEXTFE] Khởi tạo WorkspaceManager dưới dạng Singleton (Mới thêm)
+					.AddSingleton<WorkspaceManager>()
 				);
 
 			// Conditional DI
