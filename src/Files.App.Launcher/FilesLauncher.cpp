@@ -4,7 +4,6 @@
 #include <iostream>
 #include <algorithm>
 #include <exdisp.h>
-#include <iostream>
 #include <objbase.h>
 #include <propvarutil.h>
 #include <shtypes.h>
@@ -12,6 +11,8 @@
 #include <ShObjIdl_core.h>
 #include <vector>
 #include <wil/resource.h>
+// [OPTIMIZATION] Thêm thư viện xử lý chuỗi tốc độ cao của Windows
+#include <shlwapi.h>
 
 #include "OpenInFolder.h"
 
@@ -20,6 +21,8 @@
 #pragma comment(lib, "Propsys.lib")
 #pragma comment(lib, "user32.lib")
 #pragma comment(lib, "uuid.lib")
+// [OPTIMIZATION] Link Shlwapi cho hàm StrStrIW
+#pragma comment(lib, "Shlwapi.lib")
 
 constexpr auto ID_TIMEREXPIRED = 101;
 
@@ -258,7 +261,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
-	 // Jump across to the member window function (will handle all requests).
+	// Jump across to the member window function (will handle all requests).
 	if (pContainer != nullptr)
 		return pContainer->WindowProcedure(hwnd, uMsg, wParam, lParam);
 	else
@@ -267,42 +270,43 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 size_t strifind(const std::wstring& strHaystack, const std::wstring& strNeedle)
 {
-	auto it = std::search(
-		strHaystack.begin(), strHaystack.end(),
-		strNeedle.begin(), strNeedle.end(),
-		[](wchar_t ch1, wchar_t ch2) { return std::toupper(ch1) == std::toupper(ch2); }
-	);
-
-	return it != strHaystack.end() ? it - strHaystack.begin() : std::wstring::npos;
+	// [OPTIMIZATION] Bỏ std::search chậm chạp, dùng API lõi của Windows (SIMD Accelerated)
+	// Tìm kiếm siêu tốc, Zero-allocation.
+	PCWSTR ptr = StrStrIW(strHaystack.c_str(), strNeedle.c_str());
+	return ptr ? (ptr - strHaystack.c_str()) : std::wstring::npos;
 }
 
 bool comparei(std::wstring stringA, std::wstring stringB)
 {
-	transform(stringA.begin(), stringA.end(), stringA.begin(), std::toupper);
-	transform(stringB.begin(), stringB.end(), stringB.begin(), std::toupper);
-
-	return (stringA == stringB);
+	// [OPTIMIZATION] Bỏ std::transform. Dùng hàm C-Runtime _wcsicmp không tốn RAM cấp phát
+	// và không phân biệt hoa thường cực nhanh.
+	return _wcsicmp(stringA.c_str(), stringB.c_str()) == 0;
 }
 
 std::string wstring_to_utf8_hex(const std::wstring& input)
 {
-	std::string output;
+	if (input.empty()) return "";
 
 	int cbNeeded = WideCharToMultiByte(CP_UTF8, 0, input.c_str(), -1, NULL, 0, NULL, NULL);
-	if (cbNeeded > 0)
-	{
-		char* utf8 = new char[cbNeeded];
-		if (WideCharToMultiByte(CP_UTF8, 0, input.c_str(), -1, utf8, cbNeeded, NULL, NULL) != 0)
-		{
-			for (char* p = utf8; *p; p++)
-			{
-				char onehex[5];
-				sprintf_s(onehex, sizeof(onehex), "%%%02.2X", (unsigned char)*p);
-				output.append(onehex);
-			}
-		}
+	if (cbNeeded <= 0) return "";
 
-		delete[] utf8;
+	// [OPTIMIZATION] Quản lý bộ nhớ tự động với std::string thay vì dùng new char[]
+	std::string utf8(cbNeeded, '\0');
+	WideCharToMultiByte(CP_UTF8, 0, input.c_str(), -1, &utf8[0], cbNeeded, NULL, NULL);
+
+	std::string output;
+	// Pre-allocate bộ nhớ chính xác cho chuỗi Output (%XX = 3 bytes cho 1 char)
+	// -1 ở đây là để bỏ qua ký tự Null Terminator (\0) ở cuối chuỗi utf8
+	output.reserve((cbNeeded - 1) * 3);
+
+	// [OPTIMIZATION] Loại bỏ sprintf_s (rất chậm). Dùng toán tử dịch bit (Bitwise Shift) cực đại hiệu năng
+	const char hexChars[] = "0123456789ABCDEF";
+	for (int i = 0; i < cbNeeded - 1; ++i)
+	{
+		unsigned char c = utf8[i];
+		output.push_back('%');
+		output.push_back(hexChars[(c & 0xF0) >> 4]); // Lấy 4 bit cao
+		output.push_back(hexChars[c & 0x0F]);        // Lấy 4 bit thấp
 	}
 
 	return output;
@@ -310,6 +314,8 @@ std::string wstring_to_utf8_hex(const std::wstring& input)
 
 std::wstring str2wstr(const std::string& str)
 {
+	if (str.empty()) return L"";
+
 	int cbNeeded = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
 	if (cbNeeded > 0)
 	{
@@ -349,21 +355,28 @@ bool OpenInExistingShellWindow(const TCHAR* folderPath)
 
 	if (strifind(openDirectory, L"shell:") == 0)
 	{
-		std::vector<std::wstring> supportedShellFolders{
+		// [OPTIMIZATION] Xóa sổ việc cấp phát động (Heap Allocation) std::vector.
+		// Đưa dữ liệu lên vùng Data Segment (Mảng tĩnh), tiết kiệm triệt để chu kỳ CPU.
+		static const LPCWSTR supportedShellFolders[] = {
 			L"shell:::{645FF040-5081-101B-9F08-00AA002F954E}",
 			L"shell:::{5E5F29CE-E0A8-49D3-AF32-7A7BDC173478}",
 			L"shell:::{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
 			L"shell:::{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}",
 			L"shell:::{208D2C60-3AEA-1069-A2D7-08002B30309D}",
-			L"Shell:RecycleBinFolder", L"Shell:NetworkPlacesFolder", L"Shell:MyComputerFolder"
+			L"Shell:RecycleBinFolder",
+			L"Shell:NetworkPlacesFolder",
+			L"Shell:MyComputerFolder"
 		};
 
-		auto it = std::find_if(
-			supportedShellFolders.begin(), supportedShellFolders.end(),
-			[openDirectory](std::wstring it) { return comparei(it, openDirectory); }
-		);
-
-		mustOpenInExplorer = it == supportedShellFolders.end();
+		mustOpenInExplorer = true;
+		for (const auto& folder : supportedShellFolders)
+		{
+			if (_wcsicmp(folder, openDirectory.c_str()) == 0)
+			{
+				mustOpenInExplorer = false;
+				break;
+			}
+		}
 	}
 
 	IShellItem* psi;

@@ -23,6 +23,7 @@ using static Files.App.Helpers.Win32PInvoke;
 using ByteSize = ByteSizeLib.ByteSize;
 using DispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue;
 using FileAttributes = System.IO.FileAttributes;
+using Files.App.Utils.Storage.Enumerators;
 
 namespace Files.App.ViewModels
 {
@@ -1691,6 +1692,14 @@ namespace Files.App.ViewModels
 						WatchForWin32FolderChanges(path);
 					break;
 
+				// [NEXTFE VIP ENGINE] Enumerated by WorkspaceStorageEnumerator
+				case 3:
+					// Báo cho UI biết đây không phải Cloud hay Recycle Bin
+					PageTypeUpdated?.Invoke(this, new PageTypeUpdatedEventArgs() { IsTypeCloudDrive = false, IsTypeRecycleBin = false });
+					// Tắt Watcher (File System Watcher không hoạt động với đường dẫn ảo "workspace://")
+					HasNoWatcher = true;
+					break;
+
 				// Enumeration failed
 				case -1:
 				default:
@@ -1723,6 +1732,46 @@ namespace Files.App.ViewModels
 
 		private async Task<int> EnumerateItemsFromStandardFolderAsync(string path, CancellationToken cancellationToken, LibraryItem? library = null)
 		{
+			// [NEXTFE VIP ENGINE] CHỐT CHẶN WORKSPACE (VIRTUAL FOLDER)
+			if (path.StartsWith("workspace://", StringComparison.OrdinalIgnoreCase))
+			{
+				try
+				{
+					// Gọi Kẻ đánh chặn để quét file ảo
+					List<ListedItem> fileList = await WorkspaceStorageEnumerator.ListEntriesAsync(path, cancellationToken, async (intermediateList) =>
+					{
+						filesAndFolders.AddRange(intermediateList);
+
+						if ((DateTime.UtcNow - lastIntermediateUpdateTime).TotalMilliseconds > 500)
+						{
+							lastIntermediateUpdateTime = DateTime.UtcNow;
+							await ApplyFilesAndFoldersChangesAsync();
+						}
+					});
+
+					filesAndFolders.AddRange(fileList);
+
+					// Sắp xếp và cập nhật UI
+					await OrderFilesAndFoldersAsync();
+					await ApplyFilesAndFoldersChangesAsync();
+
+					// Xóa bộ lọc và hình nền
+					await dispatcherQueue.EnqueueOrInvokeAsync(() =>
+					{
+						FilesAndFoldersFilter = null;
+						FolderBackgroundImageSource = null;
+					}, Microsoft.UI.Dispatching.DispatcherQueuePriority.Low);
+
+					// Trả về 3: Mã báo hiệu đây là một Thư mục Ảo (Không dùng Watcher)
+					return 3;
+				}
+				catch (Exception ex)
+				{
+					App.Logger.LogWarning(ex, $"Lỗi khi tải Workspace: {path}");
+					return -1; // Thất bại
+				}
+			}
+
 			// Flag to use FindFirstFileExFromApp or StorageFolder enumeration - Use storage folder for Box Drive (#4629)
 			var isBoxFolder = CloudDrivesManager.Drives.FirstOrDefault(x => x.Text == "Box")?.Path?.TrimEnd('\\') is string boxFolder && path.StartsWith(boxFolder);
 			bool isWslDistro = path.StartsWith(@"\\wsl$\", StringComparison.OrdinalIgnoreCase) || path.StartsWith(@"\\wsl.localhost\", StringComparison.OrdinalIgnoreCase)

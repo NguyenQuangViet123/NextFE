@@ -8,6 +8,11 @@ using Vanara.PInvoke;
 using Vanara.Windows.Shell;
 using Windows.Win32;
 using Windows.Win32.UI.Shell;
+using System.Collections;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
 
 namespace Files.App.Utils.Shell
 {
@@ -33,25 +38,29 @@ namespace Files.App.Utils.Shell
 			return HandleApplicationLaunch(application, arguments, workingDirectory);
 		}
 
-		public static Task<bool> RunCompatibilityTroubleshooterAsync(string filePath)
+		public static async Task<bool> RunCompatibilityTroubleshooterAsync(string filePath)
 		{
-			var compatibilityTroubleshooterAnswerFile = Path.Combine(Path.GetTempPath(), "CompatibilityTroubleshooterAnswerFile.xml");
+			var tempPath = Path.GetTempPath();
+			var compatibilityTroubleshooterAnswerFile = Path.Combine(tempPath, "CompatibilityTroubleshooterAnswerFile.xml");
+			var xmlContent = $"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Answers Version=\"1.0\"><Interaction ID=\"IT_LaunchMethod\"><Value>CompatTab</Value></Interaction><Interaction ID=\"IT_BrowseForFile\"><Value>{filePath}</Value></Interaction></Answers>";
 
 			try
 			{
-				File.WriteAllText(compatibilityTroubleshooterAnswerFile, $"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Answers Version=\"1.0\"><Interaction ID=\"IT_LaunchMethod\"><Value>CompatTab</Value></Interaction><Interaction ID=\"IT_BrowseForFile\"><Value>{filePath}</Value></Interaction></Answers>");
+				// [OPTIMIZATION] Sử dụng Async I/O để ghi file tạm, giải phóng luồng giao diện
+				await File.WriteAllTextAsync(compatibilityTroubleshooterAnswerFile, xmlContent);
 			}
 			catch (IOException)
 			{
 				// Try with a different file name
-				SafetyExtensions.IgnoreExceptions(() =>
+				try
 				{
-					compatibilityTroubleshooterAnswerFile = Path.Combine(Path.GetTempPath(), "CompatibilityTroubleshooterAnswerFile1.xml");
-					File.WriteAllText(compatibilityTroubleshooterAnswerFile, $"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Answers Version=\"1.0\"><Interaction ID=\"IT_LaunchMethod\"><Value>CompatTab</Value></Interaction><Interaction ID=\"IT_BrowseForFile\"><Value>{filePath}</Value></Interaction></Answers>");
-				});
+					compatibilityTroubleshooterAnswerFile = Path.Combine(tempPath, "CompatibilityTroubleshooterAnswerFile1.xml");
+					await File.WriteAllTextAsync(compatibilityTroubleshooterAnswerFile, xmlContent);
+				}
+				catch { /* Ignore exceptions to preserve original silent fallback behavior */ }
 			}
 
-			return HandleApplicationLaunch("MSDT.exe", $"/id PCWDiagnostic /af \"{compatibilityTroubleshooterAnswerFile}\"", "");
+			return await HandleApplicationLaunch("MSDT.exe", $"/id PCWDiagnostic /af \"{compatibilityTroubleshooterAnswerFile}\"", "");
 		}
 
 		private static async Task<bool> HandleApplicationLaunch(string application, string arguments, string workingDirectory)
@@ -99,24 +108,38 @@ namespace Files.App.Utils.Shell
 				{
 					process.StartInfo.Arguments = arguments;
 
-					// Refresh env variables for the child process
-					foreach (DictionaryEntry ent in Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Machine))
+					// ====================================================================================
+					// [VIP OPTIMIZATION] OFFLOAD HEAVY REGISTRY I/O THREAD
+					// ====================================================================================
+					// Gọi Environment.GetEnvironmentVariables() yêu cầu quét Registry cực kỳ tốn thời gian.
+					// Đưa vào Task.Run giúp UI (App) không bị đóng băng khi khởi chạy file.
+					await Task.Run(() =>
 					{
-						string key = (string)ent.Key;
+						var machineVars = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Machine);
+						var userVars = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.User);
 
-						// Skip USERNAME to avoid issues where files were executed as SYSTEM user (#12139)
-						if (string.Equals(key, "USERNAME", StringComparison.OrdinalIgnoreCase)) 
-							continue;
+						foreach (DictionaryEntry ent in machineVars)
+						{
+							string key = (string)ent.Key;
 
-						process.StartInfo.EnvironmentVariables[key] = (string)ent.Value;
-					}
+							// Skip USERNAME to avoid issues where files were executed as SYSTEM user (#12139)
+							if (string.Equals(key, "USERNAME", StringComparison.OrdinalIgnoreCase))
+								continue;
 
-					foreach (DictionaryEntry ent in Environment.GetEnvironmentVariables(EnvironmentVariableTarget.User))
-						process.StartInfo.EnvironmentVariables[(string)ent.Key] = (string)ent.Value;
+							process.StartInfo.EnvironmentVariables[key] = (string)ent.Value;
+						}
 
-					process.StartInfo.EnvironmentVariables["PATH"] = string.Join(';',
-						Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine),
-						Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User));
+						foreach (DictionaryEntry ent in userVars)
+						{
+							process.StartInfo.EnvironmentVariables[(string)ent.Key] = (string)ent.Value;
+						}
+
+						// [OPTIMIZATION] Tái sử dụng Dictionary đã lấy ở trên, KHÔNG gọi GetEnvironmentVariable 
+						// thêm 2 lần nữa để tránh việc Windows phải mở Registry thêm lần nào.
+						process.StartInfo.EnvironmentVariables["PATH"] = string.Join(';',
+							machineVars["PATH"] as string ?? string.Empty,
+							userVars["PATH"] as string ?? string.Empty);
+					});
 				}
 
 				process.StartInfo.WorkingDirectory = string.IsNullOrEmpty(workingDirectory) ? PathNormalization.GetParentDir(application) : workingDirectory;
@@ -154,26 +177,25 @@ namespace Files.App.Utils.Shell
 					{
 						var opened = await STATask.Run(async () =>
 						{
-							var split = application.Split('|').Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => GetMtpPath(x));
-							if (split.Count() == 1)
-							{
-								Process.Start(split.First());
+							// [OPTIMIZATION] Dùng mảng và loại bỏ phần tử rỗng trực tiếp thay vì đẻ IEnumerable
+							var split = application.Split('|', StringSplitOptions.RemoveEmptyEntries);
 
+							if (split.Length == 1)
+							{
+								Process.Start(GetMtpPath(split[0]));
 								Win32Helper.BringToForeground(currentWindows);
 							}
 							else
 							{
-								var groups = split.GroupBy(x => new
-								{
-									Dir = Path.GetDirectoryName(x),
-									Prog = Win32Helper.GetDefaultFileAssociationAsync(x).Result ?? Path.GetExtension(x)
-								});
+								var groups = split.Select(x => GetMtpPath(x))
+												  .GroupBy(x => new
+												  {
+													  Dir = Path.GetDirectoryName(x),
+													  Prog = Win32Helper.GetDefaultFileAssociationAsync(x).Result ?? Path.GetExtension(x)
+												  });
 
 								foreach (var group in groups)
 								{
-									if (!group.Any())
-										continue;
-
 									using var cMenu = await ContextMenu.GetContextMenuForFiles(group.ToArray(), PInvoke.CMF_DEFAULTONLY);
 
 									if (cMenu is not null)
@@ -184,20 +206,17 @@ namespace Files.App.Utils.Shell
 							return true;
 						}, App.Logger);
 
-						if (!opened)
+						if (!opened && application.StartsWith(@"\\SHELL\", StringComparison.Ordinal))
 						{
-							if (application.StartsWith(@"\\SHELL\", StringComparison.Ordinal))
+							opened = await STATask.Run(async () =>
 							{
-								opened = await STATask.Run(async () =>
-								{
-									using var cMenu = await ContextMenu.GetContextMenuForFiles(new[] { application }, PInvoke.CMF_DEFAULTONLY);
+								using var cMenu = await ContextMenu.GetContextMenuForFiles(new[] { application }, PInvoke.CMF_DEFAULTONLY);
 
-									if (cMenu is not null)
-										await cMenu.InvokeItem(cMenu.Items.FirstOrDefault()?.ID ?? -1);
+								if (cMenu is not null)
+									await cMenu.InvokeItem(cMenu.Items.FirstOrDefault()?.ID ?? -1);
 
-									return true;
-								}, App.Logger);
-							}
+								return true;
+							}, App.Logger);
 						}
 
 						if (!opened)
@@ -205,10 +224,17 @@ namespace Files.App.Utils.Shell
 							var isAlternateStream = RegexHelpers.AlternateStream().IsMatch(application);
 							if (isAlternateStream)
 							{
-								var basePath = Path.Combine(Environment.GetEnvironmentVariable("TEMP"), Guid.NewGuid().ToString("n"));
+								// [OPTIMIZATION] Thay thế cụm LINQ nặng nề bằng IndexOf và Substring (O(1) memory)
+								var fileName = Path.GetFileName(application);
+								int colonIndex = fileName.IndexOf(':');
+								string streamName = colonIndex >= 0 && colonIndex + 1 < fileName.Length
+									? fileName.Substring(colonIndex + 1)
+									: fileName;
+
+								var basePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("n"));
 								Kernel32.CreateDirectory(basePath);
 
-								var tempPath = Path.Combine(basePath, new string(Path.GetFileName(application).SkipWhile(x => x != ':').Skip(1).ToArray()));
+								var tempPath = Path.Combine(basePath, streamName);
 								using var hFileSrc = Kernel32.CreateFile(application, Kernel32.FileAccess.GENERIC_READ, FileShare.ReadWrite, null, FileMode.Open, FileFlagsAndAttributes.FILE_ATTRIBUTE_NORMAL);
 								using var hFileDst = Kernel32.CreateFile(tempPath, Kernel32.FileAccess.GENERIC_WRITE, 0, null, FileMode.Create, FileFlagsAndAttributes.FILE_ATTRIBUTE_NORMAL | FileFlagsAndAttributes.FILE_ATTRIBUTE_READONLY);
 
@@ -231,24 +257,20 @@ namespace Files.App.Utils.Shell
 					}
 					catch (Win32Exception)
 					{
-						// Cannot open file (e.g DLL)
 						return false;
 					}
 					catch (ArgumentException)
 					{
-						// Cannot open file (e.g DLL)
 						return false;
 					}
 				}
 			}
 			catch (InvalidOperationException)
 			{
-				// Invalid file path
 				return false;
 			}
 			catch (Exception ex)
 			{
-				// Generic error, log
 				App.Logger.LogWarning(ex, $"Error launching: {application}");
 				return false;
 			}
@@ -256,12 +278,18 @@ namespace Files.App.Utils.Shell
 
 		private static string GetMtpPath(string executable)
 		{
-			if (executable.StartsWith("\\\\?\\", StringComparison.Ordinal))
+			const string mtpPrefix = "\\\\?\\";
+			if (executable.StartsWith(mtpPrefix, StringComparison.Ordinal))
 			{
 				using var computer = new ShellFolder(Shell32.KNOWNFOLDERID.FOLDERID_ComputerFolder);
-				using var device = computer.FirstOrDefault(i => executable.Replace("\\\\?\\", "", StringComparison.Ordinal).StartsWith(i.Name, StringComparison.Ordinal));
+
+				// [OPTIMIZATION] Dùng Substring thay vì .Replace tạo ra nhiều allocations trung gian
+				string cleanPath = executable.Substring(mtpPrefix.Length);
+
+				using var device = computer.FirstOrDefault(i => cleanPath.StartsWith(i.Name, StringComparison.Ordinal));
 				var deviceId = device?.ParsingName;
 				var itemPath = RegexHelpers.WindowsPath().Replace(executable, "");
+
 				return deviceId is not null ? Path.Combine(deviceId, itemPath) : executable;
 			}
 

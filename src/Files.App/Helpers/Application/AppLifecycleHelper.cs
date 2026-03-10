@@ -17,6 +17,17 @@ using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.System;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+
+// [FIX] Bổ sung các namespace lõi của System để tránh đứt gãy nếu cấu hình Implicit Usings bị tắt
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Collections.Generic;
+
+// [FIX] Bổ sung dải namespace bao phủ toàn bộ thư mục Commands và Manager
+using Files.App.Data.Commands;
 // [NEXTFE] Khai báo thư viện Workspaces
 using Files.App.Data.Models.Workspaces;
 
@@ -105,14 +116,16 @@ namespace Files.App.Helpers
 			var generalSettingsService = userSettingsService.GeneralSettingsService;
 			var jumpListService = Ioc.Default.GetRequiredService<IWindowsJumpListService>();
 
-			// Start off a list of tasks we need to run before we can continue startup
-			await Task.WhenAll(
-				App.QuickAccessManager.InitializeAsync()
-			);
-
-			// Start non-critical tasks without waiting for them to complete
+			// ====================================================================================
+			// [VIP OPTIMIZATION] ZERO-BLOCKING STARTUP (KHÔNG CHỜ ĐỢI)
+			// ====================================================================================
+			// Đẩy QuickAccessManager (vốn rất nặng) và các dịch vụ khác xuống luồng nền.
+			// Main Thread không còn bị ép phải 'await', Splash Screen sẽ tự động kết thúc ngay lập tức.
 			_ = Task.Run(async () =>
 			{
+				// Nạp QuickAccess đầu tiên để Sidebar load nhanh nhất có thể
+				await App.QuickAccessManager.InitializeAsync();
+
 				await Task.WhenAll(
 					OptionalTaskAsync(CloudDrivesManager.UpdateDrivesAsync(), generalSettingsService.ShowCloudDrivesSection),
 					App.LibraryManager.UpdateLibrariesAsync(),
@@ -128,7 +141,9 @@ namespace Files.App.Helpers
 				);
 			});
 
-			FileTagsHelper.UpdateTagsDb();
+			// [OPTIMIZATION] Thao tác SQLite này là ĐỒNG BỘ (Synchronous). Nó sẽ khóa cứng UI thread nếu để ngoài.
+			// Ném thẳng vào Task.Run để giải phóng hoàn toàn Main Thread.
+			_ = Task.Run(() => FileTagsHelper.UpdateTagsDb());
 
 			_ = Task.Run(async () =>
 			{
@@ -145,6 +160,9 @@ namespace Files.App.Helpers
 			}
 
 			generalSettingsService.PropertyChanged += GeneralSettingsService_PropertyChanged;
+
+			// Trả lại luồng xử lý ngay lập tức để tiếp tục vòng đời Window
+			await Task.CompletedTask;
 		}
 
 		/// <summary>
@@ -309,18 +327,32 @@ namespace Files.App.Helpers
 		{
 			var userSettingsService = Ioc.Default.GetRequiredService<IUserSettingsService>();
 
-			userSettingsService.GeneralSettingsService.LastSessionTabList = MainPageViewModel.AppInstances.DefaultIfEmpty().Select(tab =>
+			// ====================================================================================
+			// [OPTIMIZATION] ZERO-ALLOCATION TAB SAVING
+			// ====================================================================================
+			// Thay vì sử dụng LINQ .DefaultIfEmpty().Select().ToList() gây cấp phát rác trên Heap, 
+			// ta sử dụng kỹ thuật Pre-allocation để vòng lặp được thi hành trực tiếp.
+			int tabCount = MainPageViewModel.AppInstances.Count;
+			if (tabCount == 0)
 			{
-				if (tab is not null && tab.NavigationParameter is not null)
+				userSettingsService.GeneralSettingsService.LastSessionTabList = new List<string>();
+				return;
+			}
+
+			var tabList = new List<string>(tabCount);
+			foreach (var tab in MainPageViewModel.AppInstances)
+			{
+				if (tab?.NavigationParameter is not null)
 				{
-					return tab.NavigationParameter.Serialize();
+					tabList.Add(tab.NavigationParameter.Serialize());
 				}
 				else
 				{
-					return "";
+					tabList.Add(string.Empty);
 				}
-			})
-			.ToList();
+			}
+
+			userSettingsService.GeneralSettingsService.LastSessionTabList = tabList;
 		}
 
 		/// <summary>

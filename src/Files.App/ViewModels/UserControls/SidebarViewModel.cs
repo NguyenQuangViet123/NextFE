@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Files.App.Controls;
+using Files.App.Data.Items;
 using Files.App.Helpers.ContextFlyouts;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
@@ -71,16 +72,17 @@ namespace Files.App.ViewModels.UserControls
 		public static event EventHandler<INavigationControlItem?>? RightClickedItemChanged;
 
 		private readonly SectionType[] SectionOrder =
-			[
-				SectionType.Home,
-				SectionType.Pinned,
-				SectionType.Library,
-				SectionType.Drives,
-				SectionType.CloudDrives,
-				SectionType.Network,
-				SectionType.WSL,
-				SectionType.FileTag
-			];
+		[
+			SectionType.Home,
+			SectionType.Pinned,
+			(SectionType)100, // [NEXTFE VIP ENGINE]
+			SectionType.Library,
+			SectionType.Drives,
+			SectionType.CloudDrives,
+			SectionType.Network,
+			SectionType.WSL,
+			SectionType.FileTag
+		];
 
 		public bool IsSidebarCompactSize
 			=> SidebarDisplayMode == SidebarDisplayMode.Compact || SidebarDisplayMode == SidebarDisplayMode.Minimal;
@@ -104,7 +106,6 @@ namespace Files.App.ViewModels.UserControls
 
 			if (string.IsNullOrEmpty(value))
 			{
-				//SidebarSelectedItem = sidebarItems.FirstOrDefault(x => x.Path.Equals("Home"));
 				return;
 			}
 
@@ -246,6 +247,8 @@ namespace Files.App.ViewModels.UserControls
 			CreateItemHomeAsync();
 
 			Manager_DataChanged(SectionType.Pinned, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+			// [TẠM KHÓA] Bật tính năng nạp Workspaces khi mở App
+			// Manager_DataChanged((SectionType)100, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 			Manager_DataChanged(SectionType.Library, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 			Manager_DataChanged(SectionType.Drives, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 			Manager_DataChanged(SectionType.CloudDrives, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
@@ -254,6 +257,8 @@ namespace Files.App.ViewModels.UserControls
 			Manager_DataChanged(SectionType.FileTag, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
 			App.QuickAccessManager.Model.DataChanged += Manager_DataChanged;
+			// [TẠM KHÓA] Lắng nghe thay đổi từ Database Workspace (JSON)
+			// App.WorkspaceManager.Workspaces.CollectionChanged += Manager_DataChangedForWorkspaces;
 			App.LibraryManager.DataChanged += Manager_DataChanged;
 			drivesViewModel.Drives.CollectionChanged += Manager_DataChangedForDrives;
 			CloudDrivesManager.DataChanged += Manager_DataChanged;
@@ -275,6 +280,9 @@ namespace Files.App.ViewModels.UserControls
 			return CreateSectionAsync(SectionType.Home);
 		}
 
+		private void Manager_DataChangedForWorkspaces(object? sender, NotifyCollectionChangedEventArgs e)
+			=> Manager_DataChanged((SectionType)100, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
 		private async void Manager_DataChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			if (dispatcherQueue is null)
@@ -287,6 +295,7 @@ namespace Files.App.ViewModels.UserControls
 				Func<IReadOnlyList<INavigationControlItem>> getElements = () => sectionType switch
 				{
 					SectionType.Pinned => App.QuickAccessManager.Model.PinnedFolderItems,
+					(SectionType)100 => App.WorkspaceManager.Workspaces.Select(w => new WorkspaceLocationItem(w)).ToList().AsReadOnly(),
 					SectionType.CloudDrives => CloudDrivesManager.Drives,
 					SectionType.Drives => drivesViewModel.Drives.Cast<DriveItem>().ToList().AsReadOnly(),
 					SectionType.Network => NetworkService.Computers.Cast<DriveItem>().ToList().AsReadOnly(),
@@ -305,10 +314,7 @@ namespace Files.App.ViewModels.UserControls
 
 		private async Task SyncSidebarItemsAsync(LocationItem section, Func<IReadOnlyList<INavigationControlItem>> getElements, NotifyCollectionChangedEventArgs e)
 		{
-			if (section is null)
-			{
-				return;
-			}
+			if (section is null) return;
 
 			switch (e.Action)
 			{
@@ -319,7 +325,6 @@ namespace Files.App.ViewModels.UserControls
 							var index = e.NewStartingIndex < 0 ? -1 : i + e.NewStartingIndex;
 							await AddElementToSectionAsync((INavigationControlItem)e.NewItems[i], section, index);
 						}
-
 						break;
 					}
 
@@ -336,7 +341,6 @@ namespace Files.App.ViewModels.UserControls
 						{
 							goto case NotifyCollectionChangedAction.Add;
 						}
-
 						break;
 					}
 
@@ -353,7 +357,6 @@ namespace Files.App.ViewModels.UserControls
 								section.ChildItems.Remove(elem);
 							}
 						}
-
 						break;
 					}
 			}
@@ -378,7 +381,6 @@ namespace Files.App.ViewModels.UserControls
 			{
 				if (section.Section is SectionType.Network or SectionType.CloudDrives)
 				{
-					// Already sorted
 					if (!section.ChildItems.Any(x => x.Path == drive.Path))
 					{
 						section.ChildItems.Insert(index < 0 ? section.ChildItems.Count : Math.Min(index, section.ChildItems.Count), drive);
@@ -473,10 +475,7 @@ namespace Files.App.ViewModels.UserControls
 
 				case SectionType.Pinned:
 					{
-						if (ShowPinnedFoldersSection == false)
-						{
-							break;
-						}
+						if (ShowPinnedFoldersSection == false) break;
 
 						section = BuildSection(Strings.Pinned.GetLocalizedResource(), sectionType, new ContextMenuOptions { ShowHideSection = true }, false);
 						icon = new BitmapImage(new Uri(Constants.FluentIconsPaths.StarIcon));
@@ -485,13 +484,18 @@ namespace Files.App.ViewModels.UserControls
 
 						break;
 					}
+				case (SectionType)100:
+					{
+						section = BuildSection("Workspaces", sectionType, new ContextMenuOptions { ShowHideSection = false }, false);
+						iconIdex = Constants.ImageRes.Libraries;
+						section.IsHeader = true;
+						section.IsExpanded = true;
+						break;
+					}
 
 				case SectionType.Library:
 					{
-						if (ShowLibrarySection == false)
-						{
-							break;
-						}
+						if (ShowLibrarySection == false) break;
 						section = BuildSection(Strings.SidebarLibraries.GetLocalizedResource(), sectionType, new ContextMenuOptions { IsLibrariesHeader = true, ShowHideSection = true }, false);
 						iconIdex = Constants.ImageRes.Libraries;
 						section.IsHeader = true;
@@ -502,10 +506,7 @@ namespace Files.App.ViewModels.UserControls
 
 				case SectionType.Drives:
 					{
-						if (ShowDrivesSection == false)
-						{
-							break;
-						}
+						if (ShowDrivesSection == false) break;
 						section = BuildSection(Strings.Drives.GetLocalizedResource(), sectionType, new ContextMenuOptions { ShowHideSection = true }, false);
 						iconIdex = Constants.ImageRes.ThisPC;
 						section.IsHeader = true;
@@ -516,10 +517,7 @@ namespace Files.App.ViewModels.UserControls
 
 				case SectionType.CloudDrives:
 					{
-						if (ShowCloudDrivesSection == false || CloudDrivesManager.Drives.Any() == false)
-						{
-							break;
-						}
+						if (ShowCloudDrivesSection == false || CloudDrivesManager.Drives.Any() == false) break;
 						section = BuildSection(Strings.SidebarCloudDrives.GetLocalizedResource(), sectionType, new ContextMenuOptions { ShowHideSection = true }, false);
 						icon = new BitmapImage(new Uri(Constants.FluentIconsPaths.CloudDriveIcon));
 						section.IsHeader = true;
@@ -530,10 +528,7 @@ namespace Files.App.ViewModels.UserControls
 
 				case SectionType.Network:
 					{
-						if (!ShowNetworkSection)
-						{
-							break;
-						}
+						if (!ShowNetworkSection) break;
 						section = BuildSection(Strings.Network.GetLocalizedResource(), sectionType, new ContextMenuOptions { ShowHideSection = true }, false);
 						iconIdex = Constants.ImageRes.Network;
 						section.IsHeader = true;
@@ -544,10 +539,7 @@ namespace Files.App.ViewModels.UserControls
 
 				case SectionType.WSL:
 					{
-						if (ShowWslSection == false || WSLDistroManager.Distros.Any() == false)
-						{
-							break;
-						}
+						if (ShowWslSection == false || WSLDistroManager.Distros.Any() == false) break;
 						section = BuildSection(Strings.WSL.GetLocalizedResource(), sectionType, new ContextMenuOptions { ShowHideSection = true }, false);
 						icon = new BitmapImage(new Uri(Constants.WslIconsPaths.GenericIcon));
 						section.IsHeader = true;
@@ -558,10 +550,7 @@ namespace Files.App.ViewModels.UserControls
 
 				case SectionType.FileTag:
 					{
-						if (!ShowFileTagsSection)
-						{
-							break;
-						}
+						if (!ShowFileTagsSection) break;
 						section = BuildSection(Strings.FileTags.GetLocalizedResource(), sectionType, new ContextMenuOptions { IsTagsHeader = true, ShowHideSection = true }, false);
 						icon = new BitmapImage(new Uri(Constants.FluentIconsPaths.FileTagsIcon));
 						section.IsHeader = true;
@@ -573,17 +562,9 @@ namespace Files.App.ViewModels.UserControls
 
 			if (section is not null)
 			{
-				if (icon is not null)
-				{
-					section.Icon = icon;
-				}
-
+				if (icon is not null) section.Icon = icon;
 				AddSectionToSideBar(section);
-
-				if (iconIdex != -1)
-				{
-					section.Icon = await UIHelpers.GetSidebarIconResource(iconIdex);
-				}
+				if (iconIdex != -1) section.Icon = await UIHelpers.GetSidebarIconResource(iconIdex);
 			}
 
 			return section;
@@ -622,6 +603,7 @@ namespace Files.App.ViewModels.UserControls
 					SectionType.FileTag when generalSettingsService.ShowFileTagsSection => App.FileTagsManager.UpdateFileTagsAsync,
 					SectionType.Library => App.LibraryManager.UpdateLibrariesAsync,
 					SectionType.Pinned => App.QuickAccessManager.Model.AddAllItemsToSidebarAsync,
+					(SectionType)100 => () => Task.CompletedTask,
 					_ => () => Task.CompletedTask
 				};
 
@@ -688,6 +670,7 @@ namespace Files.App.ViewModels.UserControls
 			UserSettingsService.OnSettingChangedEvent -= UserSettingsService_OnSettingChangedEvent;
 
 			App.QuickAccessManager.Model.DataChanged -= Manager_DataChanged;
+			App.WorkspaceManager.Workspaces.CollectionChanged -= Manager_DataChangedForWorkspaces;
 			App.LibraryManager.DataChanged -= Manager_DataChanged;
 			drivesViewModel.Drives.CollectionChanged -= Manager_DataChangedForDrives;
 			CloudDrivesManager.DataChanged -= Manager_DataChanged;
@@ -702,7 +685,6 @@ namespace Files.App.ViewModels.UserControls
 		{
 			TabControlMargin = SidebarDisplayMode switch
 			{
-				// This prevents the pane toggle button from overlapping the tab control in minimal mode
 				SidebarDisplayMode.Minimal => new GridLength(44, GridUnitType.Pixel),
 				_ => new GridLength(0, GridUnitType.Pixel),
 			};
@@ -710,14 +692,11 @@ namespace Files.App.ViewModels.UserControls
 
 		public async void HandleItemContextInvokedAsync(object sender, ItemContextInvokedArgs args)
 		{
-			if (sender is not FrameworkElement sidebarItem)
-				return;
+			if (sender is not FrameworkElement sidebarItem) return;
 
 			if (args.Item is not INavigationControlItem item)
 			{
-				// We are in the pane context requested path
 				PaneFlyout.ShowAt(sender as FrameworkElement, args.Position);
-
 				return;
 			}
 
@@ -728,9 +707,7 @@ namespace Files.App.ViewModels.UserControls
 
 				await foreach (var taggedItem in fileTagsService.GetItemsForTagAsync(tagItem.FileTag.Uid, cts.Token))
 				{
-					items.Add((
-						taggedItem.Storable.Id,
-						taggedItem.Storable is IFolder));
+					items.Add((taggedItem.Storable.Id, taggedItem.Storable is IFolder));
 				}
 
 				SelectedTagChanged?.Invoke(this, new SelectedTagChangedEventArgs(items));
@@ -750,21 +727,13 @@ namespace Files.App.ViewModels.UserControls
 			var menuItems = GetLocationItemMenuItems(item, itemContextMenuFlyout);
 			var (primaryElements, secondaryElements) = ContextFlyoutModelToElementHelper.GetAppBarItemsFromModel(menuItems);
 
-			// Workaround for WinUI (#5508) - AppBarButtons don't auto-close CommandBarFlyout
 			var closeHandler = new RoutedEventHandler((s, e) => itemContextMenuFlyout.Hide());
-			primaryElements
-				.OfType<AppBarButton>()
-				.ForEach(button => button.Click += closeHandler);
-			primaryElements
-				.OfType<AppBarToggleButton>()
-				.ForEach(button => button.Click += closeHandler);
+			primaryElements.OfType<AppBarButton>().ForEach(button => button.Click += closeHandler);
+			primaryElements.OfType<AppBarToggleButton>().ForEach(button => button.Click += closeHandler);
 
 			primaryElements.ForEach(itemContextMenuFlyout.PrimaryCommands.Add);
 
-			secondaryElements
-				.OfType<FrameworkElement>()
-				.ForEach(i => i.MinWidth = Constants.UI.ContextMenuItemsMaxWidth);
-
+			secondaryElements.OfType<FrameworkElement>().ForEach(i => i.MinWidth = Constants.UI.ContextMenuItemsMaxWidth);
 			secondaryElements.ForEach(itemContextMenuFlyout.SecondaryCommands.Add);
 
 			if (item.MenuOptions.ShowShellItems)
@@ -775,9 +744,7 @@ namespace Files.App.ViewModels.UserControls
 
 		private async void ItemContextMenuFlyout_Opened(object? sender, object e)
 		{
-			if (sender is not CommandBarFlyout itemContextMenuFlyout)
-				return;
-
+			if (sender is not CommandBarFlyout itemContextMenuFlyout) return;
 			itemContextMenuFlyout.Opened -= ItemContextMenuFlyout_Opened;
 			await ShellContextFlyoutFactory.LoadShellMenuItemsAsync(rightClickedItem.Path, itemContextMenuFlyout, rightClickedItem.MenuOptions);
 		}
@@ -787,33 +754,25 @@ namespace Files.App.ViewModels.UserControls
 			if (item is not INavigationControlItem navigationControlItem) return;
 			var navigationPath = item as string;
 
-			if (await DriveHelpers.CheckEmptyDrive(navigationPath))
-				return;
+			if (await DriveHelpers.CheckEmptyDrive(navigationPath)) return;
 
 			var ctrlPressed = InputKeyboardSource.GetKeyStateForCurrentThread(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down);
 			var middleClickPressed = pointerUpdateKind == PointerUpdateKind.MiddleButtonReleased;
-			if ((ctrlPressed ||
-				middleClickPressed) &&
-				navigationControlItem.Path is not null)
+			if ((ctrlPressed || middleClickPressed) && navigationControlItem.Path is not null)
 			{
 				await NavigationHelpers.OpenPathInNewTab(navigationControlItem.Path);
 				return;
 			}
 
-			// Type of page to navigate
 			Type? sourcePageType = null;
 
 			switch (navigationControlItem.ItemType)
 			{
 				case NavigationControlItemType.Location:
 					{
-						// Get the path of the invoked item
 						var ItemPath = navigationControlItem.Path;
+						if (ItemPath is null) ItemPath = navigationControlItem.Text;
 
-						if (ItemPath is null)
-							ItemPath = navigationControlItem.Text;
-
-						// Home item
 						if (ItemPath != null && ItemPath.Equals("Home", StringComparison.OrdinalIgnoreCase))
 						{
 							navigationPath = "Home";
@@ -827,7 +786,7 @@ namespace Files.App.ViewModels.UserControls
 					}
 
 				case NavigationControlItemType.FileTag:
-					var tagPath = navigationControlItem.Path; // Get the path of the invoked item
+					var tagPath = navigationControlItem.Path;
 					if (PaneHolder?.ActivePane is IShellPage shp)
 					{
 						shp.NavigateToPath(tagPath, new NavigationArguments()
@@ -852,20 +811,15 @@ namespace Files.App.ViewModels.UserControls
 				shellPage.NavigateToPath(navigationPath, sourcePageType);
 		}
 
-		public readonly ICommand CreateLibraryCommand = new AsyncRelayCommand(LibraryManager.ShowCreateNewLibraryDialogAsync);
+		public readonly ICommand CreateLibraryCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(LibraryManager.ShowCreateNewLibraryDialogAsync);
 
-		public readonly ICommand RestoreLibrariesCommand = new AsyncRelayCommand(LibraryManager.ShowRestoreDefaultLibrariesDialogAsync);
+		public readonly ICommand RestoreLibrariesCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(LibraryManager.ShowRestoreDefaultLibrariesDialogAsync);
 
 		private ICommand HideSectionCommand { get; }
-
 		private ICommand PinItemCommand { get; }
-
 		private ICommand UnpinItemCommand { get; }
-
 		private ICommand EjectDeviceCommand { get; }
-
 		private ICommand OpenPropertiesCommand { get; }
-
 		private ICommand ReorderItemsCommand { get; }
 
 		private void PinItem()
@@ -970,8 +924,31 @@ namespace Files.App.ViewModels.UserControls
 			var isDriveItem = item is DriveItem;
 			var isDriveItemPinned = isDriveItem && ((DriveItem)item).IsPinned;
 
+			// [NEXTFE VIP ENGINE] Tự động hiển thị các lệnh thao tác cho Workspace
+			var isWorkspaceItem = item is WorkspaceLocationItem;
+			var isWorkspaceHeader = item.Section == (SectionType)100 && item is LocationItem loc && loc.IsHeader;
+
 			return new List<ContextMenuFlyoutItemViewModel>()
 			{
+				new ContextMenuFlyoutItemViewModel()
+				{
+					Text = "Tạo Workspace mới",
+					Glyph = "\uE710",
+					Command = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(async () => await App.WorkspaceManager.CreateWorkspaceAsync("Workspace Mới")),
+					ShowItem = isWorkspaceHeader
+				},
+				new ContextMenuFlyoutItemViewModel()
+				{
+					Text = "Xóa Workspace này",
+					Glyph = "\uE74D",
+					Command = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(async () => await App.WorkspaceManager.DeleteWorkspaceAsync(((WorkspaceLocationItem)item).Workspace.Id)),
+					ShowItem = isWorkspaceItem
+				},
+				new ContextMenuFlyoutItemViewModel()
+				{
+					ItemType = ContextMenuFlyoutItemType.Separator,
+					ShowItem = isWorkspaceHeader || isWorkspaceItem
+				},
 				new ContextMenuFlyoutItemViewModel()
 				{
 					Text = Strings.SideBarCreateNewLibrary_Text.GetLocalizedResource(),
@@ -1117,6 +1094,19 @@ namespace Files.App.ViewModels.UserControls
 		{
 			var rawEvent = args.RawEvent;
 
+			// [NEXTFE FIX] Kiểm tra Path thay vì Type để 100% không bị sai lệch kiểu
+			if (locationItem.Path?.StartsWith("workspace://", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				if (Utils.Storage.FilesystemHelpers.HasDraggedStorageItems(args.DroppedItem))
+				{
+					rawEvent.Handled = true;
+					rawEvent.DragUIOverride.IsCaptionVisible = true;
+					rawEvent.DragUIOverride.Caption = $"Thêm vào {locationItem.Text}";
+					rawEvent.AcceptedOperation = DataPackageOperation.Link;
+				}
+				return;
+			}
+
 			if (Utils.Storage.FilesystemHelpers.HasDraggedStorageItems(args.DroppedItem))
 			{
 				args.RawEvent.Handled = true;
@@ -1158,7 +1148,6 @@ namespace Files.App.ViewModels.UserControls
 					if (locationItem.Path.StartsWith(Constants.UserEnvironmentPaths.RecycleBinPath, StringComparison.Ordinal))
 					{
 						captionText = string.Format(Strings.MoveToFolderCaptionText.GetLocalizedResource(), locationItem.Text);
-						// Some applications such as Edge can't raise the drop event by the Move flag (#14008), so we set the Copy flag as well.
 						operationType = DataPackageOperation.Move | DataPackageOperation.Copy;
 					}
 					else if (rawEvent.Modifiers.HasFlag(DragDropModifiers.Alt) || rawEvent.Modifiers.HasFlag(DragDropModifiers.Control | DragDropModifiers.Shift))
@@ -1174,7 +1163,6 @@ namespace Files.App.ViewModels.UserControls
 					else if (rawEvent.Modifiers.HasFlag(DragDropModifiers.Shift))
 					{
 						captionText = string.Format(Strings.MoveToFolderCaptionText.GetLocalizedResource(), locationItem.Text);
-						// Some applications such as Edge can't raise the drop event by the Move flag (#14008), so we set the Copy flag as well.
 						operationType = DataPackageOperation.Move | DataPackageOperation.Copy;
 					}
 					else if (storageItems.Any(x => x.Item is ZipStorageFile || x.Item is ZipStorageFolder)
@@ -1186,7 +1174,6 @@ namespace Files.App.ViewModels.UserControls
 					else if (locationItem.IsDefaultLocation || storageItems.AreItemsInSameDrive(locationItem.Path))
 					{
 						captionText = string.Format(Strings.MoveToFolderCaptionText.GetLocalizedResource(), locationItem.Text);
-						// Some applications such as Edge can't raise the drop event by the Move flag (#14008), so we set the Copy flag as well.
 						operationType = DataPackageOperation.Move | DataPackageOperation.Copy;
 					}
 					else
@@ -1235,13 +1222,11 @@ namespace Files.App.ViewModels.UserControls
 				else if (args.RawEvent.Modifiers.HasFlag(DragDropModifiers.Shift))
 				{
 					captionText = string.Format(Strings.MoveToFolderCaptionText.GetLocalizedResource(), driveItem.Text);
-					// Some applications such as Edge can't raise the drop event by the Move flag (#14008), so we set the Copy flag as well.
 					operationType = DataPackageOperation.Move | DataPackageOperation.Copy;
 				}
 				else if (storageItems.AreItemsInSameDrive(driveItem.Path))
 				{
 					captionText = string.Format(Strings.MoveToFolderCaptionText.GetLocalizedResource(), driveItem.Text);
-					// Some applications such as Edge can't raise the drop event by the Move flag (#14008), so we set the Copy flag as well.
 					operationType = DataPackageOperation.Move | DataPackageOperation.Copy;
 				}
 				else
@@ -1286,6 +1271,15 @@ namespace Files.App.ViewModels.UserControls
 
 		private async Task HandleLocationItemDroppedAsync(LocationItem locationItem, ItemDroppedEventArgs args)
 		{
+			// [NEXTFE FIX] Loại bỏ xử lý rơi (Drop) tại Sidebar cho Workspace. 
+			// Thay vào đó, trả việc đó về cho Engine Native `ShellFilesystemOperations` để nó gọi hộp Toast màu xanh lá cây!
+			// Hành động này cho phép File rơi thẳng xuống lõi Copy/Link cực kỳ an toàn.
+			if (locationItem.Path?.StartsWith("workspace://", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				// Hạ cờ hiệu Link để hệ thống C++ gọi hành vi CreateShortcut (Đã được chặn lại trong ShellFilesystemOperations)
+				args.RawEvent.AcceptedOperation = DataPackageOperation.Link;
+			}
+
 			if (Utils.Storage.FilesystemHelpers.HasDraggedStorageItems(args.DroppedItem))
 			{
 				if (string.IsNullOrEmpty(locationItem.Path) && SectionType.Pinned.Equals(locationItem.Section)) // Pin to "Pinned" section

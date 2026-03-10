@@ -3,12 +3,24 @@
 
 using System.Windows.Input;
 
+// [OPTIMIZATION] Bổ sung System.Collections.Generic để sử dụng List cục bộ
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
+
 namespace Files.App.ViewModels.UserControls
 {
 	public sealed partial class StatusBarViewModel : ObservableObject
 	{
-		private IContentPageContext ContentPageContext { get; } = Ioc.Default.GetRequiredService<IContentPageContext>();
-		private IDevToolsSettingsService DevToolsSettingsService = Ioc.Default.GetRequiredService<IDevToolsSettingsService>();
+		// ====================================================================================
+		// [VIP OPTIMIZATION] LAZY DI EVALUATION
+		// ====================================================================================
+		// Không cấp phát Service ngay lập tức lúc khởi tạo Tab. Trì hoãn đến khi thực sự cần.
+		private IContentPageContext? _contentPageContext;
+		private IContentPageContext ContentPageContext => _contentPageContext ??= Ioc.Default.GetRequiredService<IContentPageContext>();
+
+		private IDevToolsSettingsService? _devToolsSettingsService;
+		private IDevToolsSettingsService DevToolsSettingsService => _devToolsSettingsService ??= Ioc.Default.GetRequiredService<IDevToolsSettingsService>();
 
 		// The first branch will always be the active one.
 		public const int ACTIVE_BRANCH_INDEX = 0;
@@ -98,6 +110,10 @@ namespace Files.App.ViewModels.UserControls
 
 		public ICommand NewBranchCommand { get; }
 
+		// Các biến Tracking để Zero-allocation khi không đổi trạng thái
+		private int _lastAhead = -1;
+		private int _lastBehind = -1;
+
 		public StatusBarViewModel()
 		{
 			NewBranchCommand = new AsyncRelayCommand(()
@@ -105,24 +121,20 @@ namespace Files.App.ViewModels.UserControls
 
 			DevToolsSettingsService.PropertyChanged += (s, e) =>
 			{
-				switch (e.PropertyName)
+				// [OPTIMIZATION] Bỏ khối switch cồng kềnh, dùng if cho 1 trường hợp duy nhất để xử lý nhanh
+				if (e.PropertyName == nameof(DevToolsSettingsService.OpenInIDEOption))
 				{
-					case nameof(DevToolsSettingsService.OpenInIDEOption):
-						OnPropertyChanged(nameof(ShowOpenInIDEButton));
-						break;
+					OnPropertyChanged(nameof(ShowOpenInIDEButton));
 				}
 			};
 		}
 
 		public void UpdateGitInfo(bool isGitRepository, string? repositoryPath, BranchItem? head)
 		{
-			GitBranchDisplayName =
-				isGitRepository &&
-				head is not null &&
-				ContentPageContext.ShellPage is not null &&
-				!ContentPageContext.ShellPage.InstanceViewModel.IsPageTypeSearchResults
-					? head.Name
-					: null;
+			// [OPTIMIZATION] Truy xuất an toàn và ngắn gọn hơn cho cờ SearchResults
+			bool isSearchResults = ContentPageContext.ShellPage?.InstanceViewModel?.IsPageTypeSearchResults ?? false;
+
+			GitBranchDisplayName = isGitRepository && head is not null && !isSearchResults ? head.Name : null;
 
 			_gitRepositoryPath = repositoryPath;
 
@@ -130,11 +142,21 @@ namespace Files.App.ViewModels.UserControls
 			if (!IsBranchesFlyoutExpanded)
 				ShowLocals = true;
 
-			var behind = head is not null ? head.BehindBy ?? 0 : 0;
-			var ahead = head is not null ? head.AheadBy ?? 0 : 0;
+			var behind = head?.BehindBy ?? 0;
+			var ahead = head?.AheadBy ?? 0;
 
-			ExtendedStatusInfo = string.Format(Strings.GitSyncStatusExtendedInfo.GetLocalizedResource(), ahead, behind);
-			StatusInfo = $"{ahead} / {behind}";
+			// ====================================================================================
+			// [VIP OPTIMIZATION] ZERO STRING ALLOCATION
+			// ====================================================================================
+			// Chỉ cấp phát bộ nhớ để nối chuỗi (String Interpolation & Format) khi thông số thay đổi.
+			// Giúp FPS không bị giật khi lướt qua hàng trăm file trong thư mục Git.
+			if (_lastAhead != ahead || _lastBehind != behind)
+			{
+				_lastAhead = ahead;
+				_lastBehind = behind;
+				ExtendedStatusInfo = string.Format(Strings.GitSyncStatusExtendedInfo.GetLocalizedResource(), ahead, behind);
+				StatusInfo = $"{ahead} / {behind}";
+			}
 
 			OnPropertyChanged(nameof(ShowOpenInIDEButton));
 		}
@@ -146,15 +168,33 @@ namespace Files.App.ViewModels.UserControls
 
 			var branches = await GitHelpers.GetBranchesNames(_gitRepositoryPath);
 
-			_localBranches.Clear();
-			_remoteBranches.Clear();
+			// ====================================================================================
+			// [OPTIMIZATION] OFFLOAD DATA SORTING (GIẢM TẢI COLLECTION CHANGED)
+			// ====================================================================================
+			// Xử lý phân loại trên RAM bằng List cục bộ trước, KHÔNG đẩy trực tiếp vào ObservableCollection
+			// ngay trong vòng lặp để UI Thread không bị bóp nghẹt bởi hàng trăm event render.
+			var localTemp = new List<BranchItem>();
+			var remoteTemp = new List<BranchItem>();
 
 			foreach (var branch in branches)
 			{
 				if (branch.IsRemote)
-					_remoteBranches.Add(branch);
+					remoteTemp.Add(branch);
 				else
-					_localBranches.Add(branch);
+					localTemp.Add(branch);
+			}
+
+			// Cập nhật lên UI Collection gọn gàng
+			_localBranches.Clear();
+			foreach (var branch in localTemp)
+			{
+				_localBranches.Add(branch);
+			}
+
+			_remoteBranches.Clear();
+			foreach (var branch in remoteTemp)
+			{
+				_remoteBranches.Add(branch);
 			}
 
 			SelectedBranchIndex = ShowLocals ? ACTIVE_BRANCH_INDEX : -1;

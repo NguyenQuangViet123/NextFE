@@ -12,6 +12,9 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using IO = System.IO;
+using System.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace Files.App
 {
@@ -70,10 +73,28 @@ namespace Files.App
 			switch (activatedEventArgs)
 			{
 				case ILaunchActivatedEventArgs launchArgs:
-					if (launchArgs.Arguments is not null &&
-						(CommandLineParser.SplitArguments(launchArgs.Arguments, true)[0].EndsWith($"files-dev.exe", StringComparison.OrdinalIgnoreCase)
-						|| CommandLineParser.SplitArguments(launchArgs.Arguments, true)[0].EndsWith($"files-dev", StringComparison.OrdinalIgnoreCase)
-						|| CommandLineParser.SplitArguments(launchArgs.Arguments, true)[0].Equals(Path.Join(Package.Current.InstalledLocation.Path, "Files.App", "Files.exe"), StringComparison.OrdinalIgnoreCase)))
+					// ====================================================================================
+					// [OPTIMIZATION] ELIMINATE REDUNDANT ALLOCATIONS & COM CALLS
+					// ====================================================================================
+					// Loại bỏ 3 lần SplitArguments() và hạn chế gọi WinRT Package.Current.
+					bool isDevLauncher = false;
+					if (!string.IsNullOrEmpty(launchArgs.Arguments))
+					{
+						var splitArgs = CommandLineParser.SplitArguments(launchArgs.Arguments, true);
+
+						// [FIX] Mảng C# sử dụng .Length thay vì .Count (Tránh lỗi method group)
+						if (splitArgs is not null && splitArgs.Length > 0)
+						{
+							var firstArg = splitArgs[0];
+							var filesExePath = Path.Join(Package.Current.InstalledLocation.Path, "Files.App", "Files.exe");
+
+							isDevLauncher = firstArg.EndsWith("files-dev.exe", StringComparison.OrdinalIgnoreCase) ||
+											firstArg.EndsWith("files-dev", StringComparison.OrdinalIgnoreCase) ||
+											firstArg.Equals(filesExePath, StringComparison.OrdinalIgnoreCase);
+						}
+					}
+
+					if (isDevLauncher)
 					{
 						// WINUI3: When launching from commandline the argument is not ICommandLineActivatedEventArgs (#10370)
 						var ppm = CommandLineParser.ParseUntrustedCommands(launchArgs.Arguments);
@@ -258,6 +279,10 @@ namespace Files.App
 
 		private async Task InitializeFromCmdLineArgsAsync(Frame rootFrame, ParsedCommands parsedCommands, string activationPath = "")
 		{
+			// [OPTIMIZATION] Kéo lệnh Resolve DI Service ra bên ngoài vòng lặp foreach. 
+			// Nếu người dùng truyền 10 lệnh, ta chỉ tốn CPU độ trễ cho việc lấy config 1 lần duy nhất thay vì 10 lần.
+			var generalSettingsService = Ioc.Default.GetService<IGeneralSettingsService>();
+
 			async Task PerformNavigationAsync(string payload, string selectItem = null)
 			{
 				if (!string.IsNullOrEmpty(payload))
@@ -267,8 +292,6 @@ namespace Files.App
 					if (folder is not null && !string.IsNullOrEmpty(folder.Path))
 						payload = folder.Path; // Convert short name to long name (#6190)
 				}
-
-				var generalSettingsService = Ioc.Default.GetService<IGeneralSettingsService>();
 
 				double boundsWidth = 0;
 				try
@@ -291,7 +314,7 @@ namespace Files.App
 					RightPaneNavPathParam = boundsWidth > Constants.UI.MultiplePaneWidthThreshold && (generalSettingsService?.AlwaysOpenDualPaneInNewTab ?? false) ? "Home" : null,
 				};
 
-				if (rootFrame.Content is MainPage && MainPageViewModel.AppInstances.Any())
+				if (rootFrame.Content is MainPage && MainPageViewModel.AppInstances.Count > 0)
 				{
 					// Bring to foreground (#14730)
 					Win32Helper.BringToForegroundEx(new(WindowHandle));
@@ -311,6 +334,7 @@ namespace Files.App
 				else
 					rootFrame.Navigate(typeof(MainPage), paneNavigationArgs, new SuppressNavigationTransitionInfo());
 			}
+
 			foreach (var command in parsedCommands)
 			{
 				switch (command.Type)
@@ -385,6 +409,8 @@ namespace Files.App
 
 		private void WindowManager_WindowMessageReceived(object? sender, WinUIEx.Messaging.WindowMessageEventArgs e)
 		{
+			// Không khóa (Lock) ở đây để tối ưu hiệu năng vì sự kiện này được kích hoạt hàng trăm lần mỗi giây khi di chuyển cửa sổ.
+			// Biến bool đọc nguyên tử (Atomic Read) nên hoàn toàn an toàn.
 			if ((!CanWindowToFront) && e.Message.MessageId == Windows.Win32.PInvoke.WM_WINDOWPOSCHANGING)
 			{
 				Win32Helper.ForceWindowPosition(e.Message.LParam);

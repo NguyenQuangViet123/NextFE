@@ -41,7 +41,7 @@
 			Foreground="{ThemeResource TextFillColorPrimaryBrush}"
 			LineHeight="32">
 			<!-- [NEXTFE BRANDING] Khẳng định thương hiệu ngay từ giây đầu tiên -->
-			<Run FontWeight="Bold" Text="NQV " />
+			<Run FontWeight="Bold" Text=" " />
 			<Run FontWeight="SemiLight" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind BranchLabel, Mode=OneTime}" />
 		</TextBlock>
 

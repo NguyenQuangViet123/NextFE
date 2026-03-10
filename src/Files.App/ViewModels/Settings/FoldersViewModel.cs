@@ -1,12 +1,23 @@
 // Copyright (c) Files Community
 // Licensed under the MIT License.
 
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
+// Khai báo các namespace nội bộ của app (cần thiết cho biên dịch)
+using Files.App.Helpers;
+
 namespace Files.App.ViewModels.Settings
 {
 	public sealed partial class FoldersViewModel : ObservableObject
 	{
-		private IUserSettingsService UserSettingsService { get; } = Ioc.Default.GetRequiredService<IUserSettingsService>();
-
+		// ====================================================================================
+		// [VIP OPTIMIZATION] LAZY DI EVALUATION
+		// ====================================================================================
+		// Tránh quét Dependency Injection ngay lúc dựng ViewModel làm chậm giao diện Settings.
+		private IUserSettingsService? _userSettingsService;
+		private IUserSettingsService UserSettingsService => _userSettingsService ??= Ioc.Default.GetRequiredService<IUserSettingsService>();
 
 		public Dictionary<SizeUnitTypes, string> SizeUnitsOptions { get; private set; } = [];
 		public Dictionary<OpenFoldersWithOneClickEnum, string> OpenFoldersWithOneClickOptions { get; private set; } = [];
@@ -27,8 +38,6 @@ namespace Files.App.ViewModels.Settings
 		}
 
 		// Properties
-
-
 
 		private int selectedDeleteConfirmationPolicyIndex;
 		public int SelectedDeleteConfirmationPolicyIndex
@@ -114,7 +123,7 @@ namespace Files.App.ViewModels.Settings
 			}
 		}
 
-		private string selectedOpenFoldersWithOneClickOption;
+		private string selectedOpenFoldersWithOneClickOption = string.Empty;
 		public string SelectedOpenFoldersWithOneClickOption
 		{
 			get => selectedOpenFoldersWithOneClickOption;
@@ -122,7 +131,18 @@ namespace Files.App.ViewModels.Settings
 			{
 				if (SetProperty(ref selectedOpenFoldersWithOneClickOption, value))
 				{
-					UserSettingsService.FoldersSettingsService.OpenFoldersWithOneClick = OpenFoldersWithOneClickOptions.First(e => e.Value == value).Key;
+					// ====================================================================================
+					// [OPTIMIZATION] ZERO-ALLOCATION REVERSE LOOKUP
+					// ====================================================================================
+					// Loại bỏ LINQ .First() gây cấp phát Closure Allocation. Quét mảng siêu ngắn trực tiếp.
+					foreach (var kvp in OpenFoldersWithOneClickOptions)
+					{
+						if (kvp.Value == value)
+						{
+							UserSettingsService.FoldersSettingsService.OpenFoldersWithOneClick = kvp.Key;
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -267,7 +287,7 @@ namespace Files.App.ViewModels.Settings
 			}
 		}
 
-		private string sizeUnitFormat;
+		private string sizeUnitFormat = string.Empty;
 		public string SizeUnitFormat
 		{
 			get => sizeUnitFormat;
@@ -275,7 +295,18 @@ namespace Files.App.ViewModels.Settings
 			{
 				if (SetProperty(ref sizeUnitFormat, value))
 				{
-					UserSettingsService.FoldersSettingsService.SizeUnitFormat = SizeUnitsOptions.First(e => e.Value == value).Key;
+					// ====================================================================================
+					// [OPTIMIZATION] ZERO-ALLOCATION REVERSE LOOKUP
+					// ====================================================================================
+					// Loại bỏ LINQ .First()
+					foreach (var kvp in SizeUnitsOptions)
+					{
+						if (kvp.Value == value)
+						{
+							UserSettingsService.FoldersSettingsService.SizeUnitFormat = kvp.Key;
+							break;
+						}
+					}
 				}
 			}
 		}
